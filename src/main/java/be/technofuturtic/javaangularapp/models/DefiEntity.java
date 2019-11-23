@@ -59,4 +59,6 @@ public class DefiEntity {
     public void setActiveDefi(boolean activeDefi) {
         isActiveDefi = activeDefi;
     }
+
+    //catégorie
 }
