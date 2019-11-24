@@ -3,7 +3,7 @@ package be.technofuturtic.javaangularapp.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Parcours")
+@Table(name = "Parcours", schema = "public", catalog = "javaangulardb")
 public class ParcoursEntity {
 
     @Id

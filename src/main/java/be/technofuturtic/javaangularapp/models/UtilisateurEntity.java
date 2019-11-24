@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Utilisateur")
+@Table(name = "Utilisateur", schema = "public", catalog = "javaangulardb")
 public class UtilisateurEntity {
 
     @Id

@@ -3,7 +3,7 @@ package be.technofuturtic.javaangularapp.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Paiement")
+@Table(name = "Paiement", schema = "public", catalog = "javaangulardb")
 public class PaiementEntity {
 
     @Id

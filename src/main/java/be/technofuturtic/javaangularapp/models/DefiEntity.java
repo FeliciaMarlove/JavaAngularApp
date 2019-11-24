@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Defi", schema = "public", catalog = "dbslide")
+@Table(name = "Defi", schema = "public", catalog = "javaangulardb")
 public class DefiEntity {
     @Id
     @GeneratedValue
