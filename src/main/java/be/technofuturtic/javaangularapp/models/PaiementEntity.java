@@ -2,7 +2,9 @@ package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Paiement", schema = "public", catalog = "javaangulardb")
@@ -49,6 +51,9 @@ public class PaiementEntity implements Serializable {
     public void setActivePaiement(boolean activePaiement) {
         isActivePaiement = activePaiement;
     }
+
+    @OneToMany(mappedBy = "paiement", targetEntity = ParcoursUtilisateurLiaison.class)
+    private Set<ParcoursUtilisateurLiaison> listePUP = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

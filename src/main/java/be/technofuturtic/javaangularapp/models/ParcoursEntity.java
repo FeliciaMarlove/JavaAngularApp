@@ -70,6 +70,9 @@ public class ParcoursEntity implements Serializable {
     @ManyToMany(mappedBy = "listeParcours")
     private Set<DefiEntity> listeDefis = new HashSet<>();
 
+    @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class)
+    private Set<ParcoursUtilisateurLiaison> listePUP = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

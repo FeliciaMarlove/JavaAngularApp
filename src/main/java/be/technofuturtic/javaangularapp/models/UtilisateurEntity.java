@@ -3,7 +3,9 @@ package be.technofuturtic.javaangularapp.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Utilisateur", schema = "public", catalog = "javaangulardb")
@@ -102,6 +104,9 @@ public class UtilisateurEntity implements Serializable {
     @ManyToOne(targetEntity = PaysEntity.class)
     @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
     private PaysEntity pays;
+
+    @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class)
+    private Set<ParcoursUtilisateurLiaison> listePUP = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
