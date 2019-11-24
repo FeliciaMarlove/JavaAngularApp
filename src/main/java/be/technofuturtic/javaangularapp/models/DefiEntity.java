@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -70,4 +71,23 @@ public class DefiEntity  implements Serializable {
     @ManyToMany
     @JoinTable(name = "DefiParcours", joinColumns = @JoinColumn(name = "id_defi"), inverseJoinColumns = @JoinColumn( name = "id_parcours"))
     private Set<ParcoursEntity> listeParcours = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DefiEntity that = (DefiEntity) o;
+        return isActiveDefi == that.isActiveDefi &&
+                Objects.equals(idDefi, that.idDefi) &&
+                Objects.equals(nomDefi, that.nomDefi) &&
+                Objects.equals(descDefi, that.descDefi) &&
+                Objects.equals(infobulleDefi, that.infobulleDefi) &&
+                Objects.equals(categorie, that.categorie) &&
+                Objects.equals(listeParcours, that.listeParcours);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idDefi, nomDefi, descDefi, infobulleDefi, isActiveDefi, categorie, listeParcours);
+    }
 }

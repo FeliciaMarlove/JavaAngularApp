@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Pays", schema = "public", catalog = "javaangulardb")
@@ -55,4 +56,23 @@ public class PaysEntity  implements Serializable {
 
     @OneToMany(mappedBy = "pays", targetEntity = UtilisateurEntity.class)
     private List<UtilisateurEntity> utilisateurs = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaysEntity that = (PaysEntity) o;
+        return code == that.code &&
+                Objects.equals(idPays, that.idPays) &&
+                Objects.equals(alpha2, that.alpha2) &&
+                Objects.equals(alpha3, that.alpha3) &&
+                Objects.equals(nomFr, that.nomFr) &&
+                Objects.equals(nomEn, that.nomEn) &&
+                Objects.equals(utilisateurs, that.utilisateurs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPays, code, alpha2, alpha3, nomFr, nomEn, utilisateurs);
+    }
 }

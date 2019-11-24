@@ -2,6 +2,7 @@ package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Paiement", schema = "public", catalog = "javaangulardb")
@@ -47,5 +48,21 @@ public class PaiementEntity implements Serializable {
 
     public void setActivePaiement(boolean activePaiement) {
         isActivePaiement = activePaiement;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaiementEntity that = (PaiementEntity) o;
+        return isActivePaiement == that.isActivePaiement &&
+                Objects.equals(idPaiement, that.idPaiement) &&
+                Objects.equals(nomPaiement, that.nomPaiement) &&
+                Objects.equals(descPaiement, that.descPaiement);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPaiement, nomPaiement, descPaiement, isActivePaiement);
     }
 }

@@ -3,6 +3,7 @@ package be.technofuturtic.javaangularapp.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -68,4 +69,23 @@ public class ParcoursEntity implements Serializable {
 
     @ManyToMany(mappedBy = "listeParcours")
     private Set<DefiEntity> listeDefis = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParcoursEntity that = (ParcoursEntity) o;
+        return Double.compare(that.prix, prix) == 0 &&
+                isActiveParcours == that.isActiveParcours &&
+                Objects.equals(idParcours, that.idParcours) &&
+                Objects.equals(nomParcours, that.nomParcours) &&
+                Objects.equals(descParcours, that.descParcours) &&
+                Objects.equals(categorie, that.categorie) &&
+                Objects.equals(listeDefis, that.listeDefis);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idParcours, nomParcours, descParcours, prix, isActiveParcours, categorie, listeDefis);
+    }
 }

@@ -3,6 +3,7 @@ package be.technofuturtic.javaangularapp.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Utilisateur", schema = "public", catalog = "javaangulardb")
@@ -101,4 +102,26 @@ public class UtilisateurEntity implements Serializable {
     @ManyToOne(targetEntity = PaysEntity.class)
     @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
     private PaysEntity pays;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UtilisateurEntity that = (UtilisateurEntity) o;
+        return newsletterOptIn == that.newsletterOptIn &&
+                isActiveUtilisateur == that.isActiveUtilisateur &&
+                Objects.equals(idUtilisateur, that.idUtilisateur) &&
+                Objects.equals(nomUtilisateur, that.nomUtilisateur) &&
+                Objects.equals(prenomUtilisateur, that.prenomUtilisateur) &&
+                Objects.equals(dateNaiss, that.dateNaiss) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(motDePasse, that.motDePasse) &&
+                Objects.equals(role, that.role) &&
+                Objects.equals(pays, that.pays);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idUtilisateur, nomUtilisateur, prenomUtilisateur, dateNaiss, email, motDePasse, newsletterOptIn, isActiveUtilisateur, role, pays);
+    }
 }
