@@ -2,6 +2,8 @@ package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Parcours", schema = "public", catalog = "javaangulardb")
@@ -63,4 +65,7 @@ public class ParcoursEntity implements Serializable {
     @ManyToOne(targetEntity = CategorieEntity.class)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;
+
+    @ManyToMany(mappedBy = "listeParcours")
+    private Set<DefiEntity> listeDefis = new HashSet<>();
 }

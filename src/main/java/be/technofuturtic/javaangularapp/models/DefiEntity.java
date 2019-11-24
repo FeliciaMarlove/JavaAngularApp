@@ -4,6 +4,8 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Defi", schema = "public", catalog = "javaangulardb")
@@ -64,4 +66,8 @@ public class DefiEntity  implements Serializable {
     @ManyToOne(targetEntity = CategorieEntity.class)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Defi_Categorie"))
     private CategorieEntity categorie;
+
+    @ManyToMany
+    @JoinTable(name = "DefiParcours", joinColumns = @JoinColumn(name = "id_defi"), inverseJoinColumns = @JoinColumn( name = "id_parcours"))
+    private Set<ParcoursEntity> listeParcours = new HashSet<>();
 }
