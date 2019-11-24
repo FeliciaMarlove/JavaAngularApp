@@ -1,10 +1,13 @@
 package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Role", schema = "public", catalog = "javaangulardb")
-public class RoleEntity {
+public class RoleEntity  implements Serializable {
 
     @Id
     @GeneratedValue
@@ -25,4 +28,7 @@ public class RoleEntity {
     public void setNomRole(String nomRole) {
         this.nomRole = nomRole;
     }
+
+    @OneToMany(mappedBy = "role", targetEntity = UtilisateurEntity.class)
+    private List<UtilisateurEntity> utilisateurs = new ArrayList<>();
 }

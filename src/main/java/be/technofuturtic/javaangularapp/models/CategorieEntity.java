@@ -1,10 +1,13 @@
 package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Categorie", schema = "public", catalog = "javaangulardb")
-public class CategorieEntity {
+public class CategorieEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -47,4 +50,10 @@ public class CategorieEntity {
     public void setActiveCategorie(boolean activeCategorie) {
         isActiveCategorie = activeCategorie;
     }
+
+    @OneToMany(mappedBy = "categorie", targetEntity = DefiEntity.class)
+    private List<DefiEntity> defis = new ArrayList<>();
+
+    @OneToMany(mappedBy = "categorie", targetEntity = ParcoursEntity.class)
+    private List<ParcoursEntity> categories = new ArrayList<>();
 }

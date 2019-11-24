@@ -1,10 +1,11 @@
 package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Parcours", schema = "public", catalog = "javaangulardb")
-public class ParcoursEntity {
+public class ParcoursEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -59,6 +60,7 @@ public class ParcoursEntity {
         isActiveParcours = activeParcours;
     }
 
-    //catégorie
-    //liste défis
+    @ManyToOne(targetEntity = CategorieEntity.class)
+    @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
+    private CategorieEntity categorie;
 }

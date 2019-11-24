@@ -3,10 +3,11 @@ package be.technofuturtic.javaangularapp.models;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Defi", schema = "public", catalog = "javaangulardb")
-public class DefiEntity {
+public class DefiEntity  implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "id_defi")
@@ -60,5 +61,7 @@ public class DefiEntity {
         isActiveDefi = activeDefi;
     }
 
-    //catégorie
+    @ManyToOne(targetEntity = CategorieEntity.class)
+    @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Defi_Categorie"))
+    private CategorieEntity categorie;
 }

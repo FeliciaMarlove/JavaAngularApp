@@ -1,11 +1,12 @@
 package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Utilisateur", schema = "public", catalog = "javaangulardb")
-public class UtilisateurEntity {
+public class UtilisateurEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -93,6 +94,11 @@ public class UtilisateurEntity {
         isActiveUtilisateur = activeUtilisateur;
     }
 
-    //role
-    //pays
+    @ManyToOne(targetEntity = RoleEntity.class)
+    @JoinColumn(name = "id_role", referencedColumnName = "id_role", foreignKey = @ForeignKey(name = "FK_Utilisateur_Role"))
+    private RoleEntity role;
+
+    @ManyToOne(targetEntity = PaysEntity.class)
+    @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
+    private PaysEntity pays;
 }

@@ -1,10 +1,11 @@
 package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Paiement", schema = "public", catalog = "javaangulardb")
-public class PaiementEntity {
+public class PaiementEntity implements Serializable {
 
     @Id
     @GeneratedValue
