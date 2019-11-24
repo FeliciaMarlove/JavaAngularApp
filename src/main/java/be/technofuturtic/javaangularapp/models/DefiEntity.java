@@ -70,7 +70,7 @@ public class DefiEntity  implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "DefiParcours", joinColumns = @JoinColumn(name = "id_defi"), inverseJoinColumns = @JoinColumn( name = "id_parcours"))
-    private Set<ParcoursEntity> listeParcours = new HashSet<>();
+    private Set<ParcoursEntity> listeParcours;
 
     @Override
     public boolean equals(Object o) {

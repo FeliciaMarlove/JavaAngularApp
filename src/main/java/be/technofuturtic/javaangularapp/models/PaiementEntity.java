@@ -53,7 +53,7 @@ public class PaiementEntity implements Serializable {
     }
 
     @OneToMany(mappedBy = "paiement", targetEntity = ParcoursUtilisateurLiaison.class)
-    private Set<ParcoursUtilisateurLiaison> listePUP = new HashSet<>();
+    private Set<ParcoursUtilisateurLiaison> listePUP;
 
     @Override
     public boolean equals(Object o) {

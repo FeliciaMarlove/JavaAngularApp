@@ -53,10 +53,10 @@ public class CategorieEntity implements Serializable {
     }
 
     @OneToMany(mappedBy = "categorie", targetEntity = DefiEntity.class)
-    private List<DefiEntity> defis = new ArrayList<>();
+    private List<DefiEntity> defis;
 
     @OneToMany(mappedBy = "categorie", targetEntity = ParcoursEntity.class)
-    private List<ParcoursEntity> categories = new ArrayList<>();
+    private List<ParcoursEntity> categories;
 
     @Override
     public boolean equals(Object o) {

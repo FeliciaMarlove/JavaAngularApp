@@ -68,10 +68,10 @@ public class ParcoursEntity implements Serializable {
     private CategorieEntity categorie;
 
     @ManyToMany(mappedBy = "listeParcours")
-    private Set<DefiEntity> listeDefis = new HashSet<>();
+    private Set<DefiEntity> listeDefis;
 
     @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class)
-    private Set<ParcoursUtilisateurLiaison> listePUP = new HashSet<>();
+    private Set<ParcoursUtilisateurLiaison> listePUP;
 
     @Override
     public boolean equals(Object o) {

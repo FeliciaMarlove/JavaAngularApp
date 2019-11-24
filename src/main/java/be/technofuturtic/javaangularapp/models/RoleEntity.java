@@ -31,7 +31,7 @@ public class RoleEntity  implements Serializable {
     }
 
     @OneToMany(mappedBy = "role", targetEntity = UtilisateurEntity.class)
-    private List<UtilisateurEntity> utilisateurs = new ArrayList<>();
+    private List<UtilisateurEntity> utilisateurs;
 
     @Override
     public boolean equals(Object o) {

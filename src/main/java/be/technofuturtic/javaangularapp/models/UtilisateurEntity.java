@@ -106,7 +106,7 @@ public class UtilisateurEntity implements Serializable {
     private PaysEntity pays;
 
     @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class)
-    private Set<ParcoursUtilisateurLiaison> listePUP = new HashSet<>();
+    private Set<ParcoursUtilisateurLiaison> listePUP;
 
     @Override
     public boolean equals(Object o) {

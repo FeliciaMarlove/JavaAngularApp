@@ -55,7 +55,7 @@ public class PaysEntity  implements Serializable {
     }
 
     @OneToMany(mappedBy = "pays", targetEntity = UtilisateurEntity.class)
-    private List<UtilisateurEntity> utilisateurs = new ArrayList<>();
+    private List<UtilisateurEntity> utilisateurs;
 
     @Override
     public boolean equals(Object o) {
