@@ -20,4 +20,14 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     public List<UtilisateurEntity> findAll() {
         return (List<UtilisateurEntity>) repo.findAll();
     }
+
+    @Override
+    public void desactiverUtilisateur(Long idUtilisateur) {
+        repo.findById(idUtilisateur).get().setActiveUtilisateur(false);
+    }
+
+    @Override
+    public void activerUtilisateur(Long idUtilisateur) {
+        repo.findById(idUtilisateur).get().setActiveUtilisateur(true);
+    }
 }

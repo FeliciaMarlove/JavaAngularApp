@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface PaiementService {
     public List<PaiementEntity> findAll();
+    void desactiverPaiement(Integer idPaiement);
+    void activerPaiement(Integer idPaiement);
+    void ajouterPaiement(PaiementEntity nouveauPaiement);
 }

@@ -21,4 +21,19 @@ public class PaiementServiceImplemented implements PaiementService {
     public List<PaiementEntity> findAll() {
         return (List<PaiementEntity>) repo.findAll();
     }
+
+    @Override
+    public void desactiverPaiement(Integer idPaiement) {
+        repo.findById(idPaiement).get().setActivePaiement(false);
+    }
+
+    @Override
+    public void activerPaiement(Integer idPaiement) {
+        repo.findById(idPaiement).get().setActivePaiement(true);
+    }
+
+    @Override
+    public void ajouterPaiement(PaiementEntity nouveauPaiement) {
+        repo.save(nouveauPaiement);
+    }
 }

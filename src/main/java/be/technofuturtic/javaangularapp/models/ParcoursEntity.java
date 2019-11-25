@@ -63,6 +63,14 @@ public class ParcoursEntity implements Serializable {
         isActiveParcours = activeParcours;
     }
 
+    public Set<DefiEntity> getListeDefis() {
+        return listeDefis;
+    }
+
+    public void setListeDefis(Set<DefiEntity> listeDefis) {
+        this.listeDefis = listeDefis;
+    }
+
     @ManyToOne(targetEntity = CategorieEntity.class)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;

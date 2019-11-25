@@ -20,4 +20,19 @@ public class DefiServiceImplemented implements DefiService {
     public List<DefiEntity> findAll() {
         return (List<DefiEntity>) repo.findAll();
     }
+
+    @Override
+    public void desactiverDefi(Integer idDefi) {
+        repo.findById(idDefi).get().setActiveDefi(false);
+    }
+
+    @Override
+    public void activerDefi(Integer idDefi) {
+        repo.findById(idDefi).get().setActiveDefi(true);
+    }
+
+    @Override
+    public void ajouterDefi(DefiEntity nouveauDefi) {
+        repo.save(nouveauDefi);
+    }
 }
