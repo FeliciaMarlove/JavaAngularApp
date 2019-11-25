@@ -2,7 +2,6 @@ package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,7 +55,7 @@ public class CategorieEntity implements Serializable {
     private List<DefiEntity> defis;
 
     @OneToMany(mappedBy = "categorie", targetEntity = ParcoursEntity.class)
-    private List<ParcoursEntity> categories;
+    private List<ParcoursEntity> parcours;
 
     @Override
     public boolean equals(Object o) {
@@ -68,11 +67,20 @@ public class CategorieEntity implements Serializable {
                 Objects.equals(nomCategorie, that.nomCategorie) &&
                 Objects.equals(descCategorie, that.descCategorie) &&
                 Objects.equals(defis, that.defis) &&
-                Objects.equals(categories, that.categories);
+                Objects.equals(parcours, that.parcours);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCategorie, nomCategorie, descCategorie, isActiveCategorie, defis, categories);
+        return Objects.hash(idCategorie, nomCategorie, descCategorie, isActiveCategorie, defis, parcours);
+    }
+
+    public CategorieEntity(String nomCategorie, String descCategorie) {
+        this.nomCategorie = nomCategorie;
+        this.descCategorie = descCategorie;
+        this.isActiveCategorie = true;
+    }
+
+    public CategorieEntity() {
     }
 }

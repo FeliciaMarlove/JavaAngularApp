@@ -70,4 +70,10 @@ public class PaiementEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(idPaiement, nomPaiement, descPaiement, isActivePaiement);
     }
+
+    public PaiementEntity(String nomPaiement, String descPaiement) {
+        this.nomPaiement = nomPaiement;
+        this.descPaiement = descPaiement;
+        this.isActivePaiement = true;
+    }
 }

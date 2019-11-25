@@ -1,10 +1,7 @@
 package be.technofuturtic.javaangularapp.models;
 
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -69,7 +66,7 @@ public class DefiEntity  implements Serializable {
     private CategorieEntity categorie;
 
     @ManyToMany
-    @JoinTable(name = "DefiParcours", joinColumns = @JoinColumn(name = "id_defi"), inverseJoinColumns = @JoinColumn( name = "id_parcours"))
+    (mappedBy = "listeDefis")
     private Set<ParcoursEntity> listeParcours;
 
     @Override
@@ -82,12 +79,22 @@ public class DefiEntity  implements Serializable {
                 Objects.equals(nomDefi, that.nomDefi) &&
                 Objects.equals(descDefi, that.descDefi) &&
                 Objects.equals(infobulleDefi, that.infobulleDefi) &&
-                Objects.equals(categorie, that.categorie) &&
-                Objects.equals(listeParcours, that.listeParcours);
+                Objects.equals(categorie, that.categorie);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idDefi, nomDefi, descDefi, infobulleDefi, isActiveDefi, categorie, listeParcours);
+        return Objects.hash(idDefi, nomDefi, descDefi, infobulleDefi, isActiveDefi, categorie);
+    }
+
+    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
+        this.nomDefi = nomDefi;
+        this.descDefi = descDefi;
+        this.infobulleDefi = infobulleDefi;
+        this.isActiveDefi = true;
+        this.categorie = categorie;
+    }
+
+    public DefiEntity() {
     }
 }

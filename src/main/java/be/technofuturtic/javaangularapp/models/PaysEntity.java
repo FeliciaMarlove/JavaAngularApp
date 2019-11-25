@@ -75,4 +75,16 @@ public class PaysEntity  implements Serializable {
     public int hashCode() {
         return Objects.hash(idPays, code, alpha2, alpha3, nomFr, nomEn, utilisateurs);
     }
+
+    public PaysEntity(Integer idPays, int code, String alpha2, String alpha3, String nomFr, String nomEn) {
+        this.idPays = idPays;
+        this.code = code;
+        this.alpha2 = alpha2;
+        this.alpha3 = alpha3;
+        this.nomFr = nomFr;
+        this.nomEn = nomEn;
+    }
+
+    public PaysEntity() {
+    }
 }

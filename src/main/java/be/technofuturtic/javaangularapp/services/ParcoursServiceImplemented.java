@@ -21,7 +21,6 @@ public class ParcoursServiceImplemented implements ParcoursService {
        repo = repository;
     }
 
-
     @Override
     public List<ParcoursEntity> findAll() {
         return (List<ParcoursEntity>) repo.findAll();
@@ -64,5 +63,12 @@ public class ParcoursServiceImplemented implements ParcoursService {
                 listeDefis.add(i, repoDefi.findByIdDefi(idDefiAAjouter));
             }
         }
+    }
+
+    @Override
+    public void ajouterDefiDansParcours(Integer idParcours, DefiEntity nouveauDefi) {
+        Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
+        List<DefiEntity> listeDefis = new ArrayList(parcoursModif.get().getListeDefis());
+        listeDefis.add(nouveauDefi);
     }
 }

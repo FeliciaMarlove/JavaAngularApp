@@ -47,4 +47,11 @@ public class RoleEntity  implements Serializable {
     public int hashCode() {
         return Objects.hash(idRole, nomRole, utilisateurs);
     }
+
+    public RoleEntity(String nomRole) {
+        this.nomRole = nomRole;
+    }
+
+    public RoleEntity() {
+    }
 }

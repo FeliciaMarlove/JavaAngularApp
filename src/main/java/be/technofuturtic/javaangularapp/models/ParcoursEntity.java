@@ -75,7 +75,8 @@ public class ParcoursEntity implements Serializable {
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;
 
-    @ManyToMany(mappedBy = "listeParcours")
+    @ManyToMany
+    @JoinTable(name = "ParcoursDefis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
     private Set<DefiEntity> listeDefis;
 
     @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class)
@@ -98,5 +99,16 @@ public class ParcoursEntity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(idParcours, nomParcours, descParcours, prix, isActiveParcours, categorie, listeDefis);
+    }
+
+    public ParcoursEntity(String nomParcours, String descParcours, double prix, CategorieEntity categorie) {
+        this.nomParcours = nomParcours;
+        this.descParcours = descParcours;
+        this.prix = prix;
+        this.isActiveParcours = true;
+        this.categorie = categorie;
+    }
+
+    public ParcoursEntity() {
     }
 }

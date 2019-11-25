@@ -129,4 +129,19 @@ public class UtilisateurEntity implements Serializable {
     public int hashCode() {
         return Objects.hash(idUtilisateur, nomUtilisateur, prenomUtilisateur, dateNaiss, email, motDePasse, newsletterOptIn, isActiveUtilisateur, role, pays);
     }
+
+    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn, RoleEntity role, PaysEntity pays) {
+        this.nomUtilisateur = nomUtilisateur;
+        this.prenomUtilisateur = prenomUtilisateur;
+        this.dateNaiss = dateNaiss;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.newsletterOptIn = newsletterOptIn;
+        this.isActiveUtilisateur = true;
+        this.role = role;
+        this.pays = pays;
+    }
+
+    public UtilisateurEntity() {
+    }
 }
