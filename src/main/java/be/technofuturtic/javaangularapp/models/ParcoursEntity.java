@@ -3,6 +3,7 @@ package be.technofuturtic.javaangularapp.models;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -63,13 +64,15 @@ public class ParcoursEntity implements Serializable {
         isActiveParcours = activeParcours;
     }
 
-    public Set<DefiEntity> getListeDefis() {
+    public List<DefiEntity> getListeDefis() {
         return listeDefis;
     }
 
-    public void setListeDefis(Set<DefiEntity> listeDefis) {
+    public void setListeDefis(List<DefiEntity> listeDefis) {
         this.listeDefis = listeDefis;
     }
+
+
 
     @ManyToOne(targetEntity = CategorieEntity.class)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
@@ -77,7 +80,7 @@ public class ParcoursEntity implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "ParcoursDefis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
-    private Set<DefiEntity> listeDefis;
+    private List<DefiEntity> listeDefis;
 
     @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class)
     private Set<ParcoursUtilisateurLiaison> listePUP;

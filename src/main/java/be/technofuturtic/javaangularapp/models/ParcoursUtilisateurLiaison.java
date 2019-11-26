@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "parcours_utilisateur")
+@Table(name = "parcours_utilisateur", schema = "public", catalog = "javaangulardb")
 public class ParcoursUtilisateurLiaison implements Serializable {
 
     @EmbeddedId
@@ -42,5 +42,14 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(parcoursUtilId);
+    }
+
+    public ParcoursUtilisateurLiaison(ParcoursEntity parcours, UtilisateurEntity utilisateur) {
+        this.dateAchat = LocalDate.now();
+        this.parcours = parcours;
+        this.utilisateur = utilisateur;
+    }
+
+    public ParcoursUtilisateurLiaison() {
     }
 }

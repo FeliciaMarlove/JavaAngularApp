@@ -1,5 +1,9 @@
 package be.technofuturtic.javaangularapp.models;
 
+import be.technofuturtic.javaangularapp.repositories.PaysRepository;
+import be.technofuturtic.javaangularapp.services.PaysService;
+import be.technofuturtic.javaangularapp.services.PaysServiceImplemented;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -130,7 +134,7 @@ public class UtilisateurEntity implements Serializable {
         return Objects.hash(idUtilisateur, nomUtilisateur, prenomUtilisateur, dateNaiss, email, motDePasse, newsletterOptIn, isActiveUtilisateur, role, pays);
     }
 
-    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn, RoleEntity role, PaysEntity pays) {
+    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn /*RoleEntity role, *//*Integer idPays*/) {
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
         this.dateNaiss = dateNaiss;
@@ -138,8 +142,8 @@ public class UtilisateurEntity implements Serializable {
         this.motDePasse = motDePasse;
         this.newsletterOptIn = newsletterOptIn;
         this.isActiveUtilisateur = true;
-        this.role = role;
-        this.pays = pays;
+        /*this.pays = */
+        /*this.role = role;*/
     }
 
     public UtilisateurEntity() {

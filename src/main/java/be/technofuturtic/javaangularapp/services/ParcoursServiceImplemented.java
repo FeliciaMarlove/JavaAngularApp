@@ -1,9 +1,13 @@
 package be.technofuturtic.javaangularapp.services;
 
 import be.technofuturtic.javaangularapp.models.DefiEntity;
+import be.technofuturtic.javaangularapp.models.PK_Parcours_Utilisateur;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
+import be.technofuturtic.javaangularapp.models.ParcoursUtilisateurLiaison;
 import be.technofuturtic.javaangularapp.repositories.DefiRepository;
+import be.technofuturtic.javaangularapp.repositories.PacoursUtilisateurLiaisonRepository;
 import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
+import be.technofuturtic.javaangularapp.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,11 +74,5 @@ public class ParcoursServiceImplemented implements ParcoursService {
         Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
         List<DefiEntity> listeDefis = new ArrayList(parcoursModif.get().getListeDefis());
         listeDefis.add(nouveauDefi);
-    }
-
-    @Override
-    public void commencerParcours(Integer idParcours) {
-        //upgrade : check parcours en cours
-        //date -> ParcoursUtilisateurLiaison -> créer un PUL
     }
 }

@@ -87,12 +87,13 @@ public class DefiEntity  implements Serializable {
         return Objects.hash(idDefi, nomDefi, descDefi, infobulleDefi, isActiveDefi, categorie);
     }
 
-    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
+    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, Integer idCategorie) {
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;
         this.infobulleDefi = infobulleDefi;
         this.isActiveDefi = true;
-        this.categorie = categorie;
+
+        /*this.categorie = categorie;*/
     }
 
     public DefiEntity() {
