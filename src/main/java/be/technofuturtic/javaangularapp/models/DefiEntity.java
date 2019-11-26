@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Defi", schema = "public", catalog = "javaangulardb")
-public class DefiEntity  implements Serializable {
+public class DefiEntity implements Serializable {
     @Id
     @GeneratedValue
     @Column(name = "id_defi")

@@ -79,7 +79,7 @@ public class ParcoursEntity implements Serializable {
     private CategorieEntity categorie;
 
     @ManyToMany
-    @JoinTable(name = "ParcoursDefis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
+    @JoinTable(name = "Parcours_Defis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
     private List<DefiEntity> listeDefis;
 
     @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class)

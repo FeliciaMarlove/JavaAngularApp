@@ -72,7 +72,8 @@ public class ParcoursServiceImplemented implements ParcoursService {
     @Override
     public void ajouterDefiDansParcours(Integer idParcours, DefiEntity nouveauDefi) {
         Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
-        List<DefiEntity> listeDefis = new ArrayList(parcoursModif.get().getListeDefis());
-        listeDefis.add(nouveauDefi);
+        parcoursModif.get().getListeDefis().add(nouveauDefi);
+        repo.save(parcoursModif.get());
+        //doit enregistrer un (Parcours?)Entity
     }
 }
