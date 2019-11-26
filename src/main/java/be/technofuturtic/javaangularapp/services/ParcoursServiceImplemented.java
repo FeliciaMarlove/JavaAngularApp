@@ -71,4 +71,10 @@ public class ParcoursServiceImplemented implements ParcoursService {
         List<DefiEntity> listeDefis = new ArrayList(parcoursModif.get().getListeDefis());
         listeDefis.add(nouveauDefi);
     }
+
+    @Override
+    public void commencerParcours(Integer idParcours) {
+        //upgrade : check parcours en cours
+        //date -> ParcoursUtilisateurLiaison -> créer un PUL
+    }
 }

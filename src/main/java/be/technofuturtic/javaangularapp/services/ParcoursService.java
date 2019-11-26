@@ -12,4 +12,5 @@ public interface ParcoursService {
     void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, DefiEntity nouveauDefi);
     void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAAjouter);
     void ajouterDefiDansParcours(Integer idParcours, DefiEntity nouveauDefi);
+    void commencerParcours(Integer idParcours);
 }

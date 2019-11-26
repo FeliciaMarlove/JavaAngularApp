@@ -21,14 +21,4 @@ public class ParcoursController {
         return (List<ParcoursEntity>) parcoursRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Set<DefiEntity> get(@PathVariable("id") Integer idParcours) {
-        /*DefiEntity a = new DefiEntity();
-        a.setActiveDefi(true);
-        a.setDescDefi("Defi bidon 2");
-        a.setInfobulleDefi("Infobulle defi bidon 2");
-        a.setNomDefi("Defi B2");
-        parcoursRepository.findById(99).get().getListeDefis().add(a);*/
-        return parcoursRepository.findById(idParcours).get().getListeDefis();
-    }
 }

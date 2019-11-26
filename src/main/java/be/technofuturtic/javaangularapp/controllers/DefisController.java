@@ -25,9 +25,5 @@ public class DefisController {
         return defiRepository.findByIdDefi(idDefi);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void create(@RequestBody DefiEntity defi) {
-        defiRepository.save(defi);
-    }
+
 }
