@@ -1,13 +1,10 @@
 package be.technofuturtic.javaangularapp.services;
 
+import be.technofuturtic.javaangularapp.models.CategorieEntity;
 import be.technofuturtic.javaangularapp.models.DefiEntity;
-import be.technofuturtic.javaangularapp.models.PK_Parcours_Utilisateur;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
-import be.technofuturtic.javaangularapp.models.ParcoursUtilisateurLiaison;
-import be.technofuturtic.javaangularapp.repositories.DefiRepository;
-import be.technofuturtic.javaangularapp.repositories.PacoursUtilisateurLiaisonRepository;
-import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
-import be.technofuturtic.javaangularapp.repositories.RoleRepository;
+import be.technofuturtic.javaangularapp.repositories.*;
+import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +16,13 @@ import java.util.Optional;
 public class ParcoursServiceImplemented implements ParcoursService {
     private ParcoursRepository repo;
     private DefiRepository repoDefi;
+    private CategorieRepository repoCat;
 
     @Autowired
-    public ParcoursServiceImplemented(ParcoursRepository repository, DefiRepository defiRepository) {
+    public ParcoursServiceImplemented(ParcoursRepository repository, DefiRepository defiRepository, CategorieRepository repoCat) {
        repo = repository;
        repoDefi = defiRepository;
+        this.repoCat = repoCat;
     }
 
     @Override
@@ -64,6 +63,11 @@ public class ParcoursServiceImplemented implements ParcoursService {
     }
 
     @Override
-    public void ajouterDefiDansParcours(Integer idParcours, DefiEntity nouveauDefi) {
+    public void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception {
+        Optional<ParcoursEntity> parcoursEntity = this.repo.findById(idParcours);
+        if (parcoursEntity.isEmpty())throw new Exception();
+        ParcoursEntity parcours = parcoursEntity.get();
+        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(nouveauDefi.getCategorieId());
+
     }
 }

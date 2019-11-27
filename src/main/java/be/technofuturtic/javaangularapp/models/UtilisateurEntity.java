@@ -3,13 +3,12 @@ package be.technofuturtic.javaangularapp.models;
 import be.technofuturtic.javaangularapp.repositories.PaysRepository;
 import be.technofuturtic.javaangularapp.services.PaysService;
 import be.technofuturtic.javaangularapp.services.PaysServiceImplemented;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "Utilisateur", schema = "public", catalog = "javaangulardb")
@@ -101,16 +100,16 @@ public class UtilisateurEntity implements Serializable {
         isActiveUtilisateur = activeUtilisateur;
     }
 
-    @ManyToOne(targetEntity = RoleEntity.class)
+    @ManyToOne(targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", foreignKey = @ForeignKey(name = "FK_Utilisateur_Role"))
     private RoleEntity role;
 
-    @ManyToOne(targetEntity = PaysEntity.class)
+    @ManyToOne(targetEntity = PaysEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
     private PaysEntity pays;
 
-    @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class)
-    private Set<ParcoursUtilisateurLiaison> listePUP;
+    @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
+    private List<ParcoursUtilisateurLiaison> listePUP;
 
     @Override
     public boolean equals(Object o) {
@@ -134,7 +133,8 @@ public class UtilisateurEntity implements Serializable {
         return Objects.hash(idUtilisateur, nomUtilisateur, prenomUtilisateur, dateNaiss, email, motDePasse, newsletterOptIn, isActiveUtilisateur, role, pays);
     }
 
-    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn /*RoleEntity role, *//*Integer idPays*/) {
+    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn, RoleEntity role, PaysEntity pays) {
+        this();
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
         this.dateNaiss = dateNaiss;
@@ -142,10 +142,11 @@ public class UtilisateurEntity implements Serializable {
         this.motDePasse = motDePasse;
         this.newsletterOptIn = newsletterOptIn;
         this.isActiveUtilisateur = true;
-        /*this.pays = */
-        /*this.role = role;*/
+        this.pays = pays;
+        this.role = role;
     }
 
     public UtilisateurEntity() {
+        this.listePUP = new ArrayList<>();
     }
 }

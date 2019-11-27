@@ -1,17 +1,29 @@
 package be.technofuturtic.javaangularapp.utilitaires;
 
+import be.technofuturtic.javaangularapp.models.CategorieEntity;
+
 public class ModifierDefiDansParcoursUtil {
     private Integer idParcours;
     private Integer idDefi;
     private String nomDefi;
     private String descDefi;
     private String infobulleDefi;
-    private Integer categorie;
+    private Integer categorieId;
+    private CategorieEntity categorie;
 
     public ModifierDefiDansParcoursUtil() {
     }
 
-    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefi, String nomDefi, String descDefi, String infobulleDefi, Integer categorie) {
+    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefi, String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
+        this.idParcours = idParcours;
+        this.idDefi = idDefi;
+        this.nomDefi = nomDefi;
+        this.descDefi = descDefi;
+        this.infobulleDefi = infobulleDefi;
+        this.categorieId = categorieId;
+    }
+
+    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefi, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
         this.idParcours = idParcours;
         this.idDefi = idDefi;
         this.nomDefi = nomDefi;
@@ -40,7 +52,11 @@ public class ModifierDefiDansParcoursUtil {
         return infobulleDefi;
     }
 
-    public Integer getCategorie() {
+    public Integer getCategorieId() {
+        return categorieId;
+    }
+
+    public CategorieEntity getCategorie() {
         return categorie;
     }
 }

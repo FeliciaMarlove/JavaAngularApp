@@ -1,7 +1,11 @@
 package be.technofuturtic.javaangularapp.models;
+import be.technofuturtic.javaangularapp.repositories.CategorieRepository;
+import be.technofuturtic.javaangularapp.services.CategorieServiceImplemented;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -61,13 +65,20 @@ public class DefiEntity implements Serializable {
         isActiveDefi = activeDefi;
     }
 
-    @ManyToOne(targetEntity = CategorieEntity.class)
+    public void setCategorie(CategorieEntity categorie) {
+        this.categorie = categorie;
+    }
+
+    public CategorieEntity getCategorie() {
+        return categorie;
+    }
+
+    @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Defi_Categorie"))
     private CategorieEntity categorie;
 
-    @ManyToMany
-    (mappedBy = "listeDefis")
-    private Set<ParcoursEntity> listeParcours;
+    @ManyToMany (mappedBy = "listeDefis", fetch = FetchType.LAZY)
+    private List<ParcoursEntity> listeParcours;
 
     @Override
     public boolean equals(Object o) {
@@ -87,15 +98,16 @@ public class DefiEntity implements Serializable {
         return Objects.hash(idDefi, nomDefi, descDefi, infobulleDefi, isActiveDefi, categorie);
     }
 
-    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, Integer idCategorie) {
+    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
+        this();
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;
         this.infobulleDefi = infobulleDefi;
         this.isActiveDefi = true;
-
-        /*this.categorie = categorie;*/
+        this.categorie = categorie;
     }
 
     public DefiEntity() {
+        this.listeParcours = new ArrayList<ParcoursEntity>();
     }
 }

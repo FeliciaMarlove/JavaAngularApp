@@ -54,7 +54,7 @@ public class PaysEntity  implements Serializable {
         return nomEn;
     }
 
-    @OneToMany(mappedBy = "pays", targetEntity = UtilisateurEntity.class)
+    @OneToMany(mappedBy = "pays", targetEntity = UtilisateurEntity.class, fetch = FetchType.LAZY)
     private List<UtilisateurEntity> utilisateurs;
 
     @Override

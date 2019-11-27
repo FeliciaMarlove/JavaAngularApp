@@ -30,7 +30,7 @@ public class RoleEntity  implements Serializable {
         this.nomRole = nomRole;
     }
 
-    @OneToMany(mappedBy = "role", targetEntity = UtilisateurEntity.class)
+    @OneToMany(mappedBy = "role", targetEntity = UtilisateurEntity.class, fetch = FetchType.LAZY)
     private List<UtilisateurEntity> utilisateurs;
 
     @Override
@@ -49,9 +49,11 @@ public class RoleEntity  implements Serializable {
     }
 
     public RoleEntity(String nomRole) {
+        this();
         this.nomRole = nomRole;
     }
 
     public RoleEntity() {
+        this.utilisateurs = new ArrayList<>();
     }
 }

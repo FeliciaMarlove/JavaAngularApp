@@ -2,6 +2,7 @@ package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,10 +52,10 @@ public class CategorieEntity implements Serializable {
         isActiveCategorie = activeCategorie;
     }
 
-    @OneToMany(mappedBy = "categorie", targetEntity = DefiEntity.class)
+    @OneToMany(mappedBy = "categorie", targetEntity = DefiEntity.class, fetch = FetchType.LAZY)
     private List<DefiEntity> defis;
 
-    @OneToMany(mappedBy = "categorie", targetEntity = ParcoursEntity.class)
+    @OneToMany(mappedBy = "categorie", targetEntity = ParcoursEntity.class, fetch = FetchType.LAZY)
     private List<ParcoursEntity> parcours;
 
     @Override
@@ -76,11 +77,14 @@ public class CategorieEntity implements Serializable {
     }
 
     public CategorieEntity(String nomCategorie, String descCategorie) {
+        this();
         this.nomCategorie = nomCategorie;
         this.descCategorie = descCategorie;
         this.isActiveCategorie = true;
     }
 
     public CategorieEntity() {
+        this.parcours = new ArrayList<>();
+        this.defis = new ArrayList<>();
     }
 }

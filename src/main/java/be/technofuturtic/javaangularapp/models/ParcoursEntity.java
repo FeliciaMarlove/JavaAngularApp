@@ -2,10 +2,7 @@ package be.technofuturtic.javaangularapp.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "Parcours", schema = "public", catalog = "javaangulardb")
@@ -53,7 +50,11 @@ public class ParcoursEntity implements Serializable {
     }
 
     public void setPrix(double prix) {
-        this.prix = prix;
+        if (prix >= 0) {
+            this.prix = prix;
+        } else {
+            this.prix = Math.abs(prix);
+        }
     }
 
     public boolean isActiveParcours() {
@@ -72,18 +73,16 @@ public class ParcoursEntity implements Serializable {
         this.listeDefis = listeDefis;
     }
 
-
-
-    @ManyToOne(targetEntity = CategorieEntity.class)
+    @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "Parcours_Defis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
     private List<DefiEntity> listeDefis;
 
-    @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class)
-    private Set<ParcoursUtilisateurLiaison> listePUP;
+    @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
+    private List<ParcoursUtilisateurLiaison> listePUP;
 
     @Override
     public boolean equals(Object o) {
@@ -105,6 +104,7 @@ public class ParcoursEntity implements Serializable {
     }
 
     public ParcoursEntity(String nomParcours, String descParcours, double prix, CategorieEntity categorie) {
+        this();
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;
         this.prix = prix;
@@ -113,5 +113,7 @@ public class ParcoursEntity implements Serializable {
     }
 
     public ParcoursEntity() {
+        this.listeDefis = new ArrayList<>();
+        this.listePUP = new ArrayList<>();
     }
 }

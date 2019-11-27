@@ -4,12 +4,12 @@ import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
 import be.technofuturtic.javaangularapp.services.ParcoursService;
+import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import be.technofuturtic.javaangularapp.utilitaires.ModifierDefiDansParcoursUtil;
 import be.technofuturtic.javaangularapp.utilitaires.ModifierDefiDansParcoursUtilId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,24 +53,16 @@ public class ParcoursController {
         this.service.ajouterParcours(nouveauParcours);
     }
 
-    @PostMapping("/modifier") //TO BE VERIFIED
-    public void modifierDefiDansParcours(@RequestBody ModifierDefiDansParcoursUtil a){
-        this.service.modifierDefiDansParcours(
-                a.getIdParcours(),
-                a.getIdDefi(),
-                new DefiEntity(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorie())
-        );
+    @PostMapping("/ajouterDefi/{idparcours}")
+    public void ajouterDefiDansParcours(
+            @RequestBody DefiEntityDto defi,
+            @PathVariable("idparcours") Integer idParcours) throws Exception {
+        this.service.ajouterDefiDansParcours(idParcours, defi);
     }
-    /*
-    JSON structure
-    {
-	"idParcours" : 99,
-	"idDefi" : 99,
-    "nomDefi" : "Defi bidon 2",
-    "descDefi" : "Ajouté par Post",
-    "infobulleDefi" : "Bla bla bla bla",
-    "categorie" : 99
-     */
+
+    //-------------------------------------------
+
+
 
     @PostMapping("/modifier/{id}") //TO BE VERIFIED
     public void modifierDefiDansParcoursId(@RequestBody ModifierDefiDansParcoursUtilId a) {
@@ -81,10 +73,12 @@ public class ParcoursController {
         );
     }
 
-    @PostMapping("/ajouterDefi/{idparcours}") //TO BE VERIFIED
-    public void ajouterDefiDansParcours(
-            @RequestBody DefiEntity defi,
-            @PathVariable("idparcours") Integer idParcours) {
-        this.service.ajouterDefiDansParcours(idParcours, defi);
+    @PostMapping("/modifier") //TO BE VERIFIED
+    public void modifierDefiDansParcours(@RequestBody ModifierDefiDansParcoursUtil a){
+        this.service.modifierDefiDansParcours(
+                a.getIdParcours(),
+                a.getIdDefi(),
+                new DefiEntity(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorie())
+        );
     }
 }
