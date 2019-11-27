@@ -1,11 +1,14 @@
 package be.technofuturtic.javaangularapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "Role", schema = "public", catalog = "javaangulardb")
 public class RoleEntity  implements Serializable {

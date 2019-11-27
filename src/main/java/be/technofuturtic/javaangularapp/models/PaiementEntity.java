@@ -1,9 +1,12 @@
 package be.technofuturtic.javaangularapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "Paiement", schema = "public", catalog = "javaangulardb")
 public class PaiementEntity implements Serializable {

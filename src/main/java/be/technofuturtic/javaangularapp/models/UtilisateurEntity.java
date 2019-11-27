@@ -1,15 +1,12 @@
 package be.technofuturtic.javaangularapp.models;
-
-import be.technofuturtic.javaangularapp.repositories.PaysRepository;
-import be.technofuturtic.javaangularapp.services.PaysService;
-import be.technofuturtic.javaangularapp.services.PaysServiceImplemented;
-import org.hibernate.validator.constraints.Range;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "Utilisateur", schema = "public", catalog = "javaangulardb")
 public class UtilisateurEntity implements Serializable {

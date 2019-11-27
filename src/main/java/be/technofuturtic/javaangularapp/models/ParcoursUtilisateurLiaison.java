@@ -1,10 +1,13 @@
 package be.technofuturtic.javaangularapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "parcours_utilisateur", schema = "public", catalog = "javaangulardb")
 public class ParcoursUtilisateurLiaison implements Serializable {
