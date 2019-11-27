@@ -1,5 +1,7 @@
 package be.technofuturtic.javaangularapp.models;
 
+import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -77,7 +79,7 @@ public class ParcoursEntity implements Serializable {
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "Parcours_Defis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
     private List<DefiEntity> listeDefis;
 

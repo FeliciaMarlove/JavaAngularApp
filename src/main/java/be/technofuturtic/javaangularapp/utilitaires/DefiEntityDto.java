@@ -1,22 +1,22 @@
 package be.technofuturtic.javaangularapp.utilitaires;
 
-import be.technofuturtic.javaangularapp.models.CategorieEntity;
 import be.technofuturtic.javaangularapp.repositories.CategorieRepository;
-
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class DefiEntityDto {
     private String nomDefi;
     private String descDefi;
     private String infobulleDefi;
-    private Optional<CategorieEntity> categorie;
+    private Integer categorieId;
+
+    @Autowired
     private CategorieRepository catRep;
 
-    public DefiEntityDto(String nomDefi, String descDefi, String infobulleDefi, Integer idCat) {
+    public DefiEntityDto(String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;
         this.infobulleDefi = infobulleDefi;
-        this.categorie = catRep.findById(idCat);
+        this.categorieId = categorieId;
     }
 
     public DefiEntityDto() {
@@ -34,15 +34,7 @@ public class DefiEntityDto {
         return infobulleDefi;
     }
 
-    public Optional<CategorieEntity> getCategorie() {
-        return categorie;
-    }
-
-    public CategorieRepository getCatRep() {
-        return catRep;
-    }
-
     public Integer getCategorieId() {
-        return getCategorie().get().getIdCategorie();
+        return categorieId;
     }
 }

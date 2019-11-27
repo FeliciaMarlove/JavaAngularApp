@@ -46,6 +46,28 @@ public class ParcoursServiceImplemented implements ParcoursService {
     }
 
     @Override
+    public void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception {
+        Optional<ParcoursEntity> parcoursEntity = this.repo.findById(idParcours);
+        if (parcoursEntity.isEmpty())throw new Exception();
+        ParcoursEntity parcours = parcoursEntity.get();
+        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(nouveauDefi.getCategorieId());
+        DefiEntity defiEntity = new DefiEntity(
+                nouveauDefi.getNomDefi(),
+                nouveauDefi.getDescDefi(),
+                nouveauDefi.getInfobulleDefi(),
+                categorieEntityOptional
+        );
+        this.repoDefi.save(defiEntity);
+        parcours.getListeDefis().add(defiEntity);
+        repo.save(parcours);
+    }
+
+//-------------------TO BE CHECKED/DONE :
+
+
+
+
+    @Override
     public void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, DefiEntity nouveauDefi) {
         Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
         List<DefiEntity> listeDefis = new ArrayList(parcoursModif.get().getListeDefis()); // liste de DefiEntity du Parcours
@@ -59,15 +81,6 @@ public class ParcoursServiceImplemented implements ParcoursService {
 
     @Override
     public void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAAjouter) {
-
-    }
-
-    @Override
-    public void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception {
-        Optional<ParcoursEntity> parcoursEntity = this.repo.findById(idParcours);
-        if (parcoursEntity.isEmpty())throw new Exception();
-        ParcoursEntity parcours = parcoursEntity.get();
-        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(nouveauDefi.getCategorieId());
 
     }
 }

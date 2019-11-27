@@ -4,10 +4,7 @@ import be.technofuturtic.javaangularapp.services.CategorieServiceImplemented;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "Defi", schema = "public", catalog = "javaangulardb")
@@ -28,6 +25,13 @@ public class DefiEntity implements Serializable {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActiveDefi;
+
+    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, Optional<CategorieEntity> categorieEntityOptional) {
+        this.nomDefi = nomDefi;
+        this.descDefi = descDefi;
+        this.infobulleDefi = infobulleDefi;
+        this.categorie = categorieEntityOptional.get();
+    }
 
     public Integer getIdDefi() {
         return idDefi;
