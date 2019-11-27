@@ -4,6 +4,8 @@ import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
 import be.technofuturtic.javaangularapp.services.UtilisateurService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/utilisateurs")
 @CrossOrigin(origins = {"http://localhost:4200"})
@@ -14,7 +16,22 @@ public class UtilisateursController {
         this.service = service;
     }
 
-    @PostMapping
+    @GetMapping
+    public List<UtilisateurEntity> list() {
+        return service.findAll();
+    }
+
+    @PostMapping("/desactiver/{id}")
+    public void desactUtil(@RequestBody UtilisateurEntity utilisateur, @PathVariable("id") Long idUtilisateur) {
+        this.service.desactiverUtilisateur(idUtilisateur);
+    }
+
+    @PostMapping("/activer/{id}")
+    public void actUtil(@RequestBody UtilisateurEntity utilisateur, @PathVariable("id") Long idUtilisateur) {
+        this.service.activerUtilisateur(idUtilisateur);
+    }
+
+    @PostMapping("/creer")
     public void creerCompte(@RequestBody UtilisateurEntity utilisateur) {
         this.service.creerCompte(utilisateur);
     }

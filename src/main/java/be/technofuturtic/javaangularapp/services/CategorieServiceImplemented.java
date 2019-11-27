@@ -35,7 +35,18 @@ public class CategorieServiceImplemented implements CategorieService {
 
     @Override
     public void ajouterCategorie(CategorieEntity nouvelleCategorie) {
-        repo.save(nouvelleCategorie);
+        boolean isDuplicate = false;
+        List<CategorieEntity> categoriesExistantes = findAll();
+        while (!isDuplicate) {
+            for (int i = 0; i < categoriesExistantes.size(); i++) {
+                if (nouvelleCategorie.equals(categoriesExistantes.get(i))) {
+                    isDuplicate = true;
+                }
+            }
+        }
+        if (!isDuplicate) {
+            repo.save(nouvelleCategorie);
+        }
     }
 
 

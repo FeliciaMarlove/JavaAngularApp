@@ -34,6 +34,17 @@ public class PaiementServiceImplemented implements PaiementService {
 
     @Override
     public void ajouterPaiement(PaiementEntity nouveauPaiement) {
-        repo.save(nouveauPaiement);
+        boolean isDuplicate = false;
+        List<PaiementEntity> paiementsExistants = findAll();
+        while (!isDuplicate) {
+            for (int i = 0; i < paiementsExistants.size(); i++) {
+                if (nouveauPaiement.equals(paiementsExistants.get(i))) {
+                    isDuplicate = true;
+                }
+            }
+        }
+        if (!isDuplicate) {
+            repo.save(nouveauPaiement);
+        }
     }
 }

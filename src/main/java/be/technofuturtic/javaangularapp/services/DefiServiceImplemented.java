@@ -32,7 +32,7 @@ public class DefiServiceImplemented implements DefiService {
     }
 
     @Override
-    public void ajouterDefi(DefiEntity nouveauDefi) {
+    public void creerDefi(DefiEntity nouveauDefi) {
         repo.save(nouveauDefi);
     }
 }

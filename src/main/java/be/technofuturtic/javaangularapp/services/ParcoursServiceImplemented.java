@@ -60,22 +60,10 @@ public class ParcoursServiceImplemented implements ParcoursService {
 
     @Override
     public void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAAjouter) {
-        Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
-        List<DefiEntity> listeDefis = new ArrayList(parcoursModif.get().getListeDefis());
-        for (int i = 0; i < listeDefis.size(); i++) {
-            if (listeDefis.get(i).getIdDefi() == idDefiARemplacer) {
-                listeDefis.remove(i);
-                listeDefis.add(i, repoDefi.findByIdDefi(idDefiAAjouter));
-            }
-        }
+
     }
 
     @Override
     public void ajouterDefiDansParcours(Integer idParcours, DefiEntity nouveauDefi) {
-        Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
-        parcoursModif.get().getListeDefis().add(nouveauDefi);
-        repoDefi.save(nouveauDefi);
-        repo.save(parcoursModif.get());
-        //doit enregistrer un (Parcours?)Entity
     }
 }

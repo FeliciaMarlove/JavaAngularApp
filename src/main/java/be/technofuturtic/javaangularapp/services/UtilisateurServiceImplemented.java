@@ -35,9 +35,11 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     public void creerCompte(UtilisateurEntity nouvelUtilisateur) {
         boolean isDuplicate = false;
         List<UtilisateurEntity> utilisateursExistants = findAll();
-        for (int i = 0; i < utilisateursExistants.size(); i++) {
-            if (nouvelUtilisateur.equals(utilisateursExistants.get(i))) {
-                isDuplicate = true;
+        while (!isDuplicate) {
+            for (int i = 0; i < utilisateursExistants.size(); i++) {
+                if (nouvelUtilisateur.equals(utilisateursExistants.get(i))) {
+                    isDuplicate = true;
+                }
             }
         }
         if(!isDuplicate) {
