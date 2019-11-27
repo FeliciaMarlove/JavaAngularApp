@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/utilisateurs")
 @CrossOrigin(origins = {"http://localhost:4200"})
-public class UtilisateurController {
+public class UtilisateursController {
      private final UtilisateurService service;
 
-    public UtilisateurController(UtilisateurService service) {
+    public UtilisateursController(UtilisateurService service) {
         this.service = service;
     }
 

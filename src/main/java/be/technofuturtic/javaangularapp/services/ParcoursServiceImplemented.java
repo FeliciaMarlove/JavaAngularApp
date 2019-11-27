@@ -21,8 +21,9 @@ public class ParcoursServiceImplemented implements ParcoursService {
     private DefiRepository repoDefi;
 
     @Autowired
-    public ParcoursServiceImplemented(ParcoursRepository repository) {
+    public ParcoursServiceImplemented(ParcoursRepository repository, DefiRepository defiRepository) {
        repo = repository;
+       repoDefi = defiRepository;
     }
 
     @Override
@@ -73,6 +74,7 @@ public class ParcoursServiceImplemented implements ParcoursService {
     public void ajouterDefiDansParcours(Integer idParcours, DefiEntity nouveauDefi) {
         Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
         parcoursModif.get().getListeDefis().add(nouveauDefi);
+        repoDefi.save(nouveauDefi);
         repo.save(parcoursModif.get());
         //doit enregistrer un (Parcours?)Entity
     }

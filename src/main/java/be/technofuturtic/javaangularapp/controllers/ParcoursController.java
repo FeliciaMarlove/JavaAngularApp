@@ -26,34 +26,21 @@ public class ParcoursController {
     @Autowired
     private ParcoursRepository parcoursRepository;
 
-    // return => ce qui est affiché en localhost8080/api/pacours
-
-    /*@GetMapping
-    public List<ParcoursEntity> list() {
-
-        return (List<ParcoursEntity>) parcoursRepository.findAll();
-    }*/
+    // return => ce qui est affiché en localhost8080/api/parcours(/...)
 
     @GetMapping
-    public List<DefiEntity> List() {
-
-
-    return parcoursRepository.findById(99).get().getListeDefis();
+    public List<ParcoursEntity> list() {
+        return (List<ParcoursEntity>) parcoursRepository.findAll();
     }
 
-    @PostMapping
-    public void ajouterDefiDansParcours(@RequestBody DefiEntity d) {
-        this.service.ajouterDefiDansParcours(99, d);
-    }
-
-    /*@PostMapping
+    @PostMapping("/modifier") //TO BE VERIFIED
     public void modifierDefiDansParcours(@RequestBody ModifierDefiDansParcoursUtil a){
         this.service.modifierDefiDansParcours(
                 a.getIdParcours(),
                 a.getIdDefi(),
                 new DefiEntity(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorie())
         );
-    }*/
+    }
     /*
     JSON structure
     {
