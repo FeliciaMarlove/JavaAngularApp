@@ -76,11 +76,10 @@ public class PaiementEntity implements Serializable {
         this();
         this.nomPaiement = nomPaiement;
         this.descPaiement = descPaiement;
-        this.isActivePaiement = true;
-
     }
 
     public PaiementEntity() {
         this.listePUP = new ArrayList<>();
+        this.isActivePaiement = true;
     }
 }

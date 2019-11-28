@@ -6,6 +6,7 @@ import be.technofuturtic.javaangularapp.repositories.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,23 +26,27 @@ public class CategorieServiceImplemented implements CategorieService {
 
     @Override
     public void desactiverCategorie(Integer idCategorie) {
-        repo.findById(idCategorie).get().setActiveCategorie(false);
+        CategorieEntity c = repo.findById(idCategorie).get();
+        c.setActiveCategorie(false);
+        repo.save(c);
     }
 
     @Override
     public void activerCategorie(Integer idCategorie) {
-        repo.findById(idCategorie).get().setActiveCategorie(true);
+        CategorieEntity c = repo.findById(idCategorie).get();
+        c.setActiveCategorie(true);
+        repo.save(c);
     }
+
+    // test : http://localhost:8080/api/categories/activer/69 -> pas de body
 
     @Override
     public void ajouterCategorie(CategorieEntity nouvelleCategorie) {
         boolean isDuplicate = false;
         List<CategorieEntity> categoriesExistantes = findAll();
-        while (!isDuplicate) {
-            for (int i = 0; i < categoriesExistantes.size(); i++) {
-                if (nouvelleCategorie.equals(categoriesExistantes.get(i))) {
-                    isDuplicate = true;
-                }
+        for (int i = 0; i < categoriesExistantes.size(); i++) {
+            if (nouvelleCategorie.getNomCategorie().equals(categoriesExistantes.get(i).getNomCategorie())) {
+                isDuplicate = true;
             }
         }
         if (!isDuplicate) {

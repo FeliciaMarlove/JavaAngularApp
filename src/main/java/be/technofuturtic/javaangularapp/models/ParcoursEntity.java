@@ -112,12 +112,12 @@ public class ParcoursEntity implements Serializable {
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;
         this.prix = prix;
-        this.isActiveParcours = true;
         this.categorie = categorie;
     }
 
     public ParcoursEntity() {
         this.listeDefis = new ArrayList<>();
         this.listePUP = new ArrayList<>();
+        this.isActiveParcours = true;
     }
 }

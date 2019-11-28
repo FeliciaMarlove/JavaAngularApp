@@ -4,7 +4,7 @@ import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
 import be.technofuturtic.javaangularapp.services.ParcoursService;
 import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
-import be.technofuturtic.javaangularapp.utilitaires.ModifierDefiDansParcoursUtil;
+import be.technofuturtic.javaangularapp.utilitaires.ParcoursDefiDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,7 +60,7 @@ public class ParcoursController {
 
     @PostMapping("/supprimerdefi/{idparcours}")
     public void supprimerDefiDansParcours(
-            @RequestBody ModifierDefiDansParcoursUtil a,
+            @RequestBody ParcoursDefiDto a,
             @PathVariable("idparcours") Integer idParcours) {
         this.service.supprimerDefiDansParcours(
                 idParcours,
@@ -70,7 +70,7 @@ public class ParcoursController {
 
     @PostMapping("/modifier/{idparcours}")
     public void modifierDefiDansParcours(
-            @RequestBody ModifierDefiDansParcoursUtil a,
+            @RequestBody ParcoursDefiDto a,
             @PathVariable("idparcours") Integer idParcours) throws Exception {
         this.service.modifierDefiDansParcours(
                 idParcours,

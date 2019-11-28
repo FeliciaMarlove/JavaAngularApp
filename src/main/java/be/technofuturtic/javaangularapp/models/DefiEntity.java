@@ -109,11 +109,11 @@ public class DefiEntity implements Serializable {
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;
         this.infobulleDefi = infobulleDefi;
-        this.isActiveDefi = true;
         this.categorie = categorie;
     }
 
     public DefiEntity() {
         this.listeParcours = new ArrayList<ParcoursEntity>();
+        this.isActiveDefi = true;
     }
 }

@@ -32,12 +32,12 @@ public class DefisController {
     }
 
     @PostMapping("/desactiver/{id}")
-    public void desactUtil(@RequestBody DefiEntity utilisateur, @PathVariable("id") Integer idDefi) {
+    public void desactUtil(@PathVariable("id") Integer idDefi) {
         this.service.desactiverDefi(idDefi);
     }
 
     @PostMapping("/activer/{id}")
-    public void actUtil(@RequestBody DefiEntity utilisateur, @PathVariable("id") Integer idDefi) {
+    public void actUtil(@PathVariable("id") Integer idDefi) {
         this.service.activerDefi(idDefi);
     }
 

@@ -48,11 +48,12 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     }
 
     public ParcoursUtilisateurLiaison(ParcoursEntity parcours, UtilisateurEntity utilisateur) {
-        this.dateAchat = LocalDate.now();
+        this();
         this.parcours = parcours;
         this.utilisateur = utilisateur;
     }
 
     public ParcoursUtilisateurLiaison() {
+        this.dateAchat = LocalDate.now();
     }
 }

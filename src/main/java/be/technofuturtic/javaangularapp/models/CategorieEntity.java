@@ -83,11 +83,11 @@ public class CategorieEntity implements Serializable {
         this();
         this.nomCategorie = nomCategorie;
         this.descCategorie = descCategorie;
-        this.isActiveCategorie = true;
     }
 
     public CategorieEntity() {
         this.parcours = new ArrayList<>();
         this.defis = new ArrayList<>();
+        this.isActiveCategorie = true;
     }
 }

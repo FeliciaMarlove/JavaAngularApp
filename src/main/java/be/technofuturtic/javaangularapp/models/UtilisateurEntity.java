@@ -138,12 +138,12 @@ public class UtilisateurEntity implements Serializable {
         this.email = email;
         this.motDePasse = motDePasse;
         this.newsletterOptIn = newsletterOptIn;
-        this.isActiveUtilisateur = true;
         this.pays = pays;
         this.role = role;
     }
 
     public UtilisateurEntity() {
         this.listePUP = new ArrayList<>();
+        this.isActiveUtilisateur = true;
     }
 }

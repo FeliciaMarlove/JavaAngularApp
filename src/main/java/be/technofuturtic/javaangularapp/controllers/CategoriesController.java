@@ -26,9 +26,25 @@ public class CategoriesController {
         return (List<CategorieEntity>) categorieRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/desactiver/{id}")
+    public void desactiverCategorie(@PathVariable("id") Integer idCategorie) {
+        this.service.desactiverCategorie(idCategorie);
+    }
+
+    @PostMapping("/activer/{id}")
+    public void activerCategorie(@PathVariable("id") Integer idCategorie) {
+        this.service.activerCategorie(idCategorie);
+    }
+
+    @PostMapping("/creer")
     public void creerCategorie(@RequestBody CategorieEntity categorie) {
         this.service.ajouterCategorie(categorie);
     }
-
+    /*
+    JSON test
+        {
+            "nomCategorie" : "Loisirs",
+            "descCategorie" : "Description de loisirs"
+        }
+     */
 }

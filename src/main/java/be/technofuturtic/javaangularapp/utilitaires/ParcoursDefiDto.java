@@ -4,9 +4,7 @@ import be.technofuturtic.javaangularapp.models.CategorieEntity;
 import be.technofuturtic.javaangularapp.repositories.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Optional;
-
-public class ModifierDefiDansParcoursUtil {
+public class ParcoursDefiDto {
     private Integer idParcours;
     private Integer idDefi;
     private String nomDefi;
@@ -19,11 +17,11 @@ public class ModifierDefiDansParcoursUtil {
     @Autowired
     private CategorieRepository rep;
 
-    public ModifierDefiDansParcoursUtil() {
+    public ParcoursDefiDto() {
     }
 
     //utilisé dans modifierDefiDansParcours (ServiceImp) > @PostMapping("/modifier/{idparcours}")
-    public ModifierDefiDansParcoursUtil(Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
+    public ParcoursDefiDto(Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
         this.defiRmv = idDefiRemove;
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;
@@ -31,7 +29,7 @@ public class ModifierDefiDansParcoursUtil {
         this.categorieId = categorieId;
     }
 
-    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
+    public ParcoursDefiDto(Integer idParcours, Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
         this.idParcours = idParcours;
         this.defiRmv = idDefiRemove;
         this.nomDefi = nomDefi;
@@ -40,7 +38,7 @@ public class ModifierDefiDansParcoursUtil {
         this.categorie = categorie;
     }
 
-    public ModifierDefiDansParcoursUtil(Integer idParcours, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
+    public ParcoursDefiDto(Integer idParcours, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
         this.idParcours = idParcours;
         this.idDefi = idDefi;
         this.nomDefi = nomDefi;
@@ -49,7 +47,7 @@ public class ModifierDefiDansParcoursUtil {
         this.categorie = categorie;
     }
 
-    public ModifierDefiDansParcoursUtil(Integer idDefiRemove) {
+    public ParcoursDefiDto(Integer idDefiRemove) {
         this.defiRmv = idDefiRemove;
     }
 
