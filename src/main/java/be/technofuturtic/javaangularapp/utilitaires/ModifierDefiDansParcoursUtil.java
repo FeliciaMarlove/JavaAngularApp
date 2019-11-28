@@ -1,6 +1,8 @@
 package be.technofuturtic.javaangularapp.utilitaires;
 
 import be.technofuturtic.javaangularapp.models.CategorieEntity;
+import be.technofuturtic.javaangularapp.repositories.DefiRepository;
+import be.technofuturtic.javaangularapp.services.DefiService;
 
 public class ModifierDefiDansParcoursUtil {
     private Integer idParcours;
@@ -16,8 +18,7 @@ public class ModifierDefiDansParcoursUtil {
     }
 
     //utilisé dans modifierDefiDansParcours (ServiceImp) > @PostMapping("/modifier/{idparcours}")
-    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
-        this.idParcours = idParcours;
+    public ModifierDefiDansParcoursUtil(Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
         this.defiRmv = idDefiRemove;
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;
@@ -41,6 +42,10 @@ public class ModifierDefiDansParcoursUtil {
         this.descDefi = descDefi;
         this.infobulleDefi = infobulleDefi;
         this.categorie = categorie;
+    }
+
+    public ModifierDefiDansParcoursUtil(Integer idDefiRemove) {
+        this.defiRmv = idDefiRemove;
     }
 
     public Integer getIdParcours() {

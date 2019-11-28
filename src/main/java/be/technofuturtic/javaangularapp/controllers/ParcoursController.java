@@ -69,6 +69,16 @@ public class ParcoursController {
         );
     }*/
 
+    @PostMapping("/supprimerdefi/{idparcours}")
+    public void supprimerDefiDansParcours(
+            @RequestBody ModifierDefiDansParcoursUtil a,
+            @PathVariable("idparcours") Integer idParcours) {
+        this.service.supprimerDefiDansParcours(
+                idParcours,
+                a.getDefiRmv()
+        );
+    }
+
     @PostMapping("/modifier/{idparcours}")
     public void modifierDefiDansParcours(
             @RequestBody ModifierDefiDansParcoursUtil a,
@@ -83,7 +93,6 @@ public class ParcoursController {
     /*
     Json test
     {
-		"idParcours" : 99,
 		"defiRmv" : 41,
         "nomDefi" : "truc",
         "descDefi" : "jfdslkfjls",
@@ -93,16 +102,6 @@ public class ParcoursController {
      */
 
     //-------------------------------------------
-
-    //NOT USED
-    /*@PostMapping("/modifier/{id}")
-    public void modifierDefiDansParcoursId(@RequestBody ModifierDefiDansParcoursUtilId a, @PathVariable("id") Integer idParcours) {
-        this.service.modifierDefiDansParcours(
-                a.getIdParcours(),
-                a.getIdDefiRemplace(),
-                a.getIdDefiRemplacant()
-        );
-    }*/
 
 
 }

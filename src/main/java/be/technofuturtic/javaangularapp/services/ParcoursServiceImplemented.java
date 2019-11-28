@@ -81,32 +81,25 @@ public class ParcoursServiceImplemented implements ParcoursService {
         repo.save(p);
     }
 
-//-------------------laboratoire expérimental :
-
-    //PAS POSSIBLE -> CONTRAINTE CLE UNIQUE PARCOURS-DEFIS -> IL FAUDRAIT DONNER UN NOUVEL ID AU DEFI
     @Override
-    public void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAAjouter) {
+    public void supprimerDefiDansParcours(Integer idParcours, Integer idDefiASupprimer) {
+        boolean checker = false;
         Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
-        List<DefiEntity> listeDefis = new ArrayList(parcoursModif.get().getListeDefis()); // liste de DefiEntity du Parcours
-
-        DefiEntity dRm = null;
+        List<DefiEntity> listeDefis = new ArrayList();
+        int indice = -1;
+        listeDefis.addAll(parcoursModif.get().getListeDefis());
         for (int i = 0; i < listeDefis.size(); i++) {
-            if (listeDefis.get(i).getIdDefi() == idDefiARemplacer) { //est-ce que l'id à remplacer est bien présent dans la liste
-                dRm = listeDefis.get(i);
-
+            if (listeDefis.get(i).getIdDefi() == idDefiASupprimer) {
+                checker = true;
+                indice = i;
             }
         }
         ParcoursEntity p = parcoursModif.get();
-        p.getListeDefis().remove(dRm);
-        p.getListeDefis().add(repoDefi.findByIdDefi(idDefiAAjouter));
+        if (indice >=0) p.getListeDefis().remove(indice);
         repo.save(p);
     }
-    /*
-    Json test:
-        {
-            "idParcours" : 99,
-            "idDefiRemplace" : 17,
-            "idDefiRemplacant" : 24
-         }
-     */
+
+//-------------------laboratoire expérimental :
+
+
 }
