@@ -10,20 +10,31 @@ public class ModifierDefiDansParcoursUtil {
     private String infobulleDefi;
     private Integer categorieId;
     private CategorieEntity categorie;
+    private Integer defiRmv;
 
     public ModifierDefiDansParcoursUtil() {
     }
 
-    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefi, String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
+    //utilisé dans modifierDefiDansParcours (ServiceImp) > @PostMapping("/modifier/{idparcours}")
+    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
         this.idParcours = idParcours;
-        this.idDefi = idDefi;
+        this.defiRmv = idDefiRemove;
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;
         this.infobulleDefi = infobulleDefi;
         this.categorieId = categorieId;
     }
 
-    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefi, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
+    public ModifierDefiDansParcoursUtil(Integer idParcours, Integer idDefiRemove, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
+        this.idParcours = idParcours;
+        this.defiRmv = idDefiRemove;
+        this.nomDefi = nomDefi;
+        this.descDefi = descDefi;
+        this.infobulleDefi = infobulleDefi;
+        this.categorie = categorie;
+    }
+
+    public ModifierDefiDansParcoursUtil(Integer idParcours, String nomDefi, String descDefi, String infobulleDefi, CategorieEntity categorie) {
         this.idParcours = idParcours;
         this.idDefi = idDefi;
         this.nomDefi = nomDefi;
@@ -58,5 +69,9 @@ public class ModifierDefiDansParcoursUtil {
 
     public CategorieEntity getCategorie() {
         return categorie;
+    }
+
+    public Integer getDefiRmv() {
+        return defiRmv;
     }
 }

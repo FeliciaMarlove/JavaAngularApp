@@ -60,25 +60,49 @@ public class ParcoursController {
         this.service.ajouterDefiDansParcours(idParcours, defi);
     }
 
-    //-------------------------------------------
-
-
-
-    @PostMapping("/modifier/{id}") //TO BE VERIFIED
-    public void modifierDefiDansParcoursId(@RequestBody ModifierDefiDansParcoursUtilId a) {
-        this.service.modifierDefiDansParcours(
-                a.getIdParcours(),
-                a.getIdDefiRemplace(),
-                a.getIdDefiRemplacant()
-        );
-    }
-
-    @PostMapping("/modifier") //TO BE VERIFIED
-    public void modifierDefiDansParcours(@RequestBody ModifierDefiDansParcoursUtil a){
+    /*@PostMapping("/modifier/{idparcours}")
+    public void modifierDefiDansParcours(@RequestBody ModifierDefiDansParcoursUtil a, @PathVariable("idparcours") Integer idParcours){
         this.service.modifierDefiDansParcours(
                 a.getIdParcours(),
                 a.getIdDefi(),
                 new DefiEntity(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorie())
         );
+    }*/
+
+    @PostMapping("/modifier/{idparcours}")
+    public void modifierDefiDansParcours(
+            @RequestBody ModifierDefiDansParcoursUtil a,
+            @PathVariable("idparcours") Integer idParcours) {
+        this.service.modifierDefiDansParcours(
+                idParcours,
+                a.getDefiRmv(),
+                new DefiEntity(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorie())
+        );
     }
+
+    /*
+    Json test
+    {
+		"idParcours" : 99,
+		"defiRmv" : 41,
+        "nomDefi" : "truc",
+        "descDefi" : "jfdslkfjls",
+        "infobulleDefi" : "jfdksjfljsdkf",
+        "categorieId" : 99
+    }
+     */
+
+    //-------------------------------------------
+
+    //NOT USED
+    /*@PostMapping("/modifier/{id}")
+    public void modifierDefiDansParcoursId(@RequestBody ModifierDefiDansParcoursUtilId a, @PathVariable("id") Integer idParcours) {
+        this.service.modifierDefiDansParcours(
+                a.getIdParcours(),
+                a.getIdDefiRemplace(),
+                a.getIdDefiRemplacant()
+        );
+    }*/
+
+
 }
