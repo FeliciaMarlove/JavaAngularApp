@@ -3,6 +3,7 @@ package be.technofuturtic.javaangularapp.controllers;
 import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.repositories.DefiRepository;
 import be.technofuturtic.javaangularapp.services.DefiService;
+import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,11 @@ public class DefisController {
 
     @GetMapping
     public List<DefiEntity> list() {
+        return this.service.listerActifs();
+    }
+
+    @GetMapping("/all")
+    public List<DefiEntity> listAll() {
         return (List<DefiEntity>) defiRepository.findAll();
     }
 
@@ -42,7 +48,15 @@ public class DefisController {
     }
 
     @PostMapping("/creer")
-    public void creerDefi(@RequestBody DefiEntity defi) {
-        this.service.creerDefi(defi);
+    public void creerDefi(@RequestBody DefiEntityDto defi) {
+        this.service.creerDefi(new DefiEntityDto(defi.getNomDefi(), defi.getDescDefi(), defi.getInfobulleDefi(), defi.getCategorieId()));
     }
+    /* JSON
+    {
+	"nomDefi" : "Defi 1",
+    "descDefi" : "Premier defi",
+    "infobulleDefi" : "Defi ajouté dans la catégorie cuisine",
+    "categorieId" : 69
+}
+     */
 }

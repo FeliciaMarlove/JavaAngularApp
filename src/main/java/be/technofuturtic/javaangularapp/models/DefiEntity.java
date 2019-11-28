@@ -1,6 +1,4 @@
 package be.technofuturtic.javaangularapp.models;
-import be.technofuturtic.javaangularapp.repositories.CategorieRepository;
-import be.technofuturtic.javaangularapp.services.CategorieServiceImplemented;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -67,8 +65,8 @@ public class DefiEntity implements Serializable {
         return isActiveDefi;
     }
 
-    public void setActiveDefi(boolean activeDefi) {
-        isActiveDefi = activeDefi;
+    public void setActiveDefi(boolean isActiveDefi) {
+        this.isActiveDefi = isActiveDefi;
     }
 
     public void setCategorie(CategorieEntity categorie) {
