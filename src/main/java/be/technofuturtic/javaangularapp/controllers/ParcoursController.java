@@ -1,12 +1,10 @@
 package be.technofuturtic.javaangularapp.controllers;
 
-import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
 import be.technofuturtic.javaangularapp.services.ParcoursService;
 import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import be.technofuturtic.javaangularapp.utilitaires.ModifierDefiDansParcoursUtil;
-import be.technofuturtic.javaangularapp.utilitaires.ModifierDefiDansParcoursUtilId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,15 +58,6 @@ public class ParcoursController {
         this.service.ajouterDefiDansParcours(idParcours, defi);
     }
 
-    /*@PostMapping("/modifier/{idparcours}")
-    public void modifierDefiDansParcours(@RequestBody ModifierDefiDansParcoursUtil a, @PathVariable("idparcours") Integer idParcours){
-        this.service.modifierDefiDansParcours(
-                a.getIdParcours(),
-                a.getIdDefi(),
-                new DefiEntity(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorie())
-        );
-    }*/
-
     @PostMapping("/supprimerdefi/{idparcours}")
     public void supprimerDefiDansParcours(
             @RequestBody ModifierDefiDansParcoursUtil a,
@@ -82,11 +71,11 @@ public class ParcoursController {
     @PostMapping("/modifier/{idparcours}")
     public void modifierDefiDansParcours(
             @RequestBody ModifierDefiDansParcoursUtil a,
-            @PathVariable("idparcours") Integer idParcours) {
+            @PathVariable("idparcours") Integer idParcours) throws Exception {
         this.service.modifierDefiDansParcours(
                 idParcours,
                 a.getDefiRmv(),
-                new DefiEntity(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorie())
+                new DefiEntityDto(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorieId())
         );
     }
 

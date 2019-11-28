@@ -1,8 +1,10 @@
 package be.technofuturtic.javaangularapp.utilitaires;
 
 import be.technofuturtic.javaangularapp.models.CategorieEntity;
-import be.technofuturtic.javaangularapp.repositories.DefiRepository;
-import be.technofuturtic.javaangularapp.services.DefiService;
+import be.technofuturtic.javaangularapp.repositories.CategorieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Optional;
 
 public class ModifierDefiDansParcoursUtil {
     private Integer idParcours;
@@ -13,6 +15,9 @@ public class ModifierDefiDansParcoursUtil {
     private Integer categorieId;
     private CategorieEntity categorie;
     private Integer defiRmv;
+
+    @Autowired
+    private CategorieRepository rep;
 
     public ModifierDefiDansParcoursUtil() {
     }
@@ -73,6 +78,7 @@ public class ModifierDefiDansParcoursUtil {
     }
 
     public CategorieEntity getCategorie() {
+
         return categorie;
     }
 

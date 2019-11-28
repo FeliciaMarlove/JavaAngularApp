@@ -63,25 +63,6 @@ public class ParcoursServiceImplemented implements ParcoursService {
     }
 
     @Override
-    public void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, DefiEntity nouveauDefi) {
-        Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
-        List<DefiEntity> listeDefis = new ArrayList();
-        listeDefis.addAll(parcoursModif.get().getListeDefis());// liste de DefiEntity du Parcours
-        int indice = 0;
-        for (int i = 0; i < listeDefis.size(); i++) {
-            if (listeDefis.get(i).getIdDefi() == idDefiARemplacer) { //est-ce que l'id à remplacer est bien présent dans la liste
-                indice = i;
-            }
-        }
-        this.repoDefi.save(nouveauDefi);
-        ParcoursEntity p = parcoursModif.get();
-        p.getListeDefis().remove(p.getListeDefis().get(indice));
-        repo.save(p);
-        p.getListeDefis().add(nouveauDefi);
-        repo.save(p);
-    }
-
-    @Override
     public void supprimerDefiDansParcours(Integer idParcours, Integer idDefiASupprimer) {
         boolean checker = false;
         Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
@@ -99,7 +80,39 @@ public class ParcoursServiceImplemented implements ParcoursService {
         repo.save(p);
     }
 
+    public void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, DefiEntityDto nouveauDefi) throws Exception {
+        Optional<ParcoursEntity> parcoursEntity = this.repo.findById(idParcours);
+        if (parcoursEntity.isEmpty())throw new Exception();
+        ParcoursEntity parcours = parcoursEntity.get();
+        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(nouveauDefi.getCategorieId());
+        CategorieEntity cat = categorieEntityOptional.get();
+        DefiEntity defiEntity = new DefiEntity(
+                nouveauDefi.getNomDefi(),
+                nouveauDefi.getDescDefi(),
+                nouveauDefi.getInfobulleDefi(),
+                cat
+        );
+        List<DefiEntity> listeDefis = new ArrayList();
+        listeDefis.addAll(parcours.getListeDefis());
+        int indice = 0;
+        for (int i = 0; i < listeDefis.size(); i++) {
+            if (listeDefis.get(i).getIdDefi() == idDefiARemplacer) { //est-ce que l'id à remplacer est bien présent dans la liste
+                indice = i;
+            }
+        }
+        this.repoDefi.save(defiEntity);
+        parcours.getListeDefis().remove(indice);
+        parcours.getListeDefis().add(defiEntity);
+        repo.save(parcours);
+    }
+
+
 //-------------------laboratoire expérimental :
 
 
+    // méthode pour "remplacer" -> suppr + add
+
+
+
+    //------------------
 }
