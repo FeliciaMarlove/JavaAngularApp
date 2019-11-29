@@ -7,7 +7,6 @@ import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import be.technofuturtic.javaangularapp.utilitaires.ParcoursDefiDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +49,15 @@ public class ParcoursController {
     public void ajouterParcours(@RequestBody ParcoursEntity nouveauParcours) {
         this.service.ajouterParcours(nouveauParcours);
     }
+    /*
+    JSON
+    {
+        "nomParcours" : "Parcours 2",
+        "descParcours" : "Deuxième parcours",
+        "prix" : 0.00,
+        "categorie" : 99
+    }
+     */
 
     @PostMapping("/ajouterDefi/{idparcours}")
     public void ajouterDefiDansParcours(
@@ -57,16 +65,24 @@ public class ParcoursController {
             @PathVariable("idparcours") Integer idParcours) throws Exception {
         this.service.ajouterDefiDansParcours(idParcours, defi);
     }
+    /* JSON
+    {
+        "nomDefi" : "Defi Defi",
+        "descDefi" : "Un défi parmi tant d'autres",
+        "infobulleDefi" : "Shalalalalalala",
+        "categorieId" : 99
+    }
+     */
 
-    @PostMapping("/supprimerdefi/{idparcours}")
-    public void supprimerDefiDansParcours(
-            @RequestBody ParcoursDefiDto a,
-            @PathVariable("idparcours") Integer idParcours) {
+    @PostMapping("/supprimerdefi/{idparcours}/{iddefi}")
+    public void supprimerDefiDansParcours(@PathVariable("idparcours") Integer idParcours,
+                                          @PathVariable("iddefi") Integer idDefi) {
         this.service.supprimerDefiDansParcours(
                 idParcours,
-                a.getDefiRmv()
+                idDefi
         );
     }
+    //ex : http://localhost:8080/api/parcours/supprimerdefi/99/64
 
     @PostMapping("/modifier/{idparcours}")
     public void modifierDefiDansParcours(
@@ -78,7 +94,6 @@ public class ParcoursController {
                 new DefiEntityDto(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorieId())
         );
     }
-
     /*
     Json test
     {
@@ -90,7 +105,19 @@ public class ParcoursController {
     }
      */
 
-    //-------------------------------------------
+    @PostMapping("/modifier/{idparcours}/{iddefiout}/{iddefiin}")
+    public void modifierDefiDansParcours(@PathVariable("idparcours") Integer idParcours,
+                                         @PathVariable("iddefiout") Integer idDefiOut,
+                                         @PathVariable("iddefiin") Integer idDefiIn) throws Exception {
+        this.service.interchangerDefisDansParcours(
+                idParcours,
+                idDefiOut,
+                idDefiIn);
+    }
+    // ex : http://localhost:8080/api/parcours/modifier/99/41/101
+
+
+    //--------------------------------------------------------------
 
 
 }

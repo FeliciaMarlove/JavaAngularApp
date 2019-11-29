@@ -12,9 +12,7 @@ public interface ParcoursService {
     void activerParcours(Integer idParcours);
     void ajouterParcours(ParcoursEntity nouveauParcours);
     void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, DefiEntityDto nouveauDefi) throws Exception;
-/*
-    void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, DefiEntity nouveauDefi);
-*/
+    void interchangerDefisDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAInserer) throws Exception;
     void supprimerDefiDansParcours(Integer idParcours, Integer idDefiASupprimer);
     void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception;
 }

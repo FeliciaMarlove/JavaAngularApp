@@ -32,12 +32,16 @@ public class ParcoursServiceImplemented implements ParcoursService {
 
     @Override
     public void desactiverParcours(Integer idParcours) {
-        repo.findById(idParcours).get().setActiveParcours(false);
+        ParcoursEntity p = repo.findById(idParcours).get();
+        p.setActiveParcours(false);
+        repo.save(p);
     }
 
     @Override
     public void activerParcours(Integer idParcours) {
-        repo.findById(idParcours).get().setActiveParcours(true);
+        ParcoursEntity p = repo.findById(idParcours).get();
+        p.setActiveParcours(true);
+        repo.save(p);
     }
 
     @Override
@@ -57,6 +61,7 @@ public class ParcoursServiceImplemented implements ParcoursService {
                 nouveauDefi.getInfobulleDefi(),
                 categorieEntityOptional
         );
+        defiEntity.setActiveDefi(true);
         this.repoDefi.save(defiEntity);
         parcours.getListeDefis().add(defiEntity);
         repo.save(parcours);
@@ -92,6 +97,25 @@ public class ParcoursServiceImplemented implements ParcoursService {
                 nouveauDefi.getInfobulleDefi(),
                 cat
         );
+        List<DefiEntity> listeDefis = new ArrayList();
+        listeDefis.addAll(parcours.getListeDefis());
+        int indice = 0;
+        for (int i = 0; i < listeDefis.size(); i++) {
+            if (listeDefis.get(i).getIdDefi() == idDefiARemplacer) { //est-ce que l'id à remplacer est bien présent dans la liste
+                indice = i;
+            }
+        }
+        this.repoDefi.save(defiEntity);
+        parcours.getListeDefis().remove(indice);
+        parcours.getListeDefis().add(defiEntity);
+        repo.save(parcours);
+    }
+
+    public void interchangerDefisDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAAjouter) throws Exception {
+        Optional<ParcoursEntity> parcoursEntity = this.repo.findById(idParcours);
+        if (parcoursEntity.isEmpty())throw new Exception();
+        ParcoursEntity parcours = parcoursEntity.get();
+        DefiEntity defiEntity = repoDefi.findByIdDefi(idDefiAAjouter);
         List<DefiEntity> listeDefis = new ArrayList();
         listeDefis.addAll(parcours.getListeDefis());
         int indice = 0;
