@@ -1,6 +1,7 @@
 package be.technofuturtic.javaangularapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.io.Serializable;

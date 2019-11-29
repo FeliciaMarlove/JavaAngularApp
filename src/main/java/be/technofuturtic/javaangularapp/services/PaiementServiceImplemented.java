@@ -24,23 +24,25 @@ public class PaiementServiceImplemented implements PaiementService {
 
     @Override
     public void desactiverPaiement(Integer idPaiement) {
-        repo.findById(idPaiement).get().setActivePaiement(false);
+        PaiementEntity p = repo.findById(idPaiement).get();
+        p.setActivePaiement(false);
+        repo.save(p);
     }
 
     @Override
     public void activerPaiement(Integer idPaiement) {
-        repo.findById(idPaiement).get().setActivePaiement(true);
+        PaiementEntity p = repo.findById(idPaiement).get();
+        p.setActivePaiement(true);
+        repo.save(p);
     }
 
     @Override
     public void ajouterPaiement(PaiementEntity nouveauPaiement) {
         boolean isDuplicate = false;
         List<PaiementEntity> paiementsExistants = findAll();
-        while (!isDuplicate) {
-            for (int i = 0; i < paiementsExistants.size(); i++) {
-                if (nouveauPaiement.equals(paiementsExistants.get(i))) {
-                    isDuplicate = true;
-                }
+        for (int i = 0; i < paiementsExistants.size(); i++) {
+            if (nouveauPaiement.getNomPaiement().equals(paiementsExistants.get(i).getNomPaiement())) {
+                isDuplicate = true;
             }
         }
         if (!isDuplicate) {

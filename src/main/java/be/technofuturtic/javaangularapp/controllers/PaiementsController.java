@@ -4,10 +4,7 @@ import be.technofuturtic.javaangularapp.models.PaiementEntity;
 import be.technofuturtic.javaangularapp.repositories.PaiementRepository;
 import be.technofuturtic.javaangularapp.services.PaiementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,27 @@ public class PaiementsController {
     @GetMapping
     public List<PaiementEntity> list() {
         return (List<PaiementEntity>) paiementsRepository.findAll();
+    }
+
+    @PostMapping("/ajouter")
+    public void ajouterPaiement(@RequestBody PaiementEntity paiementEntity) {
+        this.service.ajouterPaiement(paiementEntity);
+    }
+    /*
+    JSON
+    {
+	"nomPaiement" : "gratuit",
+	"descPaiement" : "Parcours gratuit"
+}
+     */
+
+    @PostMapping("/desactiver/{id}")
+    public void desactiverPaiement(@PathVariable("id") Integer idPaiement) {
+        this.service.desactiverPaiement(idPaiement);
+    }
+
+    @PostMapping("/activer/{id}")
+    public void activerPaiement(@PathVariable("id") Integer idPaiement) {
+        this.service.activerPaiement(idPaiement);
     }
 }
