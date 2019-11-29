@@ -37,12 +37,12 @@ public class UtilisateursController {
     }
     /* JSON format creerCompte
     	{
-	    "nomUtilisateur" : "jflkdfj",
-	    "prenomUtilisateur" : "jkfdjfk",
-	    "dateNaiss" : "1988-04-07",
-	    "email" : "jfdklfjdlk@msn.com",
-	    "motDePasse" : "1234",
-	    "newsletterOptIn" : true
- }
+            "nomUtilisateur" : "jflkdfj",
+            "prenomUtilisateur" : "jkfdjfk",
+            "dateNaiss" : "1988-04-07",
+            "email" : "jfdklfjdlk@msn.com",
+            "motDePasse" : "1234",
+            "newsletterOptIn" : true
+        }
      */
 }

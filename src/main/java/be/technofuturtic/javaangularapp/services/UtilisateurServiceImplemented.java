@@ -23,26 +23,29 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
 
     @Override
     public void desactiverUtilisateur(Long idUtilisateur) {
-        repo.findById(idUtilisateur).get().setActiveUtilisateur(false);
+        UtilisateurEntity u = repo.findById(idUtilisateur).get();
+        u.setActiveUtilisateur(false);
+        repo.save(u);
     }
 
     @Override
     public void activerUtilisateur(Long idUtilisateur) {
-        repo.findById(idUtilisateur).get().setActiveUtilisateur(true);
+        UtilisateurEntity u = repo.findById(idUtilisateur).get();
+        u.setActiveUtilisateur(true);
+        repo.save(u);
     }
 
     @Override
     public void creerCompte(UtilisateurEntity nouvelUtilisateur) {
         boolean isDuplicate = false;
         List<UtilisateurEntity> utilisateursExistants = findAll();
-        while (!isDuplicate) {
-            for (int i = 0; i < utilisateursExistants.size(); i++) {
-                if (nouvelUtilisateur.equals(utilisateursExistants.get(i))) {
-                    isDuplicate = true;
-                }
+        for (int i = 0; i < utilisateursExistants.size(); i++) {
+            if (nouvelUtilisateur.equals(utilisateursExistants.get(i))) {
+                isDuplicate = true;
             }
         }
         if(!isDuplicate) {
+            nouvelUtilisateur.setActiveUtilisateur(true);
             repo.save(nouvelUtilisateur);
         }
     }

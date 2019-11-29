@@ -108,21 +108,13 @@ public class UtilisateurEntity implements Serializable {
     @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
     private List<ParcoursUtilisateurLiaison> listePUP;
 
+    // CUSTOM
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UtilisateurEntity that = (UtilisateurEntity) o;
-        return newsletterOptIn == that.newsletterOptIn &&
-                isActiveUtilisateur == that.isActiveUtilisateur &&
-                Objects.equals(idUtilisateur, that.idUtilisateur) &&
-                Objects.equals(nomUtilisateur, that.nomUtilisateur) &&
-                Objects.equals(prenomUtilisateur, that.prenomUtilisateur) &&
-                Objects.equals(dateNaiss, that.dateNaiss) &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(motDePasse, that.motDePasse) &&
-                Objects.equals(role, that.role) &&
-                Objects.equals(pays, that.pays);
+        return Objects.equals(email, that.email);
     }
 
     @Override
