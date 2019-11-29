@@ -53,8 +53,8 @@ public class PaiementEntity implements Serializable {
         isActivePaiement = activePaiement;
     }
 
-    @OneToMany(mappedBy = "paiement", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
-    private List<ParcoursUtilisateurLiaison> listePUP;
+/*    @OneToMany(mappedBy = "paiement", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
+    private List<ParcoursUtilisateurLiaison> listePUP;*/
 
     @Override
     public boolean equals(Object o) {
@@ -76,10 +76,11 @@ public class PaiementEntity implements Serializable {
         this();
         this.nomPaiement = nomPaiement;
         this.descPaiement = descPaiement;
+        this.setActivePaiement(true);
     }
 
     public PaiementEntity() {
-        this.listePUP = new ArrayList<>();
+        /*this.listePUP = new ArrayList<>();*/
         this.isActivePaiement = true;
     }
 }

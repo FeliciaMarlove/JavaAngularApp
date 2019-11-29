@@ -26,13 +26,55 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     @JoinColumn(name = "id_parcours", referencedColumnName = "id_parcours", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_parcours"), insertable = false, updatable = false)
     private ParcoursEntity parcours;
 
-    @ManyToOne(targetEntity = PaiementEntity.class)
+    /*@ManyToOne(targetEntity = PaiementEntity.class)
     @JoinColumn(name = "id_paiement", referencedColumnName = "id_paiement", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_paiement"), insertable = false, updatable = false)
-    private PaiementEntity paiement;
+    private PaiementEntity paiement;*/
 
     @ManyToOne(targetEntity = UtilisateurEntity.class)
     @JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_utilisateur"), insertable = false, updatable = false)
     private UtilisateurEntity utilisateur;
+
+    public void setDateAchat(LocalDate dateAchat) {
+        this.dateAchat = dateAchat;
+    }
+
+    public void setParcours(ParcoursEntity parcours) {
+        this.parcours = parcours;
+    }
+
+   /* public void setPaiement(PaiementEntity paiement) {
+        this.paiement = paiement;
+    }*/
+
+    public void setUtilisateur(UtilisateurEntity utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    @Transient
+    private boolean isOngoing;
+
+    @Transient
+    private int taille;
+
+    public boolean isOngoing() {
+        return isOngoing;
+    }
+
+    public void setOngoing(boolean ongoing) {
+        isOngoing = ongoing;
+    }
+
+    public LocalDate getDateAchat() {
+        return dateAchat;
+    }
+
+    public int getTaille() {
+        return this.parcours.getListeDefis().size();
+    }
+
+    public UtilisateurEntity getUtilisateur() {
+        return utilisateur;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,9 +93,11 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this();
         this.parcours = parcours;
         this.utilisateur = utilisateur;
+        /*this.parcoursUtilId = new PK_Parcours_Utilisateur(utilisateur.getIdUtilisateur(), parcours.getIdParcours());*/
     }
 
     public ParcoursUtilisateurLiaison() {
         this.dateAchat = LocalDate.now();
+        this.isOngoing = true;
     }
 }

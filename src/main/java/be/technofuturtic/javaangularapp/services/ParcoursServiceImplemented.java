@@ -61,7 +61,7 @@ public class ParcoursServiceImplemented implements ParcoursService {
                 nouveauDefi.getInfobulleDefi(),
                 categorieEntityOptional
         );
-        defiEntity.setActiveDefi(true);
+        //defiEntity.setActiveDefi(true);
         this.repoDefi.save(defiEntity);
         parcours.getListeDefis().add(defiEntity);
         repo.save(parcours);

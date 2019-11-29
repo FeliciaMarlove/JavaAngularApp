@@ -45,7 +45,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
             }
         }
         if(!isDuplicate) {
-            nouvelUtilisateur.setActiveUtilisateur(true);
+            //nouvelUtilisateur.setActiveUtilisateur(true);
             repo.save(nouvelUtilisateur);
         }
     }

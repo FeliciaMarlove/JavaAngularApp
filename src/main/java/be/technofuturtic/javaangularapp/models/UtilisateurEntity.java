@@ -108,7 +108,19 @@ public class UtilisateurEntity implements Serializable {
     @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
     private List<ParcoursUtilisateurLiaison> listePUP;
 
-    // CUSTOM
+    public void ajouterRelationParcours(ParcoursUtilisateurLiaison a) {
+        listePUP.add(a);
+    }
+
+    public void retirerRelationParcours(ParcoursUtilisateurLiaison a) {
+        listePUP.remove(a);
+    }
+
+    public List<ParcoursUtilisateurLiaison> getListePUP() {
+        return listePUP;
+    }
+
+    // CUSTOM :
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -132,6 +144,7 @@ public class UtilisateurEntity implements Serializable {
         this.newsletterOptIn = newsletterOptIn;
         this.pays = pays;
         this.role = role;
+        this.setActiveUtilisateur(true);
     }
 
     public UtilisateurEntity() {

@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface ParcoursUtilisateurLiaisonService {
     public List<ParcoursUtilisateurLiaison> findAll();
-    void commencerParcours(ParcoursEntity parcours, UtilisateurEntity utilisateur);
-    DefiEntity voirDefiDuJour(ParcoursUtilisateurLiaison parcoursUtil);
+    void commencerParcours(Integer parcours, Long utilisateur);
+    DefiEntity voirDefiDuJour(Long idUtil);
 }

@@ -21,10 +21,10 @@ public class PK_Parcours_Utilisateur implements Serializable {
     public PK_Parcours_Utilisateur() {
     }
 
-    public PK_Parcours_Utilisateur(Long idUtil, Integer idParc, LocalDate dateParcUtil) {
+    public PK_Parcours_Utilisateur(Long idUtil, Integer idParc) {
         this.idUtil = idUtil;
         this.idParc = idParc;
-        this.dateParcUtil = dateParcUtil;
+        this.dateParcUtil = LocalDate.now();
     }
 
     public Long getIdUtil() {
@@ -37,6 +37,18 @@ public class PK_Parcours_Utilisateur implements Serializable {
 
     public LocalDate getDateParcUtil() {
         return dateParcUtil;
+    }
+
+    public void setIdUtil(Long idUtil) {
+        this.idUtil = idUtil;
+    }
+
+    public void setIdParc(Integer idParc) {
+        this.idParc = idParc;
+    }
+
+    public void setDateParcUtil(LocalDate dateParcUtil) {
+        this.dateParcUtil = dateParcUtil;
     }
 
     @Override

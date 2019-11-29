@@ -84,6 +84,7 @@ public class CategorieEntity implements Serializable {
         this();
         this.nomCategorie = nomCategorie;
         this.descCategorie = descCategorie;
+        this.setActiveCategorie(true);
     }
 
     public CategorieEntity() {
