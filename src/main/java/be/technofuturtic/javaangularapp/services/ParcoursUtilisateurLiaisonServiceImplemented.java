@@ -31,29 +31,25 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
     }
 
     @Override
-    public void commencerParcours(Integer idParcours, Long idUtilisateur) {
-        ParcoursEntity parcours = parcoursRepo.findById(idParcours).get();
-        System.out.println(1);
-        UtilisateurEntity utilisateur = utilisateurRepo.findById(idUtilisateur).get();
-        System.out.println(utilisateur);
-        System.out.println(2);
-        ParcoursUtilisateurLiaison n = new ParcoursUtilisateurLiaison(parcours, utilisateur);
-        System.out.println(3);
-        utilisateur.ajouterRelationParcours(n); //----------------NOT WORKING (liste pup vide)
-        System.out.println(4);
-        //n.setUtilisateur(utilisateur);
-        System.out.println(5);
-        utilisateurRepo.save(utilisateur);
-        System.out.println(6);
-        n.setOngoing(true);
-        System.out.println(7);
-        repo.save(n); //---------------------------------------------PLANTAGE : NULL ID GENERATED :'(
-        System.out.println(8);
+    public void commencerParcours(Integer parcours, Long utilisateur) {
+        ParcoursEntity p = parcoursRepo.findById(parcours).get();
+        UtilisateurEntity u = utilisateurRepo.findById(utilisateur).get();
+        ParcoursUtilisateurLiaison pul = new ParcoursUtilisateurLiaison(p, u);
+        repo.save(pul);
+        u.ajouterRelationParcours(pul);
+        utilisateurRepo.save(u);
+        p.ajouterRelationParcours(pul);
+        parcoursRepo.save(p);
+        repo.save(pul);
+        System.out.println(pul.getParcoursUtilId());
     }
-
     //test : http://localhost:8080/api/utilparc/start/107/90
 
 
+
+    //--------------------------------------------------------------------------------------
+    // TO BE TESTED :
+    // DTO because la PK composite ?
     @Override
     public DefiEntity voirDefiDuJour(Long idUtilisateur) {
         ParcoursUtilisateurLiaison pul = repo.findByParcoursUtilId(trouverLeParcoursEnCoursDeGerard(trouverGerard(idUtilisateur)));

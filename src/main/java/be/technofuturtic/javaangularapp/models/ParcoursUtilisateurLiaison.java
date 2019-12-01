@@ -1,6 +1,8 @@
 package be.technofuturtic.javaangularapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Target;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,16 +24,19 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     @Column(name = "date_achat")
     private LocalDate dateAchat;
 
-    @ManyToOne(targetEntity = ParcoursEntity.class, fetch =  FetchType.EAGER)
+    @ManyToOne(targetEntity = ParcoursEntity.class, fetch =  FetchType.LAZY)
     @JoinColumn(name = "id_parcours", referencedColumnName = "id_parcours", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_parcours"), insertable = false, updatable = false)
+    @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
     private ParcoursEntity parcours;
 
-    @ManyToOne(targetEntity = PaiementEntity.class, fetch =  FetchType.EAGER)
+    @ManyToOne(targetEntity = PaiementEntity.class, fetch =  FetchType.LAZY)
     @JoinColumn(name = "id_paiement", referencedColumnName = "id_paiement", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_paiement"), insertable = false, updatable = false)
+    @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
     private PaiementEntity paiement;
 
-    @ManyToOne(targetEntity = UtilisateurEntity.class, fetch =  FetchType.EAGER)
+    @ManyToOne(targetEntity = UtilisateurEntity.class, fetch =  FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_utilisateur"), insertable = false, updatable = false)
+    @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
     private UtilisateurEntity utilisateur;
 
     public void setDateAchat(LocalDate dateAchat) {
@@ -84,6 +89,8 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         return Objects.equals(parcoursUtilId, that.parcoursUtilId);
     }
 
+
+
     @Override
     public int hashCode() {
         return Objects.hash(parcoursUtilId);
@@ -93,10 +100,24 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this();
         this.parcours = parcours;
         this.utilisateur = utilisateur;
+        this.parcoursUtilId = new PK_Parcours_Utilisateur(utilisateur.getIdUtilisateur(), parcours.getIdParcours(), LocalDate.now());
     }
 
     public ParcoursUtilisateurLiaison() {
         this.dateAchat = LocalDate.now();
         this.isOngoing = true;
+    }
+
+    @Override
+    public String toString() {
+        return "Parcours Utilisateur Liaison {".toUpperCase() +
+                "parcoursUtilId=" + parcoursUtilId +
+                ", dateAchat=" + dateAchat +
+                ", parcours=" + parcours.getNomParcours() +
+                ", paiement=" + paiement +
+                ", utilisateur=" + utilisateur.getNomUtilisateur() +
+                ", isOngoing=" + isOngoing +
+                ", taille=" + taille +
+                '}'+"\n\tFIN PARCOURS UTILISATEUR\n------------";
     }
 }

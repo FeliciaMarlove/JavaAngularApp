@@ -9,7 +9,7 @@ import java.util.Objects;
 @Embeddable
 public class PK_Parcours_Utilisateur implements Serializable {
 
-    @Column(name = "id_utilisteur")
+    @Column(name = "id_utilisateur")
     private Long idUtil;
 
     @Column(name = "id_parcours")
@@ -21,10 +21,10 @@ public class PK_Parcours_Utilisateur implements Serializable {
     public PK_Parcours_Utilisateur() {
     }
 
-    public PK_Parcours_Utilisateur(Long idUtil, Integer idParc) {
+    public PK_Parcours_Utilisateur(Long idUtil, Integer idParc, LocalDate date) {
         this.idUtil = idUtil;
         this.idParc = idParc;
-        this.dateParcUtil = LocalDate.now();
+        this.dateParcUtil = date;
     }
 
     public Long getIdUtil() {

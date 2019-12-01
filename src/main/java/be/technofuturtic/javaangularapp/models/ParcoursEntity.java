@@ -1,5 +1,6 @@
 package be.technofuturtic.javaangularapp.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -83,7 +84,7 @@ public class ParcoursEntity implements Serializable {
         this.listeDefis = listeDefis;
     }
 
-    @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;
 
@@ -91,8 +92,19 @@ public class ParcoursEntity implements Serializable {
     @JoinTable(name = "Parcours_Defis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
     private List<DefiEntity> listeDefis;
 
-    @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
+    @JsonBackReference //avoids infiite recursion (works with @JsonManagedReference on the ManyToOne side)
     private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateursLiaison;
+
+    //--------------------------------------------------------------------------------------??
+    public void ajouterRelationParcours(ParcoursUtilisateurLiaison a) {
+        listeParcoursUtilisateursLiaison.add(a);
+    }
+
+    public void retirerRelationParcours(ParcoursUtilisateurLiaison a) {
+        listeParcoursUtilisateursLiaison.remove(a);
+    }
+    //--------------------------------------------------------------------------------------??
 
     @Override
     public boolean equals(Object o) {
@@ -139,6 +151,6 @@ public class ParcoursEntity implements Serializable {
 
     @Override
     public String toString() {
-        return this.idParcours+" nom="+this.nomParcours+" prix="+this.prix+" cat="+this.categorie.getIdCategorie();
+        return "PARCOURS\n\t"+this.idParcours+" nom="+this.nomParcours+" prix="+this.prix+" cat="+this.categorie.getIdCategorie()+"\n\t\t"+this.listeParcoursUtilisateursLiaison+ "\nFIN PARCOURS-------------\n";
     }
 }

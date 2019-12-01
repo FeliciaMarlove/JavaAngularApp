@@ -1,5 +1,6 @@
 package be.technofuturtic.javaangularapp.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -53,8 +54,9 @@ public class PaiementEntity implements Serializable {
         isActivePaiement = activePaiement;
     }
 
-/*    @OneToMany(mappedBy = "paiement", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
-    private List<ParcoursUtilisateurLiaison> listePUP;*/
+    @OneToMany(mappedBy = "paiement", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
+    @JsonBackReference //avoids infiite recursion (works with @JsonManagedReference on the ManyToOne side)
+    private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateurLiaisons;
 
     @Override
     public boolean equals(Object o) {
@@ -80,7 +82,7 @@ public class PaiementEntity implements Serializable {
     }
 
     public PaiementEntity() {
-        /*this.listePUP = new ArrayList<>();*/
+        this.listeParcoursUtilisateurLiaisons = new ArrayList<>();
         this.isActivePaiement = true;
     }
 }

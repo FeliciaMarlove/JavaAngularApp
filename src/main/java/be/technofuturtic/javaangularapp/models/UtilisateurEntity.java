@@ -1,4 +1,5 @@
 package be.technofuturtic.javaangularapp.models;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -113,7 +114,8 @@ public class UtilisateurEntity implements Serializable {
     @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
     private PaysEntity pays;
 
-    @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
+    @JsonBackReference //avoids infiite recursion (works with @JsonManagedReference on the ManyToOne side)
     private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateurs;
 
     //--------------------------------------------------------------------------------------??
@@ -165,7 +167,7 @@ public class UtilisateurEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "UtilisateurEntity{" +
+        return "UTILISATEUR \n\tUtilisateurEntity{" +
                 "idUtilisateur=" + idUtilisateur +
                 ", nomUtilisateur='" + nomUtilisateur + '\'' +
                 ", prenomUtilisateur='" + prenomUtilisateur + '\'' +
@@ -177,6 +179,6 @@ public class UtilisateurEntity implements Serializable {
                 ", role=" + role +
                 ", pays=" + pays +
                 ", listePUP=" + listeParcoursUtilisateurs +
-                '}';
+                '}' + "\nFIN UTILISATEUR-------------\n";
     }
 }
