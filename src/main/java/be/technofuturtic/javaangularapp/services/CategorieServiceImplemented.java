@@ -40,26 +40,32 @@ public class CategorieServiceImplemented implements CategorieService {
 
     // test : http://localhost:8080/api/categories/activer/69 -> pas de body
 
-    @Override
-    public void ajouterCategorie(CategorieEntity nouvelleCategorie) {
+    private boolean isDuplicate(CategorieEntity categorie) {
         boolean isDuplicate = false;
         List<CategorieEntity> categoriesExistantes = findAll();
         for (int i = 0; i < categoriesExistantes.size(); i++) {
-            if (nouvelleCategorie.getNomCategorie().equals(categoriesExistantes.get(i).getNomCategorie())) {
+            if (categorie.getNomCategorie().equals(categoriesExistantes.get(i).getNomCategorie())) {
                 isDuplicate = true;
             }
         }
-        if (!isDuplicate) {
+        return isDuplicate;
+    }
+
+    @Override
+    public void ajouterCategorie(CategorieEntity nouvelleCategorie) {
+        if (!isDuplicate(nouvelleCategorie)) {
             repo.save(nouvelleCategorie);
         }
     }
 
     @Override
     public void majCategorie(Integer idCategorie, CategorieEntity categorie) {
-        CategorieEntity c = categorie;
-        c.setNomCategorie(categorie.getNomCategorie());
-        c.setDescCategorie(categorie.getDescCategorie());
-        repo.save(c);
+        CategorieEntity c = repo.findById(idCategorie).get();
+        if(!isDuplicate(categorie)) {
+            c.setNomCategorie(categorie.getNomCategorie());
+            c.setDescCategorie(categorie.getDescCategorie());
+            repo.save(c);
+        }
     }
 
 

@@ -63,9 +63,7 @@ public class PaiementEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaiementEntity that = (PaiementEntity) o;
-        return isActivePaiement == that.isActivePaiement &&
-                Objects.equals(idPaiement, that.idPaiement) &&
-                Objects.equals(nomPaiement, that.nomPaiement) &&
+        return Objects.equals(nomPaiement, that.nomPaiement) &&
                 Objects.equals(descPaiement, that.descPaiement);
     }
 

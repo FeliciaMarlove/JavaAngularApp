@@ -73,7 +73,7 @@ public class ParcoursServiceImplemented implements ParcoursService {
         System.out.println(p.toString()); // ---- Devt purpose
         p.setNomParcours(parcoursDto.getNomParcours());
         p.setDescParcours(parcoursDto.getDescParcours());
-        p.setPrix(parcoursDto.getPrix());
+        p.setPrix(parcoursDto.getPrix()); //obtient bien le prix via le DTO !
         CategorieEntity c = repoCat.findById(parcoursDto.getIdCategorie()).get();
         p.setCategorie(c);
         repo.save(p);

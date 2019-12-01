@@ -67,12 +67,7 @@ public class CategorieEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CategorieEntity that = (CategorieEntity) o;
-        return isActiveCategorie == that.isActiveCategorie &&
-                Objects.equals(idCategorie, that.idCategorie) &&
-                Objects.equals(nomCategorie, that.nomCategorie) &&
-                Objects.equals(descCategorie, that.descCategorie) &&
-                Objects.equals(defis, that.defis) &&
-                Objects.equals(parcours, that.parcours);
+        return Objects.equals(nomCategorie, that.nomCategorie);
     }
 
     @Override

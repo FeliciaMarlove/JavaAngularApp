@@ -12,4 +12,6 @@ public interface ParcoursUtilisateurLiaisonService {
     public List<ParcoursUtilisateurLiaison> findAll();
     void commencerParcours(Integer parcours, Long utilisateur);
     DefiEntity voirDefiDuJour(Long idUtil);
+    List<ParcoursUtilisateurLiaison> listerHistorique(Long idUtil);
+    String retranscrireHistorique(Long idUtil);
 }

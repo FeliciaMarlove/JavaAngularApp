@@ -9,7 +9,7 @@ public class ParcoursEntityDto {
     public ParcoursEntityDto() {
     }
 
-    public ParcoursEntityDto(Integer idParcours, String nomParcours, String descParcours, double prix, Integer idCategorie) {
+    public ParcoursEntityDto(String nomParcours, String descParcours, double prix, Integer idCategorie) {
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;
         this.prix = prix;

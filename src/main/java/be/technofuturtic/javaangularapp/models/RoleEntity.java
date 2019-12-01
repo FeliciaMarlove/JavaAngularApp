@@ -41,9 +41,7 @@ public class RoleEntity  implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoleEntity that = (RoleEntity) o;
-        return Objects.equals(idRole, that.idRole) &&
-                Objects.equals(nomRole, that.nomRole) &&
-                Objects.equals(utilisateurs, that.utilisateurs);
+        return Objects.equals(nomRole, that.nomRole);
     }
 
     @Override

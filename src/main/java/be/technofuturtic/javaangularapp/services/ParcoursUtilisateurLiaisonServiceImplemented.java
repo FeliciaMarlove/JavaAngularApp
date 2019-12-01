@@ -43,13 +43,7 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
         repo.save(pul);
         System.out.println(pul.getParcoursUtilId());
     }
-    //test : http://localhost:8080/api/utilparc/start/107/90
 
-
-
-    //--------------------------------------------------------------------------------------
-    // TO BE TESTED :
-    // DTO because la PK composite ?
     @Override
     public DefiEntity voirDefiDuJour(Long idUtilisateur) {
         ParcoursUtilisateurLiaison pul = repo.findByParcoursUtilId(trouverLeParcoursEnCoursDeGerard(trouverGerard(idUtilisateur)));
@@ -57,10 +51,9 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             LocalDate dateDebut = pul.getDateAchat();
             LocalDate dateDuJour = LocalDate.now();
             int deltaJours = Period.between(dateDebut, dateDuJour).getDays();
-            int numDefi = deltaJours-1;
             Optional<ParcoursEntity> p = parcoursRepo.findById(pul.getParcoursUtilId().getIdParc());
             if (deltaJours <= p.get().getListeDefis().size()) {
-                return p.get().getListeDefis().get(numDefi);
+                return p.get().getListeDefis().get(deltaJours);
             }
             return null;
         } else {
@@ -68,8 +61,28 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
         }
     }
 
+    @Override
+    public List<ParcoursUtilisateurLiaison> listerHistorique(Long idUtil) {
+        UtilisateurEntity u = utilisateurRepo.findById(idUtil).get();
+        List<ParcoursUtilisateurLiaison> liste = repo.findAllByUtilisateurEquals(u);
+        return liste;
+    }
+
+    @Override
+    public String retranscrireHistorique(Long idUtil) {
+        StringBuilder affichage = new StringBuilder(" ");
+        UtilisateurEntity u = utilisateurRepo.findById(idUtil).get();
+        List<ParcoursUtilisateurLiaison> liste = listerHistorique(idUtil);
+        affichage.append("Historique des parcours de l'utilisateur ").append(idUtil).append(" ").append(u.getPrenomUtilisateur()).append(" ").append(u.getNomUtilisateur()).append(" ").append(u.getEmail()).append(" : ");
+        for (int i = 0; i < liste.size(); i++) {
+            affichage.append("\n").append(liste.get(i).getParcoursUtilId()).append(liste.get(i).getParcours().getNomParcours()).append(" commencé le ").append(liste.get(i).getDateAchat()).append(" payé ").append(liste.get(i).getPrixAchat());
+        }
+        return affichage.toString();
+    }
+
     private UtilisateurEntity trouverGerard(Long idUtil) {
-        return utilisateurRepo.findById(idUtil).get();
+        UtilisateurEntity u = utilisateurRepo.findById(idUtil).get();
+        return u;
     }
 
     private PK_Parcours_Utilisateur trouverLeParcoursEnCoursDeGerard(UtilisateurEntity gerardLuiMeme) {
@@ -77,8 +90,8 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
 
         System.out.println(gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty());
 
-        if (gerardLuiMeme.isActiveUtilisateur() /*OK*/ && !gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty()) /*NOK*/ { // <------------------------------------------------------------------------------NOK liste empty
-              pulList = repo.findAllByUtilisateurEquals(gerardLuiMeme);  // <------------------------------------------------------------------------------NOK?
+        if (gerardLuiMeme.isActiveUtilisateur() && !gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty()) {
+              pulList = repo.findAllByUtilisateurEquals(gerardLuiMeme);
         }
         ParcoursUtilisateurLiaison pulActif = null;
         for (int i = 0; i < pulList.size(); i++) {

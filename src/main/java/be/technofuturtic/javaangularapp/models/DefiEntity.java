@@ -89,12 +89,7 @@ public class DefiEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DefiEntity that = (DefiEntity) o;
-        return isActiveDefi == that.isActiveDefi &&
-                Objects.equals(idDefi, that.idDefi) &&
-                Objects.equals(nomDefi, that.nomDefi) &&
-                Objects.equals(descDefi, that.descDefi) &&
-                Objects.equals(infobulleDefi, that.infobulleDefi) &&
-                Objects.equals(categorie, that.categorie);
+        return  Objects.equals(nomDefi, that.nomDefi);
     }
 
     @Override

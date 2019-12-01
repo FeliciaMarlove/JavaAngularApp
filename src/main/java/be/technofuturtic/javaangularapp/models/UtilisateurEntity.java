@@ -118,7 +118,6 @@ public class UtilisateurEntity implements Serializable {
     @JsonBackReference //avoids infiite recursion (works with @JsonManagedReference on the ManyToOne side)
     private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateurs;
 
-    //--------------------------------------------------------------------------------------??
     public void ajouterRelationParcours(ParcoursUtilisateurLiaison a) {
         listeParcoursUtilisateurs.add(a);
     }
@@ -126,14 +125,11 @@ public class UtilisateurEntity implements Serializable {
     public void retirerRelationParcours(ParcoursUtilisateurLiaison a) {
         listeParcoursUtilisateurs.remove(a);
     }
-    //--------------------------------------------------------------------------------------??
-
 
     public List<ParcoursUtilisateurLiaison> getListeParcoursUtilisateurs() {
         return listeParcoursUtilisateurs;
     }
 
-    // CUSTOM :
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

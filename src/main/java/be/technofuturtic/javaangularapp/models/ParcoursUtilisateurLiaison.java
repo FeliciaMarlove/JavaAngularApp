@@ -2,7 +2,6 @@ package be.technofuturtic.javaangularapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Target;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,17 +23,20 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     @Column(name = "date_achat")
     private LocalDate dateAchat;
 
-    @ManyToOne(targetEntity = ParcoursEntity.class, fetch =  FetchType.LAZY)
+    @Column(name = "prix_achat")
+    private Double prixAchat;
+
+    @ManyToOne(targetEntity = ParcoursEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_parcours", referencedColumnName = "id_parcours", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_parcours"), insertable = false, updatable = false)
     @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
     private ParcoursEntity parcours;
 
-    @ManyToOne(targetEntity = PaiementEntity.class, fetch =  FetchType.LAZY)
+    @ManyToOne(targetEntity = PaiementEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_paiement", referencedColumnName = "id_paiement", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_paiement"), insertable = false, updatable = false)
     @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
     private PaiementEntity paiement;
 
-    @ManyToOne(targetEntity = UtilisateurEntity.class, fetch =  FetchType.LAZY)
+    @ManyToOne(targetEntity = UtilisateurEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_utilisateur"), insertable = false, updatable = false)
     @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
     private UtilisateurEntity utilisateur;
@@ -53,6 +55,10 @@ public class ParcoursUtilisateurLiaison implements Serializable {
 
     public void setUtilisateur(UtilisateurEntity utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public double getPrixAchat() {
+        return prixAchat;
     }
 
     @Transient
@@ -81,6 +87,14 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         return utilisateur;
     }
 
+    public ParcoursEntity getParcours() {
+        return parcours;
+    }
+
+    public PaiementEntity getPaiement() {
+        return paiement;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -101,6 +115,7 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this.parcours = parcours;
         this.utilisateur = utilisateur;
         this.parcoursUtilId = new PK_Parcours_Utilisateur(utilisateur.getIdUtilisateur(), parcours.getIdParcours(), LocalDate.now());
+        this.prixAchat = this.parcours.getPrix();
     }
 
     public ParcoursUtilisateurLiaison() {

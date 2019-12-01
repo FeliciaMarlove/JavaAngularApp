@@ -84,6 +84,10 @@ public class ParcoursEntity implements Serializable {
         this.listeDefis = listeDefis;
     }
 
+    public CategorieEntity getCategorie() {
+        return categorie;
+    }
+
     @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;
@@ -93,10 +97,9 @@ public class ParcoursEntity implements Serializable {
     private List<DefiEntity> listeDefis;
 
     @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
-    @JsonBackReference //avoids infiite recursion (works with @JsonManagedReference on the ManyToOne side)
+    @JsonBackReference //avoids infinite recursion (works with @JsonManagedReference on the ManyToOne side)
     private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateursLiaison;
 
-    //--------------------------------------------------------------------------------------??
     public void ajouterRelationParcours(ParcoursUtilisateurLiaison a) {
         listeParcoursUtilisateursLiaison.add(a);
     }
@@ -104,20 +107,13 @@ public class ParcoursEntity implements Serializable {
     public void retirerRelationParcours(ParcoursUtilisateurLiaison a) {
         listeParcoursUtilisateursLiaison.remove(a);
     }
-    //--------------------------------------------------------------------------------------??
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParcoursEntity that = (ParcoursEntity) o;
-        return Double.compare(that.prix, prix) == 0 &&
-                isActiveParcours == that.isActiveParcours &&
-                Objects.equals(idParcours, that.idParcours) &&
-                Objects.equals(nomParcours, that.nomParcours) &&
-                Objects.equals(descParcours, that.descParcours) &&
-                Objects.equals(categorie, that.categorie) &&
-                Objects.equals(listeDefis, that.listeDefis);
+        return Objects.equals(nomParcours, that.nomParcours);
     }
 
     @Override
