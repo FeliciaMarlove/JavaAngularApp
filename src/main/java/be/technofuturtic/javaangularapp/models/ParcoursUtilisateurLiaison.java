@@ -22,15 +22,15 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     @Column(name = "date_achat")
     private LocalDate dateAchat;
 
-    @ManyToOne(targetEntity = ParcoursEntity.class)
+    @ManyToOne(targetEntity = ParcoursEntity.class, fetch =  FetchType.EAGER)
     @JoinColumn(name = "id_parcours", referencedColumnName = "id_parcours", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_parcours"), insertable = false, updatable = false)
     private ParcoursEntity parcours;
 
-    /*@ManyToOne(targetEntity = PaiementEntity.class)
+    @ManyToOne(targetEntity = PaiementEntity.class, fetch =  FetchType.EAGER)
     @JoinColumn(name = "id_paiement", referencedColumnName = "id_paiement", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_paiement"), insertable = false, updatable = false)
-    private PaiementEntity paiement;*/
+    private PaiementEntity paiement;
 
-    @ManyToOne(targetEntity = UtilisateurEntity.class)
+    @ManyToOne(targetEntity = UtilisateurEntity.class, fetch =  FetchType.EAGER)
     @JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_utilisateur"), insertable = false, updatable = false)
     private UtilisateurEntity utilisateur;
 
@@ -42,9 +42,9 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this.parcours = parcours;
     }
 
-   /* public void setPaiement(PaiementEntity paiement) {
+    public void setPaiement(PaiementEntity paiement) {
         this.paiement = paiement;
-    }*/
+    }
 
     public void setUtilisateur(UtilisateurEntity utilisateur) {
         this.utilisateur = utilisateur;
@@ -93,7 +93,6 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this();
         this.parcours = parcours;
         this.utilisateur = utilisateur;
-        /*this.parcoursUtilId = new PK_Parcours_Utilisateur(utilisateur.getIdUtilisateur(), parcours.getIdParcours());*/
     }
 
     public ParcoursUtilisateurLiaison() {

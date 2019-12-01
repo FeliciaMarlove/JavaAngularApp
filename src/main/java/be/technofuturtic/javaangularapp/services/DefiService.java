@@ -11,4 +11,5 @@ public interface DefiService {
     void activerDefi(Integer idDefi);
     void creerDefi(DefiEntityDto nouveauDefi);
     List<DefiEntity> listerActifs();
+    void majDefi(Integer idDefi, DefiEntityDto updateDefi);
 }

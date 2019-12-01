@@ -5,6 +5,7 @@ import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
 import be.technofuturtic.javaangularapp.services.ParcoursService;
 import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import be.technofuturtic.javaangularapp.utilitaires.ParcoursDefiDto;
+import be.technofuturtic.javaangularapp.utilitaires.ParcoursEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -116,8 +117,16 @@ public class ParcoursController {
     }
     // ex : http://localhost:8080/api/parcours/modifier/99/41/101
 
-
-    //--------------------------------------------------------------
-
-
+    @PostMapping("/update/{id}")
+    public void updateParcours(@RequestBody ParcoursEntityDto parcours, @PathVariable("id") Integer idParcoursToUpdate) {
+        this.service.majParcours(idParcoursToUpdate, parcours);
+    }
+    /*JSON
+        {
+        "nomParcours" : "Premier parcours",
+        "descParcours" : "Premier parcours modifie",
+        "prix" : 50.00,
+        "idCategorie" : 69
+    }
+     */
 }

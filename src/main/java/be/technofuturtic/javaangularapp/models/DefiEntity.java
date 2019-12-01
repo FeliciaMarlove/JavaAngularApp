@@ -115,4 +115,17 @@ public class DefiEntity implements Serializable {
         this.listeParcours = new ArrayList<ParcoursEntity>();
         this.isActiveDefi = true;
     }
+
+    @Override
+    public String toString() {
+        return "DefiEntity{" +
+                "idDefi=" + idDefi +
+                ", nomDefi='" + nomDefi + '\'' +
+                ", descDefi='" + descDefi + '\'' +
+                ", infobulleDefi='" + infobulleDefi + '\'' +
+                ", isActiveDefi=" + isActiveDefi +
+                ", categorie=" + categorie +
+                ", listeParcours=" + listeParcours +
+                '}';
+    }
 }

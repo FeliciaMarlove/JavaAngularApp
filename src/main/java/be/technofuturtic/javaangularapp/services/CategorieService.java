@@ -10,4 +10,5 @@ public interface CategorieService {
     void desactiverCategorie(Integer idCategorie);
     void activerCategorie(Integer idCategorie);
     void ajouterCategorie(CategorieEntity nouvelleCategorie);
+    void majCategorie(Integer idCategorie, CategorieEntity categorie);
 }

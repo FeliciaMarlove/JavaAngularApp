@@ -97,6 +97,14 @@ public class UtilisateurEntity implements Serializable {
         isActiveUtilisateur = activeUtilisateur;
     }
 
+    public PaysEntity getPays() {
+        return pays;
+    }
+
+    public void setPays(PaysEntity pays) {
+        this.pays = pays;
+    }
+
     @ManyToOne(targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", foreignKey = @ForeignKey(name = "FK_Utilisateur_Role"))
     private RoleEntity role;
@@ -105,19 +113,22 @@ public class UtilisateurEntity implements Serializable {
     @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
     private PaysEntity pays;
 
-    @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
-    private List<ParcoursUtilisateurLiaison> listePUP;
+    @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.EAGER)
+    private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateurs;
 
+    //--------------------------------------------------------------------------------------??
     public void ajouterRelationParcours(ParcoursUtilisateurLiaison a) {
-        listePUP.add(a);
+        listeParcoursUtilisateurs.add(a);
     }
 
     public void retirerRelationParcours(ParcoursUtilisateurLiaison a) {
-        listePUP.remove(a);
+        listeParcoursUtilisateurs.remove(a);
     }
+    //--------------------------------------------------------------------------------------??
 
-    public List<ParcoursUtilisateurLiaison> getListePUP() {
-        return listePUP;
+
+    public List<ParcoursUtilisateurLiaison> getListeParcoursUtilisateurs() {
+        return listeParcoursUtilisateurs;
     }
 
     // CUSTOM :
@@ -148,7 +159,24 @@ public class UtilisateurEntity implements Serializable {
     }
 
     public UtilisateurEntity() {
-        this.listePUP = new ArrayList<>();
+        this.listeParcoursUtilisateurs = new ArrayList<>();
         this.isActiveUtilisateur = true;
+    }
+
+    @Override
+    public String toString() {
+        return "UtilisateurEntity{" +
+                "idUtilisateur=" + idUtilisateur +
+                ", nomUtilisateur='" + nomUtilisateur + '\'' +
+                ", prenomUtilisateur='" + prenomUtilisateur + '\'' +
+                ", dateNaiss=" + dateNaiss +
+                ", email='" + email + '\'' +
+                ", motDePasse='" + motDePasse + '\'' +
+                ", newsletterOptIn=" + newsletterOptIn +
+                ", isActiveUtilisateur=" + isActiveUtilisateur +
+                ", role=" + role +
+                ", pays=" + pays +
+                ", listePUP=" + listeParcoursUtilisateurs +
+                '}';
     }
 }

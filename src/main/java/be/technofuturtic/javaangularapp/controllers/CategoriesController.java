@@ -47,4 +47,9 @@ public class CategoriesController {
             "descCategorie" : "Description de loisirs"
         }
      */
+
+    @PostMapping("/update/{id}")
+    public void modifierCategorie(@RequestBody CategorieEntity categorie, @PathVariable("id") Integer id) {
+        this.service.majCategorie(id, categorie);
+    }
 }

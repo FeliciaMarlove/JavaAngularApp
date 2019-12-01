@@ -1,6 +1,5 @@
 package be.technofuturtic.javaangularapp.models;
 
-import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -29,6 +28,9 @@ public class ParcoursEntity implements Serializable {
     @Column(name = "is_active", nullable = false)
     private boolean isActiveParcours;
 
+    @Transient
+    private final double PRIX_PAR_DEFAUT = 0.00;
+
     public Integer getIdParcours() {
         return idParcours;
     }
@@ -47,6 +49,10 @@ public class ParcoursEntity implements Serializable {
 
     public void setDescParcours(String descParcours) {
         this.descParcours = descParcours;
+    }
+
+    public void setCategorie(CategorieEntity categorie) {
+        this.categorie = categorie;
     }
 
     public double getPrix() {
@@ -77,7 +83,7 @@ public class ParcoursEntity implements Serializable {
         this.listeDefis = listeDefis;
     }
 
-    @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = CategorieEntity.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie", foreignKey = @ForeignKey(name = "FK_Parcours_Categorie"))
     private CategorieEntity categorie;
 
@@ -85,8 +91,8 @@ public class ParcoursEntity implements Serializable {
     @JoinTable(name = "Parcours_Defis", joinColumns = @JoinColumn(name = "id_parcours"), inverseJoinColumns = @JoinColumn( name = "id_defi"))
     private List<DefiEntity> listeDefis;
 
-    @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
-    private List<ParcoursUtilisateurLiaison> listePUP;
+    @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.EAGER)
+    private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateursLiaison;
 
     @Override
     public boolean equals(Object o) {
@@ -116,9 +122,23 @@ public class ParcoursEntity implements Serializable {
         this.setActiveParcours(true);
     }
 
+    public ParcoursEntity(String nomParcours, String descParcours, CategorieEntity categorie) {
+        this();
+        this.nomParcours = nomParcours;
+        this.descParcours = descParcours;
+        this.prix = PRIX_PAR_DEFAUT;
+        this.categorie = categorie;
+        this.setActiveParcours(true);
+    }
+
     public ParcoursEntity() {
         this.listeDefis = new ArrayList<>();
-        this.listePUP = new ArrayList<>();
+        this.listeParcoursUtilisateursLiaison = new ArrayList<>();
         this.isActiveParcours = true;
+    }
+
+    @Override
+    public String toString() {
+        return this.idParcours+" nom="+this.nomParcours+" prix="+this.prix+" cat="+this.categorie.getIdCategorie();
     }
 }

@@ -1,7 +1,10 @@
 package be.technofuturtic.javaangularapp.services;
 
+import be.technofuturtic.javaangularapp.models.PaysEntity;
 import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
+import be.technofuturtic.javaangularapp.repositories.PaysRepository;
 import be.technofuturtic.javaangularapp.repositories.UtilisateurRepository;
+import be.technofuturtic.javaangularapp.utilitaires.UtilisateurEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +13,15 @@ import java.util.List;
 @Service
 public class UtilisateurServiceImplemented implements UtilisateurService {
     private UtilisateurRepository repo;
+    private PaysRepository paysRepo;
+
+    public UtilisateurServiceImplemented(UtilisateurRepository repo, PaysRepository paysRepo) {
+        this.repo = repo;
+        this.paysRepo = paysRepo;
+    }
 
     @Autowired
-    public UtilisateurServiceImplemented(UtilisateurRepository repository) {
-        repo = repository;
-    }
+
 
     @Override
     public List<UtilisateurEntity> findAll() {
@@ -48,5 +55,29 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
             //nouvelUtilisateur.setActiveUtilisateur(true);
             repo.save(nouvelUtilisateur);
         }
+    }
+
+    @Override
+    public void majUtilisateur(UtilisateurEntityDto utilisateur, Long id) {
+        UtilisateurEntity u = repo.findById(id).get();
+        u.setEmail(utilisateur.getEmail());
+        u.setMotDePasse(utilisateur.getMotDePasse());
+        PaysEntity p = paysRepo.findById(utilisateur.getIdPays()).get();
+        u.setPays(p);
+        repo.save(u);
+    }
+
+    @Override
+    public void inscrireNewsletter(Long idUtilisateur) {
+        UtilisateurEntity u = repo.findById(idUtilisateur).get();
+        u.setNewsletterOptIn(true);
+        repo.save(u);
+    }
+
+    @Override
+    public void desinscrireNewsletter(Long idUtilisateur) {
+        UtilisateurEntity u = repo.findById(idUtilisateur).get();
+        u.setNewsletterOptIn(false);
+        repo.save(u);
     }
 }

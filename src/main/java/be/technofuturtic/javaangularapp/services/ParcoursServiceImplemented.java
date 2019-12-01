@@ -5,6 +5,7 @@ import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.repositories.*;
 import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
+import be.technofuturtic.javaangularapp.utilitaires.ParcoursEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,10 @@ public class ParcoursServiceImplemented implements ParcoursService {
     private CategorieRepository repoCat;
 
     @Autowired
-    public ParcoursServiceImplemented(ParcoursRepository repository, DefiRepository defiRepository, CategorieRepository repoCat) {
+    public ParcoursServiceImplemented(ParcoursRepository repository, DefiRepository defiRepository, CategorieRepository categorieRepository) {
        repo = repository;
        repoDefi = defiRepository;
-        this.repoCat = repoCat;
+       repoCat = categorieRepository;
     }
 
     @Override
@@ -61,10 +62,22 @@ public class ParcoursServiceImplemented implements ParcoursService {
                 nouveauDefi.getInfobulleDefi(),
                 categorieEntityOptional
         );
-        //defiEntity.setActiveDefi(true);
         this.repoDefi.save(defiEntity);
         parcours.getListeDefis().add(defiEntity);
         repo.save(parcours);
+    }
+
+    @Override
+    public void majParcours(Integer idParcours, ParcoursEntityDto parcoursDto) {
+        ParcoursEntity p = repo.findById(idParcours).get();
+        System.out.println(p.toString()); // ---- Devt purpose
+        p.setNomParcours(parcoursDto.getNomParcours());
+        p.setDescParcours(parcoursDto.getDescParcours());
+        p.setPrix(parcoursDto.getPrix());
+        CategorieEntity c = repoCat.findById(parcoursDto.getIdCategorie()).get();
+        p.setCategorie(c);
+        repo.save(p);
+        System.out.println(p.toString()); // ---- Devt purpose
     }
 
     @Override
@@ -130,13 +143,4 @@ public class ParcoursServiceImplemented implements ParcoursService {
         repo.save(parcours);
     }
 
-
-//-------------------laboratoire expérimental :
-
-
-    // méthode pour "remplacer" -> suppr + add
-
-
-
-    //------------------
 }

@@ -53,10 +53,15 @@ public class DefisController {
     }
     /* JSON
     {
-	"nomDefi" : "Defi 1",
-    "descDefi" : "Premier defi",
-    "infobulleDefi" : "Defi ajouté dans la catégorie cuisine",
-    "categorieId" : 69
-}
+        "nomDefi" : "Defi 1",
+        "descDefi" : "Premier defi",
+        "infobulleDefi" : "Defi ajouté dans la catégorie cuisine",
+        "categorieId" : 69
+    }
      */
+
+    @PostMapping("/modifier/{id}")
+    public void modifierDefi(@RequestBody DefiEntityDto defi, @PathVariable("id") Integer idDefiAModifier) {
+        this.service.majDefi(idDefiAModifier, defi);
+    }
 }

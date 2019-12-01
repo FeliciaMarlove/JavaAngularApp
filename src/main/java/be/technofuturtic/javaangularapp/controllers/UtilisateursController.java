@@ -2,6 +2,7 @@ package be.technofuturtic.javaangularapp.controllers;
 
 import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
 import be.technofuturtic.javaangularapp.services.UtilisateurService;
+import be.technofuturtic.javaangularapp.utilitaires.UtilisateurEntityDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,4 +46,27 @@ public class UtilisateursController {
             "newsletterOptIn" : true
         }
      */
+
+    @PostMapping("/update/{id}") //HAS TO BE TESTED WHEN COUNTRY LIST IS LOADED !
+    public void modifierUtilisateur(@RequestBody UtilisateurEntityDto utilisateur, @PathVariable("id") Long id) {
+        this.service.majUtilisateur(utilisateur, id);
+    }
+    /*
+    JSON
+        {
+            "motDePasse" : "sesame",
+            "idPays" : 55,
+            "email" : "emailupdate@msn.com"
+        }
+     */
+
+    @PostMapping("/subscribe/{id}")
+    public void inscrireNewsletter(@PathVariable("id") Long id) {
+        this.service.inscrireNewsletter(id);
+    }
+
+    @PostMapping("/unsubscribe/{id}")
+    public void desinscrireNewsletter(@PathVariable("id") Long id) {
+        this.service.desinscrireNewsletter(id);
+    }
 }

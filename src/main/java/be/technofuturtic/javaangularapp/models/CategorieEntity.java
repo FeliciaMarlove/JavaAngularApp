@@ -92,4 +92,16 @@ public class CategorieEntity implements Serializable {
         this.defis = new ArrayList<>();
         this.isActiveCategorie = true;
     }
+
+    @Override
+    public String toString() {
+        return "CategorieEntity{" +
+                "idCategorie=" + idCategorie +
+                ", nomCategorie='" + nomCategorie + '\'' +
+                ", descCategorie='" + descCategorie + '\'' +
+                ", isActiveCategorie=" + isActiveCategorie +
+                ", defis=" + defis +
+                ", parcours=" + parcours +
+                '}';
+    }
 }

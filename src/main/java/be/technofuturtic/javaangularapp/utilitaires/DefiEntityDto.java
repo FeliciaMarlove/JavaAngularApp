@@ -9,9 +9,6 @@ public class DefiEntityDto {
     private String infobulleDefi;
     private Integer categorieId;
 
-    @Autowired
-    private CategorieRepository catRep;
-
     public DefiEntityDto(String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
         this.nomDefi = nomDefi;
         this.descDefi = descDefi;

@@ -1,8 +1,8 @@
 package be.technofuturtic.javaangularapp.services;
 
-import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
+import be.technofuturtic.javaangularapp.utilitaires.ParcoursEntityDto;
 
 import java.util.List;
 
@@ -15,4 +15,5 @@ public interface ParcoursService {
     void interchangerDefisDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAInserer) throws Exception;
     void supprimerDefiDansParcours(Integer idParcours, Integer idDefiASupprimer);
     void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception;
+    void majParcours(Integer idParcours, ParcoursEntityDto parcoursDto);
 }

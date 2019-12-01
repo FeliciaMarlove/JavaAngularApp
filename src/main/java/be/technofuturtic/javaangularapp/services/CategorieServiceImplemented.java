@@ -54,5 +54,13 @@ public class CategorieServiceImplemented implements CategorieService {
         }
     }
 
+    @Override
+    public void majCategorie(Integer idCategorie, CategorieEntity categorie) {
+        CategorieEntity c = categorie;
+        c.setNomCategorie(categorie.getNomCategorie());
+        c.setDescCategorie(categorie.getDescCategorie());
+        repo.save(c);
+    }
+
 
 }

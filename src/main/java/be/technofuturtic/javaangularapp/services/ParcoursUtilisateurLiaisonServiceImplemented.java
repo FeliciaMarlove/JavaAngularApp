@@ -33,15 +33,25 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
     @Override
     public void commencerParcours(Integer idParcours, Long idUtilisateur) {
         ParcoursEntity parcours = parcoursRepo.findById(idParcours).get();
+        System.out.println(1);
         UtilisateurEntity utilisateur = utilisateurRepo.findById(idUtilisateur).get();
+        System.out.println(utilisateur);
+        System.out.println(2);
         ParcoursUtilisateurLiaison n = new ParcoursUtilisateurLiaison(parcours, utilisateur);
-        utilisateur.ajouterRelationParcours(n);
-        n.setUtilisateur(utilisateur);
+        System.out.println(3);
+        utilisateur.ajouterRelationParcours(n); //----------------NOT WORKING (liste pup vide)
+        System.out.println(4);
+        //n.setUtilisateur(utilisateur);
+        System.out.println(5);
         utilisateurRepo.save(utilisateur);
+        System.out.println(6);
         n.setOngoing(true);
-        repo.save(n);
+        System.out.println(7);
+        repo.save(n); //---------------------------------------------PLANTAGE : NULL ID GENERATED :'(
+        System.out.println(8);
     }
 
+    //test : http://localhost:8080/api/utilparc/start/107/90
 
 
     @Override
@@ -69,9 +79,9 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
     private PK_Parcours_Utilisateur trouverLeParcoursEnCoursDeGerard(UtilisateurEntity gerardLuiMeme) {
         List<ParcoursUtilisateurLiaison> pulList = null;
 
-        System.out.println(gerardLuiMeme.getListePUP().isEmpty());
+        System.out.println(gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty());
 
-        if (gerardLuiMeme.isActiveUtilisateur() /*OK*/ && !gerardLuiMeme.getListePUP().isEmpty()) /*NOK*/ { // <------------------------------------------------------------------------------NOK liste empty
+        if (gerardLuiMeme.isActiveUtilisateur() /*OK*/ && !gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty()) /*NOK*/ { // <------------------------------------------------------------------------------NOK liste empty
               pulList = repo.findAllByUtilisateurEquals(gerardLuiMeme);  // <------------------------------------------------------------------------------NOK?
         }
         ParcoursUtilisateurLiaison pulActif = null;
