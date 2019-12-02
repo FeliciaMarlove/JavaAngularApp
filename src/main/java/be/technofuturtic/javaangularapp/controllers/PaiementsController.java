@@ -3,6 +3,7 @@ package be.technofuturtic.javaangularapp.controllers;
 import be.technofuturtic.javaangularapp.models.PaiementEntity;
 import be.technofuturtic.javaangularapp.repositories.PaiementRepository;
 import be.technofuturtic.javaangularapp.services.PaiementService;
+import be.technofuturtic.javaangularapp.utilitaires.PaiementEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,15 +28,15 @@ public class PaiementsController {
     }
 
     @PostMapping("/ajouter")
-    public void ajouterPaiement(@RequestBody PaiementEntity paiementEntity) {
-        this.service.ajouterPaiement(paiementEntity);
+    public void ajouterPaiement(@RequestBody PaiementEntityDto paiementEntityDto) {
+        this.service.ajouterPaiement(paiementEntityDto);
     }
     /*
     JSON
     {
-	"nomPaiement" : "gratuit",
-	"descPaiement" : "Parcours gratuit"
-}
+        "nomPaiement" : "gratuit",
+        "descPaiement" : "Parcours gratuit"
+    }
      */
 
     @PostMapping("/desactiver/{id}")

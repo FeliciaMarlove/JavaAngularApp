@@ -1,14 +1,12 @@
 package be.technofuturtic.javaangularapp.services;
 
 import be.technofuturtic.javaangularapp.models.CategorieEntity;
-import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.repositories.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CategorieServiceImplemented implements CategorieService {
@@ -68,5 +66,15 @@ public class CategorieServiceImplemented implements CategorieService {
         }
     }
 
-
+    @Override
+    public List<CategorieEntity> findAllActifs() {
+        List<CategorieEntity> liste = (List<CategorieEntity>) repo.findAll();
+        List<CategorieEntity> a = new ArrayList<CategorieEntity>();
+        for (int i = 0; i < liste.size(); i++) {
+            if (liste.get(i).isActiveCategorie()) {
+                a.add(liste.get(i));
+            }
+        }
+        return a;
+    }
 }

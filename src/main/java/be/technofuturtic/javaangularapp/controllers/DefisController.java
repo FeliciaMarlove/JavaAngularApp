@@ -60,7 +60,7 @@ public class DefisController {
     }
      */
 
-    @PostMapping("/modifier/{id}")
+    @PostMapping("/update/{id}")
     public void modifierDefi(@RequestBody DefiEntityDto defi, @PathVariable("id") Integer idDefiAModifier) {
         this.service.majDefi(idDefiAModifier, defi);
     }

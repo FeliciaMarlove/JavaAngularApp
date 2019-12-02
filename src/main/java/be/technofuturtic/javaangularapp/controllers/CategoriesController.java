@@ -21,10 +21,13 @@ public class CategoriesController {
     @Autowired
     private CategorieRepository categorieRepository;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<CategorieEntity> list() {
         return (List<CategorieEntity>) categorieRepository.findAll();
     }
+
+    @GetMapping
+    public List<CategorieEntity> listActive() { return this.service.findAllActifs(); }
 
     @PostMapping("/desactiver/{id}")
     public void desactiverCategorie(@PathVariable("id") Integer idCategorie) {

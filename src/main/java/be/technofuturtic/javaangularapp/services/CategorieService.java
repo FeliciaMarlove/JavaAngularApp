@@ -11,4 +11,5 @@ public interface CategorieService {
     void activerCategorie(Integer idCategorie);
     void ajouterCategorie(CategorieEntity nouvelleCategorie);
     void majCategorie(Integer idCategorie, CategorieEntity categorie);
+    List<CategorieEntity> findAllActifs();
 }

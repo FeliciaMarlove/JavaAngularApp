@@ -2,6 +2,7 @@ package be.technofuturtic.javaangularapp.services;
 
 import be.technofuturtic.javaangularapp.models.PaiementEntity;
 import be.technofuturtic.javaangularapp.repositories.PaiementRepository;
+import be.technofuturtic.javaangularapp.utilitaires.PaiementEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +38,9 @@ public class PaiementServiceImplemented implements PaiementService {
     }
 
     @Override
-    public void ajouterPaiement(PaiementEntity nouveauPaiement) {
+    public void ajouterPaiement(PaiementEntityDto nouveauPaiement) {
         boolean isDuplicate = false;
+        PaiementEntity p = new PaiementEntity(nouveauPaiement.getNomPaiement(), nouveauPaiement.getDescPaiement());
         List<PaiementEntity> paiementsExistants = findAll();
         for (int i = 0; i < paiementsExistants.size(); i++) {
             if (nouveauPaiement.getNomPaiement().equals(paiementsExistants.get(i).getNomPaiement())) {
@@ -46,7 +48,7 @@ public class PaiementServiceImplemented implements PaiementService {
             }
         }
         if (!isDuplicate) {
-            repo.save(nouveauPaiement);
+            repo.save(p);
         }
     }
 }

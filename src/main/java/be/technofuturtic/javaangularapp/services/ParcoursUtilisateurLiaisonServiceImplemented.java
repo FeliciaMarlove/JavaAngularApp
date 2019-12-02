@@ -32,16 +32,19 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
 
     @Override
     public void commencerParcours(Integer parcours, Long utilisateur) {
-        ParcoursEntity p = parcoursRepo.findById(parcours).get();
-        UtilisateurEntity u = utilisateurRepo.findById(utilisateur).get();
-        ParcoursUtilisateurLiaison pul = new ParcoursUtilisateurLiaison(p, u);
-        repo.save(pul);
-        u.ajouterRelationParcours(pul);
-        utilisateurRepo.save(u);
-        p.ajouterRelationParcours(pul);
-        parcoursRepo.save(p);
-        repo.save(pul);
-        System.out.println(pul.getParcoursUtilId());
+        UtilisateurEntity user = utilisateurRepo.findById(utilisateur).get();
+        if(trouverLeParcoursEnCoursDeGerard(user) == null) { // si l'utilisateur n'a pas de parcours en cours il peut en commencer un autre
+            ParcoursEntity p = parcoursRepo.findById(parcours).get();
+            UtilisateurEntity u = utilisateurRepo.findById(utilisateur).get();
+            ParcoursUtilisateurLiaison pul = new ParcoursUtilisateurLiaison(p, u);
+            repo.save(pul);
+            u.ajouterRelationParcours(pul);
+            utilisateurRepo.save(u);
+            p.ajouterRelationParcours(pul);
+            parcoursRepo.save(p);
+            repo.save(pul);
+            System.out.println(pul.getParcoursUtilId()); // devt purpose
+        }
     }
 
     @Override
@@ -54,10 +57,12 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             Optional<ParcoursEntity> p = parcoursRepo.findById(pul.getParcoursUtilId().getIdParc());
             if (deltaJours <= p.get().getListeDefis().size()) {
                 return p.get().getListeDefis().get(deltaJours);
+            } else {
+                pul.setOngoing(false); // si deltaJours > taille du parcours -> il a fini
+                return null;
             }
-            return null;
         } else {
-            return null;
+            return null; // si Gerard n'a pas de parcours en cours, bah il a pas de parcours en cours
         }
     }
 
@@ -87,9 +92,6 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
 
     private PK_Parcours_Utilisateur trouverLeParcoursEnCoursDeGerard(UtilisateurEntity gerardLuiMeme) {
         List<ParcoursUtilisateurLiaison> pulList = null;
-
-        System.out.println(gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty());
-
         if (gerardLuiMeme.isActiveUtilisateur() && !gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty()) {
               pulList = repo.findAllByUtilisateurEquals(gerardLuiMeme);
         }
