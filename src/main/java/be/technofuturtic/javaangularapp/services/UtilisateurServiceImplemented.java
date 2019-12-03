@@ -6,22 +6,23 @@ import be.technofuturtic.javaangularapp.repositories.PaysRepository;
 import be.technofuturtic.javaangularapp.repositories.UtilisateurRepository;
 import be.technofuturtic.javaangularapp.utilitaires.UtilisateurEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
+/*import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UtilisateurServiceImplemented implements UtilisateurService {
     private UtilisateurRepository repo;
     private PaysRepository paysRepo;
 
+    @Autowired
     public UtilisateurServiceImplemented(UtilisateurRepository repo, PaysRepository paysRepo) {
         this.repo = repo;
         this.paysRepo = paysRepo;
     }
-
-    @Autowired
-
 
     @Override
     public List<UtilisateurEntity> findAll() {
@@ -80,4 +81,11 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
         u.setNewsletterOptIn(false);
         repo.save(u);
     }
+
+    /*@Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        Optional<UserDetails> userOptional = this.repo.findByEmail(s);
+        if (userOptional.isPresent()) return userOptional.get();
+        throw new UsernameNotFoundException(s);
+    }*/
 }
