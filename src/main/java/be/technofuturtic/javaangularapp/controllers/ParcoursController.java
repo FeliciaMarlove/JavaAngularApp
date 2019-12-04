@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/parcours")
+@RequestMapping(value = "/api/parcours", method = {RequestMethod.POST, RequestMethod.GET})
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class ParcoursController {
     private final ParcoursService service;

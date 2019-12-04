@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/defis")
+@RequestMapping(value = "/api/defis", method =  {RequestMethod.POST, RequestMethod.GET})
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class DefisController {
     private final DefiService service;
@@ -47,6 +47,11 @@ public class DefisController {
         this.service.activerDefi(idDefi);
     }
 
+    @PostMapping("/update/{id}")
+    public void modifierDefi(@RequestBody DefiEntityDto defi, @PathVariable("id") Integer idDefiAModifier) {
+        this.service.majDefi(idDefiAModifier, defi);
+    }
+
     @PostMapping("/creer")
     public void creerDefi(@RequestBody DefiEntityDto defi) {
         this.service.creerDefi(new DefiEntityDto(defi.getNomDefi(), defi.getDescDefi(), defi.getInfobulleDefi(), defi.getCategorieId()));
@@ -59,9 +64,4 @@ public class DefisController {
         "categorieId" : 69
     }
      */
-
-    @PostMapping("/update/{id}")
-    public void modifierDefi(@RequestBody DefiEntityDto defi, @PathVariable("id") Integer idDefiAModifier) {
-        this.service.majDefi(idDefiAModifier, defi);
-    }
 }

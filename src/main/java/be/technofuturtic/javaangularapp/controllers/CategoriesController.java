@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping(value = "/api/categories", method = {RequestMethod.POST, RequestMethod.GET})
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class CategoriesController {
     private final CategorieService service;
@@ -34,9 +34,14 @@ public class CategoriesController {
         this.service.desactiverCategorie(idCategorie);
     }
 
-    @PostMapping("/activer/{id}")
+    @GetMapping("/activer/{id}")
     public void activerCategorie(@PathVariable("id") Integer idCategorie) {
         this.service.activerCategorie(idCategorie);
+    }
+
+    @PostMapping("/update/{id}")
+    public void modifierCategorie(@RequestBody CategorieEntity categorie, @PathVariable("id") Integer id) {
+        this.service.majCategorie(id, categorie);
     }
 
     @PostMapping("/creer")
@@ -50,9 +55,4 @@ public class CategoriesController {
             "descCategorie" : "Description de loisirs"
         }
      */
-
-    @PostMapping("/update/{id}")
-    public void modifierCategorie(@RequestBody CategorieEntity categorie, @PathVariable("id") Integer id) {
-        this.service.majCategorie(id, categorie);
-    }
 }

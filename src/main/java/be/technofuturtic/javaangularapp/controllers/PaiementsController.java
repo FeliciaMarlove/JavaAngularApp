@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/paiements")
+@RequestMapping(value = "/api/paiements", method = {RequestMethod.POST, RequestMethod.GET})
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class PaiementsController {
     private final PaiementService service;

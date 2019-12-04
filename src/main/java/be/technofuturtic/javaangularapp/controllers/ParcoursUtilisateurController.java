@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/utilparc")
+@RequestMapping(value = "/api/utilparc", method = {RequestMethod.POST, RequestMethod.GET})
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class ParcoursUtilisateurController {
     private final ParcoursUtilisateurLiaisonService service;
