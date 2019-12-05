@@ -46,8 +46,17 @@ public class ParcoursServiceImplemented implements ParcoursService {
     }
 
     @Override
-    public void ajouterParcours(ParcoursEntity nouveauParcours) {
-        repo.save(nouveauParcours);
+    public void ajouterParcours(ParcoursEntityDto parcDto) {
+        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcDto.getCategorie());
+        CategorieEntity c = categorieEntityOptional.get();
+        ParcoursEntity p = new ParcoursEntity(
+                parcDto.getNomParcours(),
+                parcDto.getDescParcours(),
+                parcDto.getPrix(),
+                c
+        );
+        p.setActiveParcours(true);
+        this.repo.save(p);
     }
 
     @Override
@@ -74,7 +83,9 @@ public class ParcoursServiceImplemented implements ParcoursService {
         p.setNomParcours(parcoursDto.getNomParcours());
         p.setDescParcours(parcoursDto.getDescParcours());
         p.setPrix(parcoursDto.getPrix()); //obtient bien le prix via le DTO !
-        CategorieEntity c = repoCat.findById(parcoursDto.getIdCategorie()).get();
+        System.out.println(p.getPrix());
+        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcoursDto.getCategorie());
+        CategorieEntity c = categorieEntityOptional.get();
         p.setCategorie(c);
         repo.save(p);
         System.out.println(p.toString()); // ---- Devt purpose

@@ -121,7 +121,7 @@ public class ParcoursEntity implements Serializable {
         return Objects.hash(idParcours, nomParcours, descParcours, prix, isActiveParcours, categorie, listeDefis);
     }
 
-    public ParcoursEntity(String nomParcours, String descParcours, double prix, CategorieEntity categorie) {
+    public ParcoursEntity(String nomParcours, String descParcours, Double prix, CategorieEntity categorie) {
         this();
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;

@@ -10,7 +10,7 @@ public interface ParcoursService {
     public List<ParcoursEntity> findAll();
     void desactiverParcours(Integer idParcours);
     void activerParcours(Integer idParcours);
-    void ajouterParcours(ParcoursEntity nouveauParcours);
+    void ajouterParcours(ParcoursEntityDto nouveauParcours);
     void modifierDefiDansParcours(Integer idParcours, Integer idDefiARemplacer, DefiEntityDto nouveauDefi) throws Exception;
     void interchangerDefisDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAInserer) throws Exception;
     void supprimerDefiDansParcours(Integer idParcours, Integer idDefiASupprimer);

@@ -3,17 +3,17 @@ package be.technofuturtic.javaangularapp.utilitaires;
 public class ParcoursEntityDto {
     private String nomParcours;
     private String descParcours;
-    private double prix;
-    private Integer idCategorie;
+    private Double prix;
+    private Integer categorie;
 
     public ParcoursEntityDto() {
     }
 
-    public ParcoursEntityDto(String nomParcours, String descParcours, double prix, Integer idCategorie) {
+    public ParcoursEntityDto(String nomParcours, String descParcours, Double prix, Integer idCategorie) {
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;
         this.prix = prix;
-        this.idCategorie = idCategorie;
+        this.categorie = idCategorie;
     }
 
     public String getNomParcours() {
@@ -24,11 +24,11 @@ public class ParcoursEntityDto {
         return descParcours;
     }
 
-    public double getPrix() {
+    public Double getPrix() {
         return prix;
     }
 
-    public Integer getIdCategorie() {
-        return idCategorie;
+    public Integer getCategorie() {
+        return categorie;
     }
 }

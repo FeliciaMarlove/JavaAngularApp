@@ -51,7 +51,7 @@ public class DefiServiceImplemented implements DefiService {
                 nouveauDefi.getInfobulleDefi(),
                 categorieEntityOptional
         );
-        //defiEntity.setActiveDefi(true);
+        defiEntity.setActiveDefi(true);
         this.repo.save(defiEntity);
     }
 

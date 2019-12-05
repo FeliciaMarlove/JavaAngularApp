@@ -46,8 +46,8 @@ public class ParcoursController {
         this.service.activerParcours(idParcours);
     }
 
-    @PostMapping("/ajouter")
-    public void ajouterParcours(@RequestBody ParcoursEntity nouveauParcours) {
+    @PostMapping("/creer")
+    public void ajouterParcours(@RequestBody ParcoursEntityDto nouveauParcours) {
         this.service.ajouterParcours(nouveauParcours);
     }
     /*
@@ -85,6 +85,19 @@ public class ParcoursController {
     }
     //ex : http://localhost:8080/api/parcours/supprimerdefi/99/64
 
+    @PostMapping("/update/{id}")
+    public void updateParcours(@RequestBody ParcoursEntityDto parcours, @PathVariable("id") Integer idParcoursToUpdate) {
+        this.service.majParcours(idParcoursToUpdate, parcours);
+    }
+    /*JSON
+        {
+            "nomParcours" : "Premier parcours",
+            "descParcours" : "Premier parcours modifie",
+            "prix" : 50.00,
+            "idCategorie" : 69
+        }
+     */
+
     @PostMapping("/modifier/{idparcours}")
     public void modifierDefiDansParcours(
             @RequestBody ParcoursDefiDto a,
@@ -95,16 +108,6 @@ public class ParcoursController {
                 new DefiEntityDto(a.getNomDefi(), a.getDescDefi(), a.getInfobulleDefi(), a.getCategorieId())
         );
     }
-    /*
-    Json test
-    {
-		"defiRmv" : 41,
-        "nomDefi" : "truc",
-        "descDefi" : "jfdslkfjls",
-        "infobulleDefi" : "jfdksjfljsdkf",
-        "categorieId" : 99
-    }
-     */
 
     @PostMapping("/modifier/{idparcours}/{iddefiout}/{iddefiin}")
     public void modifierDefiDansParcours(@PathVariable("idparcours") Integer idParcours,
@@ -116,17 +119,14 @@ public class ParcoursController {
                 idDefiIn);
     }
     // ex : http://localhost:8080/api/parcours/modifier/99/41/101
-
-    @PostMapping("/update/{id}")
-    public void updateParcours(@RequestBody ParcoursEntityDto parcours, @PathVariable("id") Integer idParcoursToUpdate) {
-        this.service.majParcours(idParcoursToUpdate, parcours);
-    }
-    /*JSON
-        {
-        "nomParcours" : "Premier parcours",
-        "descParcours" : "Premier parcours modifie",
-        "prix" : 50.00,
-        "idCategorie" : 69
+     /*
+    Json test
+    {
+		"defiRmv" : 41,
+        "nomDefi" : "truc",
+        "descDefi" : "jfdslkfjls",
+        "infobulleDefi" : "jfdksjfljsdkf",
+        "categorieId" : 99
     }
      */
 }
