@@ -37,12 +37,12 @@ public class ParcoursController {
     }
 
     @PostMapping("/desactiver/{id}")
-    public void desactParc(@RequestBody ParcoursEntity parcours, @PathVariable("id") Integer idParcours) {
+    public void desactParc(@PathVariable("id") Integer idParcours) {
         this.service.desactiverParcours(idParcours);
     }
 
     @PostMapping("/activer/{id}")
-    public void actParc(@RequestBody ParcoursEntity parcours, @PathVariable("id") Integer idParcours) {
+    public void actParc(@PathVariable("id") Integer idParcours) {
         this.service.activerParcours(idParcours);
     }
 

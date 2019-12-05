@@ -73,7 +73,7 @@ public class ParcoursEntity implements Serializable {
     }
 
     public void setActiveParcours(boolean activeParcours) {
-        isActiveParcours = activeParcours;
+        this.isActiveParcours = activeParcours;
     }
 
     public List<DefiEntity> getListeDefis() {
