@@ -79,4 +79,10 @@ public class DefiServiceImplemented implements DefiService {
         repo.save(defiAModifier);
         System.out.println(defiAModifier.toString()); // ---- Devt purpose
     }
+
+    @Override
+    public Integer getIdCategorie(Integer idDefi) {
+        DefiEntity d = repo.findById(idDefi).get();
+        return d.getCategorie().getIdCategorie();
+    }
 }

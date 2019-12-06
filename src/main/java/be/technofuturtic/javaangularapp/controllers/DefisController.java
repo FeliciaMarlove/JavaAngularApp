@@ -28,8 +28,8 @@ public class DefisController {
     }
 
     @GetMapping("/all")
-    public List<DefiEntity> listAll() {
-        return (List<DefiEntity>) defiRepository.findAll();
+    public Iterable<DefiEntity> listAll() {
+        return defiRepository.findAll();
     }
 
     @GetMapping("/{id}")
@@ -50,6 +50,11 @@ public class DefisController {
     @PostMapping("/update/{id}")
     public void modifierDefi(@RequestBody DefiEntityDto defi, @PathVariable("id") Integer idDefiAModifier) {
         this.service.majDefi(idDefiAModifier, defi);
+    }
+
+    @GetMapping("/getcat/{id}")
+    public Integer getNumCategorie(@PathVariable("id") Integer x) {
+        return service.getIdCategorie(x);
     }
 
     @PostMapping("/creer")

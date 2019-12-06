@@ -12,4 +12,5 @@ public interface DefiService {
     void creerDefi(DefiEntityDto nouveauDefi);
     List<DefiEntity> listerActifs();
     void majDefi(Integer idDefi, DefiEntityDto updateDefi);
+    Integer getIdCategorie(Integer idDefi);
 }
