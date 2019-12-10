@@ -23,12 +23,12 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     @Column(name = "date_achat")
     private LocalDate dateAchat;
 
-    @Column(name = "prix_achat")
-    private Double prixAchat;
+   /* @Column(name = "prix_achat")
+    private Double prixAchat;*/
 
     @ManyToOne(targetEntity = ParcoursEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_parcours", referencedColumnName = "id_parcours", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_parcours"), insertable = false, updatable = false)
-    @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
+    @JsonManagedReference //avoids infinite recursion (works with @JsonBackReference on the OneToMany side)
     private ParcoursEntity parcours;
 
     @ManyToOne(targetEntity = PaiementEntity.class, fetch = FetchType.LAZY)
@@ -57,9 +57,9 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this.utilisateur = utilisateur;
     }
 
-    public double getPrixAchat() {
+ /*   public double getPrixAchat() {
         return prixAchat;
-    }
+    }*/
 
     @Transient
     private boolean isOngoing;
@@ -115,7 +115,7 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this.parcours = parcours;
         this.utilisateur = utilisateur;
         this.parcoursUtilId = new PK_Parcours_Utilisateur(utilisateur.getIdUtilisateur(), parcours.getIdParcours(), LocalDate.now());
-        this.prixAchat = this.parcours.getPrix();
+        //this.prixAchat = this.parcours.getPrix();
     }
 
     public ParcoursUtilisateurLiaison() {

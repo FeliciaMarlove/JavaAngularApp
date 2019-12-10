@@ -24,7 +24,7 @@ public class ParcoursEntity implements Serializable {
     private String descParcours;
 
     @Column(name = "prix")
-    private double prix;
+    private Double prix;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActiveParcours;

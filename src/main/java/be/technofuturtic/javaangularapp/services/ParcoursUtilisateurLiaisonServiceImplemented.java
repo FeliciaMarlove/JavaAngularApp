@@ -43,7 +43,6 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             p.ajouterRelationParcours(pul);
             parcoursRepo.save(p);
             repo.save(pul);
-            System.out.println(pul.getParcoursUtilId()); // devt purpose
         }
     }
 
@@ -80,7 +79,7 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
         List<ParcoursUtilisateurLiaison> liste = listerHistorique(idUtil);
         affichage.append("Historique des parcours de l'utilisateur ").append(idUtil).append(" ").append(u.getPrenomUtilisateur()).append(" ").append(u.getNomUtilisateur()).append(" ").append(u.getEmail()).append(" : ");
         for (int i = 0; i < liste.size(); i++) {
-            affichage.append("\n").append(liste.get(i).getParcoursUtilId()).append(liste.get(i).getParcours().getNomParcours()).append(" commencé le ").append(liste.get(i).getDateAchat()).append(" payé ").append(liste.get(i).getPrixAchat());
+            affichage.append("\n").append(liste.get(i).getParcoursUtilId()).append(liste.get(i).getParcours().getNomParcours()).append(" commencé le ").append(liste.get(i).getDateAchat())/*.append(" payé ").append(liste.get(i).getPrixAchat())*/;
         }
         return affichage.toString();
     }
