@@ -108,7 +108,7 @@ public class UtilisateurEntity implements Serializable {
 
     @ManyToOne(targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", foreignKey = @ForeignKey(name = "FK_Utilisateur_Role"))
-    private Optional<RoleEntity> role;
+    private RoleEntity role;
 
     @ManyToOne(targetEntity = PaysEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
@@ -130,8 +130,12 @@ public class UtilisateurEntity implements Serializable {
         return listeParcoursUtilisateurs;
     }
 
-    public void setRole(Optional<RoleEntity> role) {
+    public void setRole(RoleEntity role) {
         this.role = role;
+    }
+
+    public RoleEntity getRole() {
+        return role;
     }
 
     @Override
@@ -175,7 +179,6 @@ public class UtilisateurEntity implements Serializable {
                 ", motDePasse='" + motDePasse + '\'' +
                 ", newsletterOptIn=" + newsletterOptIn +
                 ", isActiveUtilisateur=" + isActiveUtilisateur +
-                ", role=" + role +
                 ", pays=" + pays +
                 '}' + "\nFIN UTILISATEUR-------------\n";
     }

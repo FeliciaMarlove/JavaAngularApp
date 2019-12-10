@@ -2,6 +2,7 @@ package be.technofuturtic.javaangularapp.controllers;
 
 import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
 import be.technofuturtic.javaangularapp.services.UtilisateurService;
+import be.technofuturtic.javaangularapp.utilitaires.AuthentificationDto;
 import be.technofuturtic.javaangularapp.utilitaires.UtilisateurEntityDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,5 +69,15 @@ public class UtilisateursController {
     @PostMapping("/unsubscribe/{id}")
     public void desinscrireNewsletter(@PathVariable("id") Long id) {
         this.service.desinscrireNewsletter(id);
+    }
+
+    @PostMapping("/login")
+    public Boolean login(@RequestBody AuthentificationDto logins) {
+        return this.service.login(logins);
+    }
+
+    @GetMapping("/{email}")
+    public UtilisateurEntityDto findByEmail(@PathVariable("email") String email) {
+        return this.service.findByEmail(email);
     }
 }
