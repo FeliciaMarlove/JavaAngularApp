@@ -95,8 +95,6 @@ public class CategorieEntity implements Serializable {
                 ", nomCategorie='" + nomCategorie + '\'' +
                 ", descCategorie='" + descCategorie + '\'' +
                 ", isActiveCategorie=" + isActiveCategorie +
-                /*", defis=" + defis +
-                ", parcours=" + parcours +*/
                 '}';
     }
 }

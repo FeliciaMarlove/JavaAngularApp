@@ -4,7 +4,7 @@ public class ParcoursEntityDto {
     private String nomParcours;
     private String descParcours;
     private Double prix;
-    private Integer categorie;
+    private Integer categorieId;
 
     public ParcoursEntityDto() {
     }
@@ -13,7 +13,7 @@ public class ParcoursEntityDto {
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;
         this.prix = prix;
-        this.categorie = idCategorie;
+        this.categorieId = idCategorie;
     }
 
     public String getNomParcours() {
@@ -28,7 +28,7 @@ public class ParcoursEntityDto {
         return prix;
     }
 
-    public Integer getCategorie() {
-        return categorie;
+    public Integer getCategorieId() {
+        return categorieId;
     }
 }

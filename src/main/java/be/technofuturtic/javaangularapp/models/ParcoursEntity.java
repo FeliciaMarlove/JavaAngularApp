@@ -121,12 +121,12 @@ public class ParcoursEntity implements Serializable {
         return Objects.hash(idParcours, nomParcours, descParcours, prix, isActiveParcours, categorie, listeDefis);
     }
 
-    public ParcoursEntity(String nomParcours, String descParcours, Double prix, CategorieEntity categorie) {
+    public ParcoursEntity(String nomParcours, String descParcours, Double prix, Optional<CategorieEntity> categorie) {
         this();
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;
         this.prix = prix;
-        this.categorie = categorie;
+        this.categorie = categorie.get();
         this.setActiveParcours(true);
     }
 
@@ -147,6 +147,6 @@ public class ParcoursEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "PARCOURS\n\t"+this.idParcours+" nom="+this.nomParcours+" prix="+this.prix+" cat="+this.categorie.getIdCategorie()+"\n\t\t"+this.listeParcoursUtilisateursLiaison+ "\nFIN PARCOURS-------------\n";
+        return "PARCOURS\n\t"+this.idParcours+" nom="+this.nomParcours+" prix="+this.prix+" cat="+this.categorie.getIdCategorie()+"\n\t\t"+ "\nFIN PARCOURS-------------\n";
     }
 }

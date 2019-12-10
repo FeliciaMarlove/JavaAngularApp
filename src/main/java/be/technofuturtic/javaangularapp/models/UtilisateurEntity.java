@@ -108,7 +108,7 @@ public class UtilisateurEntity implements Serializable {
 
     @ManyToOne(targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", foreignKey = @ForeignKey(name = "FK_Utilisateur_Role"))
-    private RoleEntity role;
+    private Optional<RoleEntity> role;
 
     @ManyToOne(targetEntity = PaysEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pays", referencedColumnName = "id_pays", foreignKey = @ForeignKey(name = "FK_Utilisateur_Pays"))
@@ -130,6 +130,10 @@ public class UtilisateurEntity implements Serializable {
         return listeParcoursUtilisateurs;
     }
 
+    public void setRole(Optional<RoleEntity> role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -143,7 +147,7 @@ public class UtilisateurEntity implements Serializable {
         return Objects.hash(idUtilisateur, nomUtilisateur, prenomUtilisateur, dateNaiss, email, motDePasse, newsletterOptIn, isActiveUtilisateur, role, pays);
     }
 
-    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn, RoleEntity role, PaysEntity pays) {
+    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn, PaysEntity pays) {
         this();
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
@@ -152,7 +156,6 @@ public class UtilisateurEntity implements Serializable {
         this.motDePasse = motDePasse;
         this.newsletterOptIn = newsletterOptIn;
         this.pays = pays;
-        this.role = role;
         this.setActiveUtilisateur(true);
     }
 
@@ -174,7 +177,6 @@ public class UtilisateurEntity implements Serializable {
                 ", isActiveUtilisateur=" + isActiveUtilisateur +
                 ", role=" + role +
                 ", pays=" + pays +
-                ", listePUP=" + listeParcoursUtilisateurs +
                 '}' + "\nFIN UTILISATEUR-------------\n";
     }
 }

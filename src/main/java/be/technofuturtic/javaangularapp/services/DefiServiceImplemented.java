@@ -70,14 +70,12 @@ public class DefiServiceImplemented implements DefiService {
     @Override
     public void majDefi(Integer idDefi, DefiEntityDto updateDefi) {
         DefiEntity defiAModifier = repo.findByIdDefi(idDefi);
-        System.out.println(defiAModifier.toString()); // ---- Devt purpose
         defiAModifier.setNomDefi(updateDefi.getNomDefi());
         defiAModifier.setDescDefi(updateDefi.getDescDefi());
         defiAModifier.setInfobulleDefi(updateDefi.getInfobulleDefi());
         CategorieEntity c = repoCat.findById(updateDefi.getCategorieId()).get();
         defiAModifier.setCategorie(c);
         repo.save(defiAModifier);
-        System.out.println(defiAModifier.toString()); // ---- Devt purpose
     }
 
     @Override

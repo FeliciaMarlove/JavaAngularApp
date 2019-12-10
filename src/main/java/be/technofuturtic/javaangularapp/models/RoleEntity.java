@@ -57,4 +57,12 @@ public class RoleEntity  implements Serializable {
     public RoleEntity() {
         this.utilisateurs = new ArrayList<>();
     }
+
+    @Override
+    public String toString() {
+        return "RoleEntity{" +
+                "idRole=" + idRole +
+                ", nomRole='" + nomRole + '\'' +
+                '}';
+    }
 }

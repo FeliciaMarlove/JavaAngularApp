@@ -3,6 +3,7 @@ package be.technofuturtic.javaangularapp.services;
 import be.technofuturtic.javaangularapp.models.PaysEntity;
 import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
 import be.technofuturtic.javaangularapp.repositories.PaysRepository;
+import be.technofuturtic.javaangularapp.repositories.RoleRepository;
 import be.technofuturtic.javaangularapp.repositories.UtilisateurRepository;
 import be.technofuturtic.javaangularapp.utilitaires.UtilisateurEntityDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class UtilisateurServiceImplemented implements UtilisateurService {
     private UtilisateurRepository repo;
     private PaysRepository paysRepo;
+    private RoleRepository roleRepository;
 
     @Autowired
     public UtilisateurServiceImplemented(UtilisateurRepository repo, PaysRepository paysRepo) {
@@ -53,7 +55,8 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
             }
         }
         if(!isDuplicate) {
-            //nouvelUtilisateur.setActiveUtilisateur(true);
+            nouvelUtilisateur.setActiveUtilisateur(true);
+            nouvelUtilisateur.setRole(roleRepository.findById(1)); // set à "user" par défaut
             repo.save(nouvelUtilisateur);
         }
     }

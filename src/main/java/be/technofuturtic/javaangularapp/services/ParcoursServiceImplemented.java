@@ -47,13 +47,13 @@ public class ParcoursServiceImplemented implements ParcoursService {
 
     @Override
     public void ajouterParcours(ParcoursEntityDto parcDto) {
-        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcDto.getCategorie());
-        CategorieEntity c = categorieEntityOptional.get();
+        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcDto.getCategorieId());
+        //CategorieEntity c = categorieEntityOptional.get();
         ParcoursEntity p = new ParcoursEntity(
                 parcDto.getNomParcours(),
                 parcDto.getDescParcours(),
                 parcDto.getPrix(),
-                c
+                categorieEntityOptional
         );
         p.setActiveParcours(true);
         this.repo.save(p);
@@ -79,16 +79,13 @@ public class ParcoursServiceImplemented implements ParcoursService {
     @Override
     public void majParcours(Integer idParcours, ParcoursEntityDto parcoursDto) {
         ParcoursEntity p = repo.findById(idParcours).get();
-        System.out.println(p.toString()); // ---- Devt purpose
         p.setNomParcours(parcoursDto.getNomParcours());
         p.setDescParcours(parcoursDto.getDescParcours());
-        p.setPrix(parcoursDto.getPrix()); //obtient bien le prix via le DTO !
-        System.out.println(p.getPrix());
-        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcoursDto.getCategorie());
+        p.setPrix(parcoursDto.getPrix());
+        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcoursDto.getCategorieId());
         CategorieEntity c = categorieEntityOptional.get();
         p.setCategorie(c);
         repo.save(p);
-        System.out.println(p.toString()); // ---- Devt purpose
     }
 
     @Override

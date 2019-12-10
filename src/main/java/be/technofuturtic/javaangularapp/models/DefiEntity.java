@@ -119,7 +119,6 @@ public class DefiEntity implements Serializable {
                 ", descDefi='" + descDefi + '\'' +
                 ", infobulleDefi='" + infobulleDefi + '\'' +
                 ", isActiveDefi=" + isActiveDefi +
-                ", categorie=" + categorie +
                 '}';
     }
 }
