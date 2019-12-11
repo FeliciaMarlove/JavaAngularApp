@@ -34,15 +34,15 @@ public class UtilisateursController {
     }
 
     @PostMapping("/creer")
-    public void creerCompte(@RequestBody UtilisateurEntity utilisateur) {
+    public void creerCompte(@RequestBody UtilisateurEntityDto utilisateur) {
         this.service.creerCompte(utilisateur);
     }
     /* JSON format creerCompte
-    	{
-            "nomUtilisateur" : "jflkdfj",
-            "prenomUtilisateur" : "jkfdjfk",
+        {
+           "nomUtilisateur" : "Derulo",
+            "prenomUtilisateur" : "Jason",
             "dateNaiss" : "1988-04-07",
-            "email" : "jfdklfjdlk@msn.com",
+            "email" : "jason@msn.com",
             "motDePasse" : "1234",
             "newsletterOptIn" : true
         }

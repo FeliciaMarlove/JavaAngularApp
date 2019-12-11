@@ -36,7 +36,7 @@ public class ParcoursUtilisateurController {
     }
 
     @PostMapping("/defi/{idutil}")
-    public void voirDefiDuJour(@PathVariable("idutil") Long idUtil) {
-        this.service.voirDefiDuJour(idUtil);
+    public DefiEntity voirDefiDuJour(@PathVariable("idutil") Long idUtil) {
+        return this.service.voirDefiDuJour(idUtil);
     }
 }

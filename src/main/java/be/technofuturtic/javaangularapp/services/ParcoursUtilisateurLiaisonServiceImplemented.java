@@ -39,10 +39,12 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             ParcoursUtilisateurLiaison pul = new ParcoursUtilisateurLiaison(p, u);
             repo.save(pul);
             u.ajouterRelationParcours(pul);
-            utilisateurRepo.save(u);
+            u.setBusy(true);
+            utilisateurRepo.save(u); //isBusy = true
             p.ajouterRelationParcours(pul);
             parcoursRepo.save(p);
-            repo.save(pul);
+            pul.setOngoing(true);
+            repo.save(pul); //isUserBusy = true
         }
     }
 
@@ -58,6 +60,7 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
                 return p.get().getListeDefis().get(deltaJours);
             } else {
                 pul.setOngoing(false); // si deltaJours > taille du parcours -> il a fini
+                pul.getUtilisateur().setBusy(false);
                 return null;
             }
         } else {
@@ -93,13 +96,16 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
         List<ParcoursUtilisateurLiaison> pulList = null;
         if (gerardLuiMeme.isActiveUtilisateur() && !gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty()) {
               pulList = repo.findAllByUtilisateurEquals(gerardLuiMeme);
-        }
-        ParcoursUtilisateurLiaison pulActif = null;
-        for (int i = 0; i < pulList.size(); i++) {
-            if (pulList.get(i).isOngoing()) {
-                pulActif = pulList.get(i);
+            ParcoursUtilisateurLiaison pulActif = null;
+            for (int i = 0; i < pulList.size(); i++) {
+                if (pulList.get(i).isOngoing()) {
+                    pulActif = pulList.get(i);
+                }
             }
+            return pulActif.getParcoursUtilId();
+        } else {
+            return null;
         }
-        return pulActif.getParcoursUtilId();
+
     }
 }

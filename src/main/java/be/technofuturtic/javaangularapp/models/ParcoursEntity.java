@@ -97,7 +97,7 @@ public class ParcoursEntity implements Serializable {
     private List<DefiEntity> listeDefis;
 
     @OneToMany(mappedBy = "parcours", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
-    @JsonBackReference //avoids infinite recursion (works with @JsonManagedReference on the ManyToOne side)
+    //@JsonBackReference //avoids infinite recursion (works with @JsonManagedReference on the ManyToOne side)
     private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateursLiaison;
 
     public void ajouterRelationParcours(ParcoursUtilisateurLiaison a) {

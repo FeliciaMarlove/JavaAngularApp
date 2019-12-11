@@ -1,6 +1,7 @@
 package be.technofuturtic.javaangularapp.services;
 
 import be.technofuturtic.javaangularapp.models.PaysEntity;
+import be.technofuturtic.javaangularapp.models.RoleEntity;
 import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
 import be.technofuturtic.javaangularapp.repositories.PaysRepository;
 import be.technofuturtic.javaangularapp.repositories.RoleRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,9 +25,10 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     private RoleRepository roleRepository;
 
     @Autowired
-    public UtilisateurServiceImplemented(UtilisateurRepository repo, PaysRepository paysRepo) {
+    public UtilisateurServiceImplemented(UtilisateurRepository repo, PaysRepository paysRepo, RoleRepository roleRepository) {
         this.repo = repo;
         this.paysRepo = paysRepo;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -48,18 +51,30 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     }
 
     @Override
-    public void creerCompte(UtilisateurEntity nouvelUtilisateur) {
+    public void creerCompte(UtilisateurEntityDto nouvelUtilisateur) {
         boolean isDuplicate = false;
+        UtilisateurEntity newbie = new UtilisateurEntity(
+                nouvelUtilisateur.getNomUtilisateur(),
+                nouvelUtilisateur.getPrenomUtilisateur(),
+                nouvelUtilisateur.getEmail(),
+                nouvelUtilisateur.getPassword(),
+                /*nouvelUtilisateur.getNewsletterOptIn(),*/
+                false,
+                true,
+                false
+        );
+        //newbie.setDateNaiss(nouvelUtilisateur.getDateNaiss()); //formatage string > date
         List<UtilisateurEntity> utilisateursExistants = findAll();
         for (int i = 0; i < utilisateursExistants.size(); i++) {
-            if (nouvelUtilisateur.equals(utilisateursExistants.get(i))) {
+            if (newbie.equals(utilisateursExistants.get(i))) {
                 isDuplicate = true;
             }
         }
         if(!isDuplicate) {
-            nouvelUtilisateur.setActiveUtilisateur(true);
-            nouvelUtilisateur.setRole(roleRepository.findById(1).get()); // set à "user" par défaut
-            repo.save(nouvelUtilisateur);
+            newbie.setActiveUtilisateur(true);
+            RoleEntity role = roleRepository.findById(1).get();
+            newbie.setRole(role); // set à "user" par défaut
+            repo.save(newbie);
         }
     }
 
@@ -121,7 +136,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     public UtilisateurEntityDto findByEmail(String email) {
         UtilisateurEntity u = repo.findByEmail(email);
         UtilisateurEntityDto lElu = new UtilisateurEntityDto(
-            u.getNomUtilisateur(), u.getPrenomUtilisateur(), u.getDateNaiss().toString(), u.getEmail(), u.getMotDePasse(), u.isNewsletterOptIn(), u.getRole().getIdRole()
+            u.getNomUtilisateur(), u.getPrenomUtilisateur(), u.getDateNaiss().toString(), u.getEmail(), u.getMotDePasse(), u.isNewsletterOptIn(), u.getRole().getIdRole(), u.getBusy()
         );
         lElu.setIdUtilisateur(u.getIdUtilisateur());
         return lElu;

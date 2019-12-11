@@ -23,7 +23,7 @@ public class UtilisateurEntity implements Serializable {
     @Column(name = "prenom", nullable = false)
     private String prenomUtilisateur;
 
-    @Column(name = "date_naissance", nullable = false)
+    @Column(name = "date_naissance") // rendre nullable = false -> gestion formatage dates
     private LocalDate dateNaiss;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -106,6 +106,17 @@ public class UtilisateurEntity implements Serializable {
         this.pays = pays;
     }
 
+    public boolean getBusy() {
+        return isBusy;
+    }
+
+    public void setBusy(boolean busy) {
+        isBusy = busy;
+    }
+
+    @Transient
+    private boolean isBusy;
+
     @ManyToOne(targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role", referencedColumnName = "id_role", foreignKey = @ForeignKey(name = "FK_Utilisateur_Role"))
     private RoleEntity role;
@@ -115,7 +126,7 @@ public class UtilisateurEntity implements Serializable {
     private PaysEntity pays;
 
     @OneToMany(mappedBy = "utilisateur", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
-    @JsonBackReference //avoids infiite recursion (works with @JsonManagedReference on the ManyToOne side)
+    //@JsonBackReference //avoids infiite recursion (works with @JsonManagedReference on the ManyToOne side)
     private List<ParcoursUtilisateurLiaison> listeParcoursUtilisateurs;
 
     public void ajouterRelationParcours(ParcoursUtilisateurLiaison a) {
@@ -163,9 +174,20 @@ public class UtilisateurEntity implements Serializable {
         this.setActiveUtilisateur(true);
     }
 
+    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, String email, String motDePasse, boolean newsletterOptIn, boolean isActiveUtilisateur, boolean isBusy) {
+        this.nomUtilisateur = nomUtilisateur;
+        this.prenomUtilisateur = prenomUtilisateur;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.newsletterOptIn = newsletterOptIn;
+        this.isActiveUtilisateur = isActiveUtilisateur;
+        this.isBusy = isBusy;
+    }
+
     public UtilisateurEntity() {
         this.listeParcoursUtilisateurs = new ArrayList<>();
         this.isActiveUtilisateur = true;
+        this.isBusy = false;
     }
 
     @Override
@@ -180,6 +202,7 @@ public class UtilisateurEntity implements Serializable {
                 ", newsletterOptIn=" + newsletterOptIn +
                 ", isActiveUtilisateur=" + isActiveUtilisateur +
                 ", pays=" + pays +
+                ", isBusy ? " + isBusy +
                 '}' + "\nFIN UTILISATEUR-------------\n";
     }
 }

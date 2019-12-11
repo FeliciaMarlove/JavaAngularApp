@@ -28,17 +28,17 @@ public class ParcoursUtilisateurLiaison implements Serializable {
 
     @ManyToOne(targetEntity = ParcoursEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_parcours", referencedColumnName = "id_parcours", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_parcours"), insertable = false, updatable = false)
-    @JsonManagedReference //avoids infinite recursion (works with @JsonBackReference on the OneToMany side)
+    //@JsonManagedReference //avoids infinite recursion (works with @JsonBackReference on the OneToMany side)
     private ParcoursEntity parcours;
 
     @ManyToOne(targetEntity = PaiementEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_paiement", referencedColumnName = "id_paiement", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_paiement"), insertable = false, updatable = false)
-    @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
+    //@JsonManagedReference //avoids infinite recursion (works with @JsonBackReference on the OneToMany side)
     private PaiementEntity paiement;
 
     @ManyToOne(targetEntity = UtilisateurEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur", foreignKey = @ForeignKey(name = "FK_parcours_utilisateur_utilisateur"), insertable = false, updatable = false)
-    @JsonManagedReference //avoids infiite recursion (works with @JsonBackReference on the OneToMany side)
+   // @JsonManagedReference //avoids infinite recursion (works with @JsonBackReference on the OneToMany side)
     private UtilisateurEntity utilisateur;
 
     public void setDateAchat(LocalDate dateAchat) {
@@ -65,7 +65,7 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     private boolean isOngoing;
 
     @Transient
-    private int taille;
+    private Integer taille;
 
     public boolean isOngoing() {
         return isOngoing;
@@ -79,7 +79,7 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         return dateAchat;
     }
 
-    public int getTaille() {
+    public Integer getTaille() {
         return this.parcours.getListeDefis().size();
     }
 
@@ -115,6 +115,8 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         this.parcours = parcours;
         this.utilisateur = utilisateur;
         this.parcoursUtilId = new PK_Parcours_Utilisateur(utilisateur.getIdUtilisateur(), parcours.getIdParcours(), LocalDate.now());
+        this.taille = this.parcours.getListeDefis().size();
+        this.utilisateur.setBusy(true);
         //this.prixAchat = this.parcours.getPrix();
     }
 
@@ -128,11 +130,12 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         return "Parcours Utilisateur Liaison {".toUpperCase() +
                 "parcoursUtilId=" + parcoursUtilId +
                 ", dateAchat=" + dateAchat +
-                ", parcours=" + parcours.getNomParcours() +
+                /*", parcours=" + parcours.getNomParcours() +*/
                 ", paiement=" + paiement +
-                ", utilisateur=" + utilisateur.getNomUtilisateur() +
+                /*", utilisateur=" + utilisateur.getEmail() +*/
                 ", isOngoing=" + isOngoing +
                 ", taille=" + taille +
+                /*", isUserBusy ? " + utilisateur.getBusy() +*/
                 '}'+"\n\tFIN PARCOURS UTILISATEUR\n------------";
     }
 }
