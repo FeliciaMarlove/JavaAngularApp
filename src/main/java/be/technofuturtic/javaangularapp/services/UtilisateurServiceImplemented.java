@@ -51,7 +51,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     }
 
     @Override
-    public void creerCompte(UtilisateurEntityDto nouvelUtilisateur) {
+    public Boolean creerCompte(UtilisateurEntityDto nouvelUtilisateur) {
         boolean isDuplicate = false;
         UtilisateurEntity newbie = new UtilisateurEntity(
                 nouvelUtilisateur.getNomUtilisateur(),
@@ -76,6 +76,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
             newbie.setRole(role); // set à "user" par défaut
             repo.save(newbie);
         }
+        return isDuplicate;
     }
 
     @Override

@@ -138,18 +138,20 @@ public class ParcoursServiceImplemented implements ParcoursService {
         if (parcoursEntity.isEmpty())throw new Exception();
         ParcoursEntity parcours = parcoursEntity.get();
         DefiEntity defiEntity = repoDefi.findByIdDefi(idDefiAAjouter);
-        List<DefiEntity> listeDefis = new ArrayList();
-        listeDefis.addAll(parcours.getListeDefis());
-        int indice = 0;
-        for (int i = 0; i < listeDefis.size(); i++) {
-            if (listeDefis.get(i).getIdDefi() == idDefiARemplacer) { //est-ce que l'id à remplacer est bien présent dans la liste
-                indice = i;
+        if (defiEntity.isActiveDefi()) {
+            List<DefiEntity> listeDefis = new ArrayList();
+            listeDefis.addAll(parcours.getListeDefis());
+            int indice = 0;
+            for (int i = 0; i < listeDefis.size(); i++) {
+                if (listeDefis.get(i).getIdDefi() == idDefiARemplacer) { //est-ce que l'id à remplacer est bien présent dans la liste
+                    indice = i;
+                }
             }
+            this.repoDefi.save(defiEntity);
+            parcours.getListeDefis().remove(indice);
+            parcours.getListeDefis().add(defiEntity);
+            repo.save(parcours);
         }
-        this.repoDefi.save(defiEntity);
-        parcours.getListeDefis().remove(indice);
-        parcours.getListeDefis().add(defiEntity);
-        repo.save(parcours);
     }
 
 }

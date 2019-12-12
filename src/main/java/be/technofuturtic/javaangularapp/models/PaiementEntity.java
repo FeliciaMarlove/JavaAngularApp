@@ -50,8 +50,8 @@ public class PaiementEntity implements Serializable {
         return isActivePaiement;
     }
 
-    public void setActivePaiement(boolean activePaiement) {
-        isActivePaiement = activePaiement;
+    public void setActivePaiement(boolean isActivePaiement) {
+        isActivePaiement = isActivePaiement;
     }
 
     @OneToMany(mappedBy = "paiement", targetEntity = ParcoursUtilisateurLiaison.class, fetch = FetchType.LAZY)
@@ -76,7 +76,6 @@ public class PaiementEntity implements Serializable {
         this();
         this.nomPaiement = nomPaiement;
         this.descPaiement = descPaiement;
-        this.setActivePaiement(true);
     }
 
     public PaiementEntity() {

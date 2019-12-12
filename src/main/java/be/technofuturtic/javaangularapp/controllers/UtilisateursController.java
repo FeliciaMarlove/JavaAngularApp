@@ -34,8 +34,8 @@ public class UtilisateursController {
     }
 
     @PostMapping("/creer")
-    public void creerCompte(@RequestBody UtilisateurEntityDto utilisateur) {
-        this.service.creerCompte(utilisateur);
+    public Boolean creerCompte(@RequestBody UtilisateurEntityDto utilisateur) {
+        return this.service.creerCompte(utilisateur);
     }
     /* JSON format creerCompte
         {

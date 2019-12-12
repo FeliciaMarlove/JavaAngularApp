@@ -103,7 +103,6 @@ public class DefiEntity implements Serializable {
         this.descDefi = descDefi;
         this.infobulleDefi = infobulleDefi;
         this.categorie = categorie;
-        this.setActiveDefi(true);
     }
 
     public DefiEntity() {

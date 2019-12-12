@@ -94,8 +94,8 @@ public class UtilisateurEntity implements Serializable {
         return isActiveUtilisateur;
     }
 
-    public void setActiveUtilisateur(boolean activeUtilisateur) {
-        isActiveUtilisateur = activeUtilisateur;
+    public void setActiveUtilisateur(boolean isActiveUtilisateur) {
+        this.isActiveUtilisateur = isActiveUtilisateur;
     }
 
     public PaysEntity getPays() {
@@ -110,8 +110,8 @@ public class UtilisateurEntity implements Serializable {
         return isBusy;
     }
 
-    public void setBusy(boolean busy) {
-        isBusy = busy;
+    public void setBusy(boolean isBusy) {
+        isBusy = isBusy;
     }
 
     @Transient
@@ -175,6 +175,7 @@ public class UtilisateurEntity implements Serializable {
     }
 
     public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, String email, String motDePasse, boolean newsletterOptIn, boolean isActiveUtilisateur, boolean isBusy) {
+        this();
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
         this.email = email;

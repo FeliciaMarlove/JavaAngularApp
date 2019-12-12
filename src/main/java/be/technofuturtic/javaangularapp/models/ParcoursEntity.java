@@ -72,8 +72,8 @@ public class ParcoursEntity implements Serializable {
         return isActiveParcours;
     }
 
-    public void setActiveParcours(boolean activeParcours) {
-        this.isActiveParcours = activeParcours;
+    public void setActiveParcours(boolean isActiveParcours) {
+        this.isActiveParcours = isActiveParcours;
     }
 
     public List<DefiEntity> getListeDefis() {
@@ -127,7 +127,6 @@ public class ParcoursEntity implements Serializable {
         this.descParcours = descParcours;
         this.prix = prix;
         this.categorie = categorie.get();
-        this.setActiveParcours(true);
     }
 
     public ParcoursEntity(String nomParcours, String descParcours, CategorieEntity categorie) {
@@ -136,7 +135,6 @@ public class ParcoursEntity implements Serializable {
         this.descParcours = descParcours;
         this.prix = PRIX_PAR_DEFAUT;
         this.categorie = categorie;
-        this.setActiveParcours(true);
     }
 
     public ParcoursEntity() {

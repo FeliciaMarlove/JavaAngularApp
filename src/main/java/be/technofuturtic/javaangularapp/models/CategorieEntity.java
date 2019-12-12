@@ -52,8 +52,8 @@ public class CategorieEntity implements Serializable {
         return isActiveCategorie;
     }
 
-    public void setActiveCategorie(boolean activeCategorie) {
-        isActiveCategorie = activeCategorie;
+    public void setActiveCategorie(boolean isActiveCategorie) {
+        this.isActiveCategorie = isActiveCategorie;
     }
 
     @OneToMany(mappedBy = "categorie", targetEntity = DefiEntity.class, fetch = FetchType.LAZY)
@@ -79,13 +79,12 @@ public class CategorieEntity implements Serializable {
         this();
         this.nomCategorie = nomCategorie;
         this.descCategorie = descCategorie;
-        this.setActiveCategorie(true);
     }
 
     public CategorieEntity() {
         this.parcours = new ArrayList<>();
         this.defis = new ArrayList<>();
-        this.isActiveCategorie = true;
+        this.isActiveCategorie =  true;
     }
 
     @Override
