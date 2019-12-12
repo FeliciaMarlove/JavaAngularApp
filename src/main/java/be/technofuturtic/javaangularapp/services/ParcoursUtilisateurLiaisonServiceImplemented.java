@@ -4,11 +4,13 @@ import be.technofuturtic.javaangularapp.models.*;
 import be.technofuturtic.javaangularapp.repositories.PacoursUtilisateurLiaisonRepository;
 import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
 import be.technofuturtic.javaangularapp.repositories.UtilisateurRepository;
+import be.technofuturtic.javaangularapp.utilitaires.ParcoursUtilisateurDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +27,27 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
         this.utilisateurRepo = utilisateurRepo;
     }
 
-    @Override
+   /* @Override
     public List<ParcoursUtilisateurLiaison> findAll() {
         return (List<ParcoursUtilisateurLiaison>) repo.findAll();
+    }*/
+
+    @Override
+    public List<ParcoursUtilisateurDto> findAll() {
+        List<ParcoursUtilisateurLiaison> all = (List<ParcoursUtilisateurLiaison>) repo.findAll();
+        List<ParcoursUtilisateurDto> cleanList = new ArrayList<>();
+        for (int i = 0; i < all.size(); i++) {
+            cleanList.add(new ParcoursUtilisateurDto(
+                    all.get(i).getParcours().getIdParcours(),
+                    all.get(i).getParcours().getNomParcours(),
+                    all.get(i).getUtilisateur().getIdUtilisateur(),
+                    all.get(i).getUtilisateur().getEmail(),
+                    all.get(i).getDateAchat(),
+                    all.get(i).isOngoing(),
+                    all.get(i).getTaille()
+            ));
+        }
+        return cleanList;
     }
 
     @Override
@@ -68,6 +88,7 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
         }
     }
 
+    // USE DTO ->
     @Override
     public List<ParcoursUtilisateurLiaison> listerHistorique(Long idUtil) {
         UtilisateurEntity u = utilisateurRepo.findById(idUtil).get();

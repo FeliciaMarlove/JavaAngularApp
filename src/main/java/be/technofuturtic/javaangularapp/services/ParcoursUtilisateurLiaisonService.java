@@ -4,12 +4,14 @@ import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursUtilisateurLiaison;
 import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
+import be.technofuturtic.javaangularapp.utilitaires.ParcoursUtilisateurDto;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public interface ParcoursUtilisateurLiaisonService {
-    public List<ParcoursUtilisateurLiaison> findAll();
+    /*List<ParcoursUtilisateurLiaison> findAll();*/
+    List<ParcoursUtilisateurDto> findAll();
     void commencerParcours(Integer parcours, Long utilisateur);
     DefiEntity voirDefiDuJour(Long idUtil);
     List<ParcoursUtilisateurLiaison> listerHistorique(Long idUtil);

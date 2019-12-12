@@ -6,6 +6,7 @@ import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
 import be.technofuturtic.javaangularapp.repositories.UtilisateurRepository;
 import be.technofuturtic.javaangularapp.services.ParcoursService;
 import be.technofuturtic.javaangularapp.services.ParcoursUtilisateurLiaisonService;
+import be.technofuturtic.javaangularapp.utilitaires.ParcoursUtilisateurDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +22,8 @@ public class ParcoursUtilisateurController {
         this.service = service;
     }
 
-    @Autowired
-    private UtilisateurRepository repoUtil;
-
     @GetMapping
-    public List<ParcoursUtilisateurLiaison> list() {
+    public List<ParcoursUtilisateurDto> list() {
         return service.findAll();
     }
 
