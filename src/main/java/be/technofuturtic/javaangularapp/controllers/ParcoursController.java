@@ -1,5 +1,6 @@
 package be.technofuturtic.javaangularapp.controllers;
 
+import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.repositories.ParcoursRepository;
 import be.technofuturtic.javaangularapp.services.ParcoursService;
@@ -27,13 +28,20 @@ public class ParcoursController {
     // return => ce qui est affiché en localhost8080/api/parcours(/...)
 
     @GetMapping
+    public List<ParcoursEntity> getActive() {
+        return (List<ParcoursEntity>) this.service.findActive();
+    }
+
+    @GetMapping("/all")
     public List<ParcoursEntity> getAll() {
         return (List<ParcoursEntity>) parcoursRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<ParcoursEntity> getOne(@PathVariable("id") Integer idParcours) {
-        return parcoursRepository.findById(idParcours);
+    /*public Optional<ParcoursEntity> getOne(@PathVariable("id") Integer idParcours) {
+        return parcoursRepository.findById(idParcours);*/
+    public List<DefiEntity> getDefis(@PathVariable("id") Integer idPacours) {
+        return this.service.listDefis(idPacours);
     }
 
     @PostMapping("/desactiver/{id}")

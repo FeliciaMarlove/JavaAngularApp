@@ -51,7 +51,7 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
     }
 
     @Override
-    public void commencerParcours(Integer parcours, Long utilisateur) {
+    public Boolean commencerParcours(Integer parcours, Long utilisateur) {
         UtilisateurEntity user = utilisateurRepo.findById(utilisateur).get();
         if(trouverLeParcoursEnCoursDeGerard(user) == null) { // si l'utilisateur n'a pas de parcours en cours il peut en commencer un autre
             ParcoursEntity p = parcoursRepo.findById(parcours).get();
@@ -65,7 +65,9 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             parcoursRepo.save(p);
             pul.setOngoing(true);
             repo.save(pul); //isUserBusy = true
+            return true;
         }
+        return false;
     }
 
     @Override

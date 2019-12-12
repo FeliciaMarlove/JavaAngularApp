@@ -32,6 +32,18 @@ public class ParcoursServiceImplemented implements ParcoursService {
     }
 
     @Override
+    public List<ParcoursEntity> findActive() {
+        List<ParcoursEntity> all = findAll();
+        List<ParcoursEntity> active = new ArrayList<>();
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).isActiveParcours()) {
+                active.add(all.get(i));
+            }
+        }
+        return active;
+    }
+
+    @Override
     public void desactiverParcours(Integer idParcours) {
         ParcoursEntity p = repo.findById(idParcours).get();
         p.setActiveParcours(false);
@@ -77,6 +89,12 @@ public class ParcoursServiceImplemented implements ParcoursService {
             repo.save(p);
         }
         return isDuplicate;
+    }
+
+    @Override
+    public List<DefiEntity> listDefis(Integer idParcours) {
+        ParcoursEntity p = repo.findById(idParcours).get();
+        return p.getListeDefis();
     }
 
     @Override

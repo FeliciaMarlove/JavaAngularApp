@@ -12,7 +12,7 @@ import java.util.List;
 public interface ParcoursUtilisateurLiaisonService {
     /*List<ParcoursUtilisateurLiaison> findAll();*/
     List<ParcoursUtilisateurDto> findAll();
-    void commencerParcours(Integer parcours, Long utilisateur);
+    Boolean commencerParcours(Integer parcours, Long utilisateur);
     DefiEntity voirDefiDuJour(Long idUtil);
     List<ParcoursUtilisateurLiaison> listerHistorique(Long idUtil);
     String retranscrireHistorique(Long idUtil);

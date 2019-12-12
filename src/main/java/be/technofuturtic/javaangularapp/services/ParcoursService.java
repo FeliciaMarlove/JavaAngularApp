@@ -1,5 +1,6 @@
 package be.technofuturtic.javaangularapp.services;
 
+import be.technofuturtic.javaangularapp.models.DefiEntity;
 import be.technofuturtic.javaangularapp.models.ParcoursEntity;
 import be.technofuturtic.javaangularapp.utilitaires.DefiEntityDto;
 import be.technofuturtic.javaangularapp.utilitaires.ParcoursEntityDto;
@@ -7,7 +8,8 @@ import be.technofuturtic.javaangularapp.utilitaires.ParcoursEntityDto;
 import java.util.List;
 
 public interface ParcoursService {
-    public List<ParcoursEntity> findAll();
+    List<ParcoursEntity> findAll();
+    List<ParcoursEntity> findActive();
     void desactiverParcours(Integer idParcours);
     void activerParcours(Integer idParcours);
     Boolean ajouterParcours(ParcoursEntityDto nouveauParcours);
@@ -16,4 +18,5 @@ public interface ParcoursService {
     void supprimerDefiDansParcours(Integer idParcours, Integer idDefiASupprimer);
     void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception;
     Boolean majParcours(Integer idParcours, ParcoursEntityDto parcoursDto);
+    List<DefiEntity> listDefis(Integer idParcours);
 }

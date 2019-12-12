@@ -28,9 +28,9 @@ public class ParcoursUtilisateurController {
     }
 
     @PostMapping("/start/{idutil}/{idparcours}")
-    public void commencerParcours(@PathVariable("idutil") Long idUtillisateur,
+    public Boolean commencerParcours(@PathVariable("idutil") Long idUtillisateur,
                                   @PathVariable("idparcours") Integer idParcours) {
-        this.service.commencerParcours(idParcours, idUtillisateur);
+        return this.service.commencerParcours(idParcours, idUtillisateur);
     }
 
     @PostMapping("/defi/{idutil}")
