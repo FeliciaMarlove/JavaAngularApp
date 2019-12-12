@@ -46,20 +46,6 @@ public class ParcoursServiceImplemented implements ParcoursService {
     }
 
     @Override
-    public void ajouterParcours(ParcoursEntityDto parcDto) {
-        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcDto.getCategorieId());
-        //CategorieEntity c = categorieEntityOptional.get();
-        ParcoursEntity p = new ParcoursEntity(
-                parcDto.getNomParcours(),
-                parcDto.getDescParcours(),
-                parcDto.getPrix(),
-                categorieEntityOptional
-        );
-        p.setActiveParcours(true);
-        this.repo.save(p);
-    }
-
-    @Override
     public void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception {
         Optional<ParcoursEntity> parcoursEntity = this.repo.findById(idParcours);
         if (parcoursEntity.isEmpty())throw new Exception();
@@ -78,15 +64,48 @@ public class ParcoursServiceImplemented implements ParcoursService {
     }
 
     @Override
-    public void majParcours(Integer idParcours, ParcoursEntityDto parcoursDto) {
-        ParcoursEntity p = repo.findById(idParcours).get();
-        p.setNomParcours(parcoursDto.getNomParcours());
-        p.setDescParcours(parcoursDto.getDescParcours());
-        p.setPrix(parcoursDto.getPrix());
-        Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcoursDto.getCategorieId());
-        CategorieEntity c = categorieEntityOptional.get();
-        p.setCategorie(c);
-        repo.save(p);
+    public Boolean majParcours(Integer idParcours, ParcoursEntityDto parcoursDto) {
+        Boolean isDuplicate = isDuplicate(parcoursDto);
+        if (!isDuplicate) {
+            ParcoursEntity p = repo.findById(idParcours).get();
+            p.setNomParcours(parcoursDto.getNomParcours());
+            p.setDescParcours(parcoursDto.getDescParcours());
+            p.setPrix(parcoursDto.getPrix());
+            Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcoursDto.getCategorieId());
+            CategorieEntity c = categorieEntityOptional.get();
+            p.setCategorie(c);
+            repo.save(p);
+        }
+        return isDuplicate;
+    }
+
+    @Override
+    public Boolean ajouterParcours(ParcoursEntityDto parcDto) {
+        Boolean isDuplicate = isDuplicate(parcDto);
+        if(!isDuplicate) {
+            Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcDto.getCategorieId());
+            //CategorieEntity c = categorieEntityOptional.get();
+            ParcoursEntity p = new ParcoursEntity(
+                    parcDto.getNomParcours(),
+                    parcDto.getDescParcours(),
+                    parcDto.getPrix(),
+                    categorieEntityOptional
+            );
+            p.setActiveParcours(true);
+            this.repo.save(p);
+        }
+        return isDuplicate;
+    }
+
+    private Boolean isDuplicate(ParcoursEntityDto parcours) {
+        Boolean isDuplicate = false;
+        List<ParcoursEntity> all = findAll();
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).getNomParcours().equals(parcours.getNomParcours())) {
+                isDuplicate = true;
+            }
+        }
+        return isDuplicate;
     }
 
     @Override

@@ -9,7 +9,7 @@ public interface CategorieService {
     List<CategorieEntity> findAll();
     void desactiverCategorie(Integer idCategorie);
     void activerCategorie(Integer idCategorie);
-    void ajouterCategorie(CategorieEntity nouvelleCategorie);
-    void majCategorie(Integer idCategorie, CategorieEntity categorie);
+    Boolean ajouterCategorie(CategorieEntity nouvelleCategorie);
+    Boolean majCategorie(Integer idCategorie, CategorieEntity categorie);
     List<CategorieEntity> findAllActifs();
 }

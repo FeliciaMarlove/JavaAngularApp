@@ -40,13 +40,13 @@ public class CategoriesController {
     }
 
     @PostMapping("/update/{id}")
-    public void modifierCategorie(@RequestBody CategorieEntity categorie, @PathVariable("id") Integer id) {
-        this.service.majCategorie(id, categorie);
+    public Boolean modifierCategorie(@RequestBody CategorieEntity categorie, @PathVariable("id") Integer id) {
+        return this.service.majCategorie(id, categorie);
     }
 
     @PostMapping("/creer")
-    public void creerCategorie(@RequestBody CategorieEntity categorie) {
-        this.service.ajouterCategorie(categorie);
+    public Boolean creerCategorie(@RequestBody CategorieEntity categorie) {
+        return this.service.ajouterCategorie(categorie);
     }
     /*
     JSON test

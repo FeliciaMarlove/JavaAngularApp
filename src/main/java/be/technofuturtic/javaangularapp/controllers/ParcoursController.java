@@ -47,8 +47,8 @@ public class ParcoursController {
     }
 
     @PostMapping("/creer")
-    public void ajouterParcours(@RequestBody ParcoursEntityDto nouveauParcours) {
-        this.service.ajouterParcours(nouveauParcours);
+    public Boolean ajouterParcours(@RequestBody ParcoursEntityDto nouveauParcours) {
+        return this.service.ajouterParcours(nouveauParcours);
     }
     /*
     JSON
@@ -86,8 +86,8 @@ public class ParcoursController {
     //ex : http://localhost:8080/api/parcours/supprimerdefi/99/64
 
     @PostMapping("/update/{id}")
-    public void updateParcours(@RequestBody ParcoursEntityDto parcours, @PathVariable("id") Integer idParcoursToUpdate) {
-        this.service.majParcours(idParcoursToUpdate, parcours);
+    public Boolean updateParcours(@RequestBody ParcoursEntityDto parcours, @PathVariable("id") Integer idParcoursToUpdate) {
+        return this.service.majParcours(idParcoursToUpdate, parcours);
     }
     /*JSON
         {

@@ -9,8 +9,8 @@ public interface DefiService {
     public List<DefiEntity> findAll();
     void desactiverDefi(Integer idDefi);
     void activerDefi(Integer idDefi);
-    void creerDefi(DefiEntityDto nouveauDefi);
+    Boolean creerDefi(DefiEntityDto nouveauDefi);
     List<DefiEntity> listerActifs();
-    void majDefi(Integer idDefi, DefiEntityDto updateDefi);
+    Boolean majDefi(Integer idDefi, DefiEntityDto updateDefi);
     Integer getIdCategorie(Integer idDefi);
 }

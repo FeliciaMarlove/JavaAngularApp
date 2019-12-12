@@ -48,8 +48,8 @@ public class DefisController {
     }
 
     @PostMapping("/update/{id}")
-    public void modifierDefi(@RequestBody DefiEntityDto defi, @PathVariable("id") Integer idDefiAModifier) {
-        this.service.majDefi(idDefiAModifier, defi);
+    public Boolean modifierDefi(@RequestBody DefiEntityDto defi, @PathVariable("id") Integer idDefiAModifier) {
+        return this.service.majDefi(idDefiAModifier, defi);
     }
 
     @GetMapping("/getcat/{id}")
@@ -58,8 +58,8 @@ public class DefisController {
     }
 
     @PostMapping("/creer")
-    public void creerDefi(@RequestBody DefiEntityDto defi) {
-        this.service.creerDefi(new DefiEntityDto(defi.getNomDefi(), defi.getDescDefi(), defi.getInfobulleDefi(), defi.getCategorieId()));
+    public Boolean creerDefi(@RequestBody DefiEntityDto defi) {
+        return this.service.creerDefi(new DefiEntityDto(defi.getNomDefi(), defi.getDescDefi(), defi.getInfobulleDefi(), defi.getCategorieId()));
     }
     /* JSON
     {

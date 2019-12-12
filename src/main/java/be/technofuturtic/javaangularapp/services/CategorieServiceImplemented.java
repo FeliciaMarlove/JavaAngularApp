@@ -50,20 +50,26 @@ public class CategorieServiceImplemented implements CategorieService {
     }
 
     @Override
-    public void ajouterCategorie(CategorieEntity nouvelleCategorie) {
+    public Boolean ajouterCategorie(CategorieEntity nouvelleCategorie) {
+        Boolean hasFailed = true;
         if (!isDuplicate(nouvelleCategorie)) {
             repo.save(nouvelleCategorie);
+            hasFailed = false;
         }
+        return hasFailed;
     }
 
     @Override
-    public void majCategorie(Integer idCategorie, CategorieEntity categorie) {
+    public Boolean majCategorie(Integer idCategorie, CategorieEntity categorie) {
         CategorieEntity c = repo.findById(idCategorie).get();
+        Boolean hasFailed = true;
         if(!isDuplicate(categorie)) {
             c.setNomCategorie(categorie.getNomCategorie());
             c.setDescCategorie(categorie.getDescCategorie());
             repo.save(c);
+            hasFailed = false;
         }
+        return hasFailed;
     }
 
     @Override
