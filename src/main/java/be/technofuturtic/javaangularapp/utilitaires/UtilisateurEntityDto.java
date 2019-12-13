@@ -41,7 +41,7 @@ public class UtilisateurEntityDto {
         return email;
     }
 
-    public String getPassword() {
+    public String getMotDePasse() {
         return motDePasse;
     }
 

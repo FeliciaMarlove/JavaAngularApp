@@ -1,6 +1,5 @@
 package be.technofuturtic.javaangularapp.services;
 
-import be.technofuturtic.javaangularapp.models.PaysEntity;
 import be.technofuturtic.javaangularapp.models.RoleEntity;
 import be.technofuturtic.javaangularapp.models.UtilisateurEntity;
 import be.technofuturtic.javaangularapp.repositories.PaysRepository;
@@ -13,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UtilisateurServiceImplemented implements UtilisateurService {
@@ -57,7 +54,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
                 nouvelUtilisateur.getNomUtilisateur(),
                 nouvelUtilisateur.getPrenomUtilisateur(),
                 nouvelUtilisateur.getEmail(),
-                nouvelUtilisateur.getPassword(),
+                nouvelUtilisateur.getMotDePasse(),
                 /*nouvelUtilisateur.getNewsletterOptIn(),*/
                 false,
                 true,
@@ -80,14 +77,13 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     }
 
     @Override
-    public UtilisateurEntity majUtilisateur(UtilisateurEntityDto utilisateur, Long id) {
+    public void majUtilisateur(UtilisateurEntityDto utilisateur, Long id) {
         UtilisateurEntity u = repo.findById(id).get();
         u.setEmail(utilisateur.getEmail());
-        u.setMotDePasse(utilisateur.getPassword());
+        u.setMotDePasse(utilisateur.getMotDePasse());
         /*PaysEntity p = paysRepo.findById(utilisateur.getPaysId()).get();
         u.setPays(p);*/
         repo.save(u);
-        return u;
     }
 
     @Override
