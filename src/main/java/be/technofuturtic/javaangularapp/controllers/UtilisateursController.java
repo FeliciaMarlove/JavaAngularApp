@@ -49,8 +49,8 @@ public class UtilisateursController {
      */
 
     @PostMapping("/update/{id}") //HAS TO BE TESTED WHEN COUNTRY LIST IS LOADED !
-    public void modifierUtilisateur(@RequestBody UtilisateurEntityDto utilisateur, @PathVariable("id") Long id) {
-        this.service.majUtilisateur(utilisateur, id);
+    public UtilisateurEntity modifierUtilisateur(@RequestBody UtilisateurEntityDto utilisateur, @PathVariable("id") Long id) {
+        return this.service.majUtilisateur(utilisateur, id);
     }
     /*
     JSON

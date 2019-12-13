@@ -63,7 +63,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
                 true,
                 false
         );
-        //newbie.setDateNaiss(nouvelUtilisateur.getDateNaiss()); //formatage string > date
+        newbie.setDateNaiss(nouvelUtilisateur.getDateNaiss()); //formatage string > date
         List<UtilisateurEntity> utilisateursExistants = findAll();
         for (int i = 0; i < utilisateursExistants.size(); i++) {
             if (newbie.equals(utilisateursExistants.get(i))) {
@@ -80,13 +80,14 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     }
 
     @Override
-    public void majUtilisateur(UtilisateurEntityDto utilisateur, Long id) {
+    public UtilisateurEntity majUtilisateur(UtilisateurEntityDto utilisateur, Long id) {
         UtilisateurEntity u = repo.findById(id).get();
         u.setEmail(utilisateur.getEmail());
         u.setMotDePasse(utilisateur.getPassword());
-        PaysEntity p = paysRepo.findById(utilisateur.getPaysId()).get();
-        u.setPays(p);
+        /*PaysEntity p = paysRepo.findById(utilisateur.getPaysId()).get();
+        u.setPays(p);*/
         repo.save(u);
+        return u;
     }
 
     @Override
@@ -137,7 +138,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     public UtilisateurEntityDto findByEmail(String email) {
         UtilisateurEntity u = repo.findByEmail(email);
         UtilisateurEntityDto lElu = new UtilisateurEntityDto(
-            u.getNomUtilisateur(), u.getPrenomUtilisateur(), u.getDateNaiss().toString(), u.getEmail(), u.getMotDePasse(), u.isNewsletterOptIn(), u.getRole().getIdRole(), u.getBusy()
+            u.getNomUtilisateur(), u.getPrenomUtilisateur(), u.getDateNaiss(), u.getEmail(), u.getMotDePasse(), u.isNewsletterOptIn(), u.getRole().getIdRole(), u.getBusy()
         );
         lElu.setIdUtilisateur(u.getIdUtilisateur());
         return lElu;

@@ -1,9 +1,11 @@
 package be.technofuturtic.javaangularapp.utilitaires;
 
+import java.time.LocalDate;
+
 public class UtilisateurEntityDto {
     private String nomUtilisateur;
     private String prenomUtilisateur;
-    private String dateNaiss;
+    private LocalDate dateNaiss;
     private String email;
     private String motDePasse;
     private Boolean newsletterOptIn;
@@ -12,7 +14,7 @@ public class UtilisateurEntityDto {
     private Long idUtilisateur;
     private Boolean isBusy;
 
-    public UtilisateurEntityDto(String nomUtilisateur, String prenomUtilisateur, String dateNaiss, String email, String motDePasse, Boolean newsletterOptIn, Integer roleId, Boolean isBusy) {
+    public UtilisateurEntityDto(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, Boolean newsletterOptIn, Integer roleId, Boolean isBusy) {
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
         this.dateNaiss = dateNaiss;
@@ -31,7 +33,7 @@ public class UtilisateurEntityDto {
         return prenomUtilisateur;
     }
 
-    public String getDateNaiss() {
+    public LocalDate getDateNaiss() {
         return dateNaiss;
     }
 

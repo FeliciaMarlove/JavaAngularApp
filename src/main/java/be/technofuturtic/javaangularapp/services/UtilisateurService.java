@@ -15,7 +15,7 @@ public interface UtilisateurService /*extends UserDetailsService*/ {
     void desactiverUtilisateur(Long idUtilisateur);
     void activerUtilisateur(Long idUtilisateur);
     Boolean creerCompte(UtilisateurEntityDto nouvelUtilisateur);
-    void majUtilisateur(UtilisateurEntityDto utilisateur, Long id);
+    UtilisateurEntity majUtilisateur(UtilisateurEntityDto utilisateur, Long id);
     void inscrireNewsletter(Long idUtilisateur);
     void desinscrireNewsletter(Long idUtilisateur);
     Boolean login(AuthentificationDto logins);
