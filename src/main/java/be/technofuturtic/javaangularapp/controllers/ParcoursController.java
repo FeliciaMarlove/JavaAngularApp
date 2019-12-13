@@ -25,8 +25,6 @@ public class ParcoursController {
     @Autowired
     private ParcoursRepository parcoursRepository;
 
-    // return => ce qui est affiché en localhost8080/api/parcours(/...)
-
     @GetMapping
     public List<ParcoursEntity> getActive() {
         return (List<ParcoursEntity>) this.service.findActive();
@@ -69,11 +67,18 @@ public class ParcoursController {
      */
 
     @PostMapping("/ajouterDefi/{idparcours}")
+    public Boolean ajouterDefiDansParcours(
+            @RequestBody Integer idDefi,
+            @PathVariable("idparcours") Integer idParcours) throws Exception {
+        return this.service.ajouterDefiDansParcours(idParcours, idDefi);
+    }
+
+    /*@PostMapping("/ajouterDefi/{idparcours}")
     public void ajouterDefiDansParcours(
             @RequestBody DefiEntityDto defi,
             @PathVariable("idparcours") Integer idParcours) throws Exception {
         this.service.ajouterDefiDansParcours(idParcours, defi);
-    }
+    }*/
     /* JSON
     {
         "nomDefi" : "Defi Defi",

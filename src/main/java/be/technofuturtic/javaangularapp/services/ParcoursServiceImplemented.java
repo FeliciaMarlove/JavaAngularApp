@@ -191,4 +191,22 @@ public class ParcoursServiceImplemented implements ParcoursService {
         }
     }
 
+    public Boolean ajouterDefiDansParcours(Integer idParcours, Integer idDefiAAjouter) throws Exception {
+        Optional<ParcoursEntity> parcoursEntity = this.repo.findById(idParcours);
+        if (parcoursEntity.isEmpty())throw new Exception();
+        ParcoursEntity parcours = parcoursEntity.get();
+        DefiEntity defiEntity = repoDefi.findByIdDefi(idDefiAAjouter);
+        for (int i = 0; i < parcours.getListeDefis().size(); i++) {
+            if (parcours.getListeDefis().get(i).getIdDefi() == defiEntity.getIdDefi()) {
+                return false;
+            }
+        }
+        if (defiEntity.isActiveDefi()) {
+            parcours.getListeDefis().add(defiEntity);
+            repo.save(parcours);
+            return true;
+        }
+        return true;
+    }
+
 }

@@ -17,6 +17,7 @@ public interface ParcoursService {
     void interchangerDefisDansParcours(Integer idParcours, Integer idDefiARemplacer, Integer idDefiAInserer) throws Exception;
     void supprimerDefiDansParcours(Integer idParcours, Integer idDefiASupprimer);
     void ajouterDefiDansParcours(Integer idParcours, DefiEntityDto nouveauDefi) throws Exception;
+    Boolean ajouterDefiDansParcours(Integer idParcours, Integer idDefi) throws Exception;
     Boolean majParcours(Integer idParcours, ParcoursEntityDto parcoursDto);
     List<DefiEntity> listDefis(Integer idParcours);
 }
