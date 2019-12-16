@@ -25,6 +25,14 @@ public class UtilisateurEntityDto {
         this.isBusy = isBusy;
     }
 
+    public UtilisateurEntityDto(String email, String motDePasse) {
+        this.email = email;
+        this.motDePasse = motDePasse;
+    }
+
+    public UtilisateurEntityDto() {
+    }
+
     public UtilisateurEntityDto(Long idUtilisateur, String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, Boolean newsletterOptIn, Integer roleId, Boolean isBusy) {
         this.idUtilisateur = idUtilisateur;
         this.nomUtilisateur = nomUtilisateur;

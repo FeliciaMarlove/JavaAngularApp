@@ -90,8 +90,6 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
         UtilisateurEntity u = repo.findById(id).get();
         u.setEmail(utilisateur.getEmail());
         u.setMotDePasse(utilisateur.getMotDePasse());
-        /*PaysEntity p = paysRepo.findById(utilisateur.getPaysId()).get();
-        u.setPays(p);*/
         repo.save(u);
     }
 

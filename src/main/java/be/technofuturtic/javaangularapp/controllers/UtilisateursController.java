@@ -56,7 +56,7 @@ public class UtilisateursController {
         }
      */
 
-    @PostMapping("/update/{id}") //HAS TO BE TESTED WHEN COUNTRY LIST IS LOADED !
+    @PostMapping("/update/{id}")
     public void modifierUtilisateur(@RequestBody UtilisateurEntityDto utilisateur, @PathVariable("id") Long id) {
         this.service.majUtilisateur(utilisateur, id);
     }
@@ -64,7 +64,6 @@ public class UtilisateursController {
     JSON
         {
             "motDePasse" : "sesame",
-            "idPays" : 55,
             "email" : "emailupdate@msn.com"
         }
      */
