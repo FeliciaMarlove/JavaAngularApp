@@ -7,6 +7,7 @@ import be.technofuturtic.javaangularapp.repositories.RoleRepository;
 import be.technofuturtic.javaangularapp.repositories.UtilisateurRepository;
 import be.technofuturtic.javaangularapp.utilitaires.AuthentificationDto;
 import be.technofuturtic.javaangularapp.utilitaires.UtilisateurEntityDto;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 /*import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
@@ -123,7 +124,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
             if (tousLesIdentifiants.get(i).getEmail().equals(logins.getEmail())) {
                 msg.append("Email address registered");
                 passwordFromCurrentTryingUser = tousLesIdentifiants.get(i).getPassword();
-                if (passwordFromCurrentTryingUser.equals(logins.getPassword())) {
+                if (BCrypt.checkpw(logins.getPassword(),passwordFromCurrentTryingUser)) {
                     msg.append("\tLogin accepted");
                     authorize = true;
                 } else {

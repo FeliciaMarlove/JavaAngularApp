@@ -1,6 +1,7 @@
 package be.technofuturtic.javaangularapp.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -79,7 +80,7 @@ public class UtilisateurEntity implements Serializable {
     }
 
     public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+        this.motDePasse = BCrypt.hashpw(motDePasse, BCrypt.gensalt(12));
     }
 
     public boolean isNewsletterOptIn() {
@@ -168,7 +169,7 @@ public class UtilisateurEntity implements Serializable {
         this.prenomUtilisateur = prenomUtilisateur;
         this.dateNaiss = dateNaiss;
         this.email = email;
-        this.motDePasse = motDePasse;
+        this.motDePasse = BCrypt.hashpw(motDePasse, BCrypt.gensalt(12));
         this.newsletterOptIn = newsletterOptIn;
         this.pays = pays;
         this.setActiveUtilisateur(true);
@@ -179,7 +180,7 @@ public class UtilisateurEntity implements Serializable {
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
         this.email = email;
-        this.motDePasse = motDePasse;
+        this.motDePasse = BCrypt.hashpw(motDePasse, BCrypt.gensalt(12));
         this.newsletterOptIn = newsletterOptIn;
         this.isActiveUtilisateur = isActiveUtilisateur;
         this.isBusy = isBusy;
@@ -191,7 +192,7 @@ public class UtilisateurEntity implements Serializable {
         this.prenomUtilisateur = prenomUtilisateur;
         this.dateNaiss = dateNaiss;
         this.email = email;
-        this.motDePasse = motDePasse;
+        this.motDePasse = BCrypt.hashpw(motDePasse, BCrypt.gensalt(12));
         this.newsletterOptIn = newsletterOptIn;
         this.isActiveUtilisateur = isActiveUtilisateur;
         this.isBusy = isBusy;

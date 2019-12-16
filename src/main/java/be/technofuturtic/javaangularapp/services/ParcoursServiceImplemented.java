@@ -131,10 +131,10 @@ public class ParcoursServiceImplemented implements ParcoursService {
         boolean checker = false;
         Optional<ParcoursEntity> parcoursModif = repo.findById(idParcours);
         List<DefiEntity> listeDefis = new ArrayList();
-        int indice = -1;
+        int indice = -1; // initialisation bidon
         listeDefis.addAll(parcoursModif.get().getListeDefis());
         for (int i = 0; i < listeDefis.size(); i++) {
-            if (listeDefis.get(i).getIdDefi() == idDefiASupprimer) {
+            if (listeDefis.get(i).getIdDefi().equals(idDefiASupprimer)) {
                 checker = true;
                 indice = i;
             }
