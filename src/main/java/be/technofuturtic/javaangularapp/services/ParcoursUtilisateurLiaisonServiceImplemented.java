@@ -78,11 +78,14 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             LocalDate dateDuJour = LocalDate.now();
             int deltaJours = Period.between(dateDebut, dateDuJour).getDays();
             Optional<ParcoursEntity> p = parcoursRepo.findById(pul.getParcoursUtilId().getIdParc());
-            if (deltaJours <= p.get().getListeDefis().size()) {
+            if (deltaJours < p.get().getListeDefis().size()) {
                 return p.get().getListeDefis().get(deltaJours);
             } else {
+                System.out.println("Il passe bien par ce else dammit");
                 pul.setOngoing(false); // si deltaJours > taille du parcours -> il a fini
+                repo.save(pul);
                 pul.getUtilisateur().setBusy(false);
+                repo.save(pul);
                 return null;
             }
         } else {
@@ -90,6 +93,29 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
         }
     }
 
+    private UtilisateurEntity trouverGerard(Long idUtil) {
+        UtilisateurEntity u = utilisateurRepo.findById(idUtil).get();
+        return u;
+    }
+
+    private PK_Parcours_Utilisateur trouverLeParcoursEnCoursDeGerard(UtilisateurEntity gerardLuiMeme) {
+        List<ParcoursUtilisateurLiaison> pulList = null;
+
+        if (gerardLuiMeme.isActiveUtilisateur() && !gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty()) {
+              pulList = repo.findAllByUtilisateurEquals(gerardLuiMeme);
+            ParcoursUtilisateurLiaison pulActif = null;
+            for (int i = 0; i < pulList.size(); i++) {
+                if (pulList.get(i).isOngoing()) {
+                    pulActif = pulList.get(i);
+                }
+            }
+            return pulActif.getParcoursUtilId();
+        } else {
+            return null;
+        }
+    }
+
+    // NOT USED YET
     // USE DTO ->
     @Override
     public List<ParcoursUtilisateurLiaison> listerHistorique(Long idUtil) {
@@ -108,27 +134,5 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             affichage.append("\n").append(liste.get(i).getParcoursUtilId()).append(liste.get(i).getParcours().getNomParcours()).append(" commencé le ").append(liste.get(i).getDateAchat())/*.append(" payé ").append(liste.get(i).getPrixAchat())*/;
         }
         return affichage.toString();
-    }
-
-    private UtilisateurEntity trouverGerard(Long idUtil) {
-        UtilisateurEntity u = utilisateurRepo.findById(idUtil).get();
-        return u;
-    }
-
-    private PK_Parcours_Utilisateur trouverLeParcoursEnCoursDeGerard(UtilisateurEntity gerardLuiMeme) {
-        List<ParcoursUtilisateurLiaison> pulList = null;
-        if (gerardLuiMeme.isActiveUtilisateur() && !gerardLuiMeme.getListeParcoursUtilisateurs().isEmpty()) {
-              pulList = repo.findAllByUtilisateurEquals(gerardLuiMeme);
-            ParcoursUtilisateurLiaison pulActif = null;
-            for (int i = 0; i < pulList.size(); i++) {
-                if (pulList.get(i).isOngoing()) {
-                    pulActif = pulList.get(i);
-                }
-            }
-            return pulActif.getParcoursUtilId();
-        } else {
-            return null;
-        }
-
     }
 }

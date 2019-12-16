@@ -25,6 +25,18 @@ public class UtilisateurEntityDto {
         this.isBusy = isBusy;
     }
 
+    public UtilisateurEntityDto(Long idUtilisateur, String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, Boolean newsletterOptIn, Integer roleId, Boolean isBusy) {
+        this.idUtilisateur = idUtilisateur;
+        this.nomUtilisateur = nomUtilisateur;
+        this.prenomUtilisateur = prenomUtilisateur;
+        this.dateNaiss = dateNaiss;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.newsletterOptIn = newsletterOptIn;
+        this.roleId = roleId;
+        this.isBusy = isBusy;
+    }
+
     public String getNomUtilisateur() {
         return nomUtilisateur;
     }

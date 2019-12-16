@@ -19,8 +19,16 @@ public class UtilisateursController {
     }
 
     @GetMapping
-    public List<UtilisateurEntity> list() {
+   /* public List<UtilisateurEntity> list() {
         return service.findAll();
+    }*/
+   public List<UtilisateurEntityDto> list() {
+       return service.findAll();
+    }
+
+    @GetMapping("/one/{id}")
+    public UtilisateurEntityDto getById(@PathVariable("id") Long idUtilisateur) {
+        return service.findById(idUtilisateur);
     }
 
     @PostMapping("/desactiver/{id}")

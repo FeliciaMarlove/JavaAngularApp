@@ -23,6 +23,9 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     @Column(name = "date_achat")
     private LocalDate dateAchat;
 
+    @Column(name = "isOngoing")
+    private Boolean isOngoing;
+
    /* @Column(name = "prix_achat")
     private Double prixAchat;*/
 
@@ -62,17 +65,14 @@ public class ParcoursUtilisateurLiaison implements Serializable {
     }*/
 
     @Transient
-    private boolean isOngoing;
-
-    @Transient
     private Integer taille;
 
-    public boolean isOngoing() {
+    public Boolean isOngoing() {
         return isOngoing;
     }
 
-    public void setOngoing(boolean ongoing) {
-        isOngoing = ongoing;
+    public void setOngoing(Boolean isOngoing) {
+        this.isOngoing = isOngoing;
     }
 
     public LocalDate getDateAchat() {
@@ -103,8 +103,6 @@ public class ParcoursUtilisateurLiaison implements Serializable {
         return Objects.equals(parcoursUtilId, that.parcoursUtilId);
     }
 
-
-
     @Override
     public int hashCode() {
         return Objects.hash(parcoursUtilId);
@@ -122,7 +120,7 @@ public class ParcoursUtilisateurLiaison implements Serializable {
 
     public ParcoursUtilisateurLiaison() {
         this.dateAchat = LocalDate.now();
-        this.isOngoing = true;
+        this.setOngoing(true);
     }
 
     @Override

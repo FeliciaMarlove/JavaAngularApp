@@ -29,8 +29,17 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
     }
 
     @Override
-    public List<UtilisateurEntity> findAll() {
+    /*public List<UtilisateurEntity> findAll() {
         return (List<UtilisateurEntity>) repo.findAll();
+    }*/
+    public List<UtilisateurEntityDto> findAll() {
+        List<UtilisateurEntity> u = (List<UtilisateurEntity>) repo.findAll();
+        List<UtilisateurEntityDto> uDto = new ArrayList<>();
+        for (int i = 0; i < u.size(); i++) {
+            uDto.add(new UtilisateurEntityDto(
+                    u.get(i).getIdUtilisateur(), u.get(i).getNomUtilisateur(), u.get(i).getPrenomUtilisateur(), u.get(i).getDateNaiss(), u.get(i).getEmail(), u.get(i).getMotDePasse(), u.get(i).isNewsletterOptIn(), u.get(i).getRole().getIdRole(), u.get(i).getBusy()));
+        }
+        return uDto;
     }
 
     @Override
@@ -61,7 +70,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
                 false
         );
         newbie.setDateNaiss(nouvelUtilisateur.getDateNaiss()); //formatage string > date
-        List<UtilisateurEntity> utilisateursExistants = findAll();
+        List<UtilisateurEntityDto> utilisateursExistants = findAll();
         for (int i = 0; i < utilisateursExistants.size(); i++) {
             if (newbie.equals(utilisateursExistants.get(i))) {
                 isDuplicate = true;
@@ -139,6 +148,18 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
         lElu.setIdUtilisateur(u.getIdUtilisateur());
         return lElu;
     }
+
+    @Override
+    public UtilisateurEntityDto findById(Long id) {
+        UtilisateurEntity u = repo.findByIdUtilisateur(id);
+        UtilisateurEntityDto userDto = new UtilisateurEntityDto(
+                u.getNomUtilisateur(), u.getPrenomUtilisateur(), u.getDateNaiss(), u.getEmail(), u.getMotDePasse(), u.isNewsletterOptIn(), u.getRole().getIdRole(), u.getBusy()
+        );
+        userDto.setIdUtilisateur(u.getIdUtilisateur());
+        return userDto;
+    }
+
+
 
     /*@Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

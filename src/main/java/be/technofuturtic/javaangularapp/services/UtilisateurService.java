@@ -11,7 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface UtilisateurService /*extends UserDetailsService*/ {
-    public List<UtilisateurEntity> findAll();
+    //List<UtilisateurEntity> findAll();
+    List<UtilisateurEntityDto> findAll();
     void desactiverUtilisateur(Long idUtilisateur);
     void activerUtilisateur(Long idUtilisateur);
     Boolean creerCompte(UtilisateurEntityDto nouvelUtilisateur);
@@ -20,4 +21,5 @@ public interface UtilisateurService /*extends UserDetailsService*/ {
     void desinscrireNewsletter(Long idUtilisateur);
     Boolean login(AuthentificationDto logins);
     UtilisateurEntityDto findByEmail(String email);
+    UtilisateurEntityDto findById(Long id);
 }
