@@ -185,6 +185,18 @@ public class UtilisateurEntity implements Serializable {
         this.isBusy = isBusy;
     }
 
+    public UtilisateurEntity(String nomUtilisateur, String prenomUtilisateur, LocalDate dateNaiss, String email, String motDePasse, boolean newsletterOptIn, boolean isActiveUtilisateur, boolean isBusy) {
+        this();
+        this.nomUtilisateur = nomUtilisateur;
+        this.prenomUtilisateur = prenomUtilisateur;
+        this.dateNaiss = dateNaiss;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.newsletterOptIn = newsletterOptIn;
+        this.isActiveUtilisateur = isActiveUtilisateur;
+        this.isBusy = isBusy;
+    }
+
     public UtilisateurEntity() {
         this.listeParcoursUtilisateurs = new ArrayList<>();
         this.isActiveUtilisateur = true;

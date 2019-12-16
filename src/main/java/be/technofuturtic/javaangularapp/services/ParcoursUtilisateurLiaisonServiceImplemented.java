@@ -81,7 +81,6 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             if (deltaJours < p.get().getListeDefis().size()) {
                 return p.get().getListeDefis().get(deltaJours);
             } else {
-                System.out.println("Il passe bien par ce else dammit");
                 pul.setOngoing(false); // si deltaJours > taille du parcours -> il a fini
                 repo.save(pul);
                 pul.getUtilisateur().setBusy(false);
@@ -107,12 +106,11 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             for (int i = 0; i < pulList.size(); i++) {
                 if (pulList.get(i).isOngoing()) {
                     pulActif = pulList.get(i);
+                    return pulActif.getParcoursUtilId();
                 }
             }
-            return pulActif.getParcoursUtilId();
-        } else {
-            return null;
         }
+        return null;
     }
 
     // NOT USED YET

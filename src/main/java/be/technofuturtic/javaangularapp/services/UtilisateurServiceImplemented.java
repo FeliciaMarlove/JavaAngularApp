@@ -62,6 +62,7 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
         UtilisateurEntity newbie = new UtilisateurEntity(
                 nouvelUtilisateur.getNomUtilisateur(),
                 nouvelUtilisateur.getPrenomUtilisateur(),
+                nouvelUtilisateur.getDateNaiss(),
                 nouvelUtilisateur.getEmail(),
                 nouvelUtilisateur.getMotDePasse(),
                 /*nouvelUtilisateur.getNewsletterOptIn(),*/
@@ -69,17 +70,17 @@ public class UtilisateurServiceImplemented implements UtilisateurService {
                 true,
                 false
         );
-        newbie.setDateNaiss(nouvelUtilisateur.getDateNaiss()); //formatage string > date
+        //newbie.setDateNaiss(nouvelUtilisateur.getDateNaiss());
         List<UtilisateurEntityDto> utilisateursExistants = findAll();
         for (int i = 0; i < utilisateursExistants.size(); i++) {
-            if (newbie.equals(utilisateursExistants.get(i))) {
+            if (newbie.getEmail().equals(utilisateursExistants.get(i).getEmail())) {
                 isDuplicate = true;
             }
         }
         if(!isDuplicate) {
             newbie.setActiveUtilisateur(true);
-            RoleEntity role = roleRepository.findById(1).get();
-            newbie.setRole(role); // set à "user" par défaut
+            RoleEntity role = roleRepository.findById(1).get(); // set à "user" par défaut
+            newbie.setRole(role);
             repo.save(newbie);
         }
         return isDuplicate;
