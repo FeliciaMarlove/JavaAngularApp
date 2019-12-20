@@ -60,11 +60,11 @@ public class ParcoursUtilisateurLiaisonServiceImplemented implements ParcoursUti
             repo.save(pul);
             u.ajouterRelationParcours(pul);
             u.setBusy(true);
-            utilisateurRepo.save(u); //isBusy = true
+            utilisateurRepo.save(u);
             p.ajouterRelationParcours(pul);
             parcoursRepo.save(p);
             pul.setOngoing(true);
-            repo.save(pul); //isUserBusy = true
+            repo.save(pul);
             return true;
         }
         return false;

@@ -112,10 +112,10 @@ public class UtilisateurEntity implements Serializable {
     }
 
     public void setBusy(boolean isBusy) {
-        isBusy = isBusy;
+        this.isBusy = isBusy;
     }
 
-    @Transient
+    @Column(name = "is_busy")
     private boolean isBusy;
 
     @ManyToOne(targetEntity = RoleEntity.class, fetch = FetchType.LAZY)
