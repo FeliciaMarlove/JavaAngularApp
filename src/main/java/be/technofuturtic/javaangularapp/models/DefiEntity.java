@@ -10,7 +10,8 @@ import java.util.*;
 @Table(name = "Defi", schema = "public", catalog = "javaangulardb")
 public class DefiEntity implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "defi_generator")
+    @SequenceGenerator(name = "defi_generator", allocationSize = 1, initialValue = 1)
     @Column(name = "id_defi")
     private Integer idDefi;
 

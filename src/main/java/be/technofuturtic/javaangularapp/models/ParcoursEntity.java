@@ -13,7 +13,8 @@ import java.util.*;
 public class ParcoursEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parcours_generator")
+    @SequenceGenerator(name = "parcours_generator", allocationSize = 1, initialValue = 1)
     @Column(name = "id_parcours")
     private Integer idParcours;
 
@@ -23,14 +24,14 @@ public class ParcoursEntity implements Serializable {
     @Column(name = "description")
     private String descParcours;
 
-    @Column(name = "prix")
-    private Double prix;
+    /*@Column(name = "prix")
+    private Double prix;*/
 
     @Column(name = "is_active", nullable = false)
     private boolean isActiveParcours;
 
-    @Transient
-    private final double PRIX_PAR_DEFAUT = 0.00;
+    /*@Transient
+    private final double PRIX_PAR_DEFAUT = 0.00;*/
 
     public Integer getIdParcours() {
         return idParcours;
@@ -56,7 +57,7 @@ public class ParcoursEntity implements Serializable {
         this.categorie = categorie;
     }
 
-    public double getPrix() {
+    /*public double getPrix() {
         return prix;
     }
 
@@ -66,7 +67,7 @@ public class ParcoursEntity implements Serializable {
         } else {
             this.prix = Math.abs(prix);
         }
-    }
+    }*/
 
     public boolean isActiveParcours() {
         return isActiveParcours;
@@ -118,23 +119,23 @@ public class ParcoursEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idParcours, nomParcours, descParcours, prix, isActiveParcours, categorie, listeDefis);
-    }
-
-    public ParcoursEntity(String nomParcours, String descParcours, Double prix, Optional<CategorieEntity> categorie) {
-        this();
-        this.nomParcours = nomParcours;
-        this.descParcours = descParcours;
-        this.prix = prix;
-        this.categorie = categorie.get();
+        return Objects.hash(idParcours, nomParcours, descParcours, isActiveParcours, categorie, listeDefis);
     }
 
     public ParcoursEntity(String nomParcours, String descParcours, CategorieEntity categorie) {
         this();
         this.nomParcours = nomParcours;
         this.descParcours = descParcours;
-        this.prix = PRIX_PAR_DEFAUT;
+        //this.prix = PRIX_PAR_DEFAUT;
         this.categorie = categorie;
+    }
+
+    public ParcoursEntity(String nomParcours, String descParcours, Optional<CategorieEntity> categorie) {
+        this();
+        this.nomParcours = nomParcours;
+        this.descParcours = descParcours;
+        //this.prix = PRIX_PAR_DEFAUT;
+        this.categorie = categorie.get();
     }
 
     public ParcoursEntity() {
@@ -145,6 +146,6 @@ public class ParcoursEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "PARCOURS\n\t"+this.idParcours+" nom="+this.nomParcours+" prix="+this.prix+" cat="+this.categorie.getIdCategorie()+"\n\t\t"+ "\nFIN PARCOURS-------------\n";
+        return "PARCOURS\n\t"+this.idParcours+" nom="+this.nomParcours+" cat="+this.categorie.getIdCategorie()+"\n\t\t"+ "\nFIN PARCOURS-------------\n";
     }
 }

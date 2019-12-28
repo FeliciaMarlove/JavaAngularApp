@@ -15,7 +15,8 @@ import java.util.Objects;
 public class CategorieEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categorie_generator")
+    @SequenceGenerator(name = "categorie_generator", allocationSize = 1, initialValue = 1)
     @Column(name = "id_categorie")
     private Integer idCategorie;
 

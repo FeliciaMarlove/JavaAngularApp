@@ -82,7 +82,7 @@ public class ParcoursServiceImplemented implements ParcoursService {
             ParcoursEntity p = repo.findById(idParcours).get();
             p.setNomParcours(parcoursDto.getNomParcours());
             p.setDescParcours(parcoursDto.getDescParcours());
-            p.setPrix(parcoursDto.getPrix());
+            //p.setPrix(parcoursDto.getPrix());
             Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(parcoursDto.getCategorieId());
             CategorieEntity c = categorieEntityOptional.get();
             p.setCategorie(c);
@@ -106,7 +106,7 @@ public class ParcoursServiceImplemented implements ParcoursService {
             ParcoursEntity p = new ParcoursEntity(
                     parcDto.getNomParcours(),
                     parcDto.getDescParcours(),
-                    parcDto.getPrix(),
+                    //parcDto.getPrix(),
                     categorieEntityOptional
             );
             p.setActiveParcours(true);

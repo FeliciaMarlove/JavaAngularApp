@@ -14,7 +14,8 @@ import java.util.*;
 public class UtilisateurEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name = "user_generator", allocationSize = 1, initialValue = 1)
     @Column(name = "id_utilisateur")
     private Long idUtilisateur;
 
