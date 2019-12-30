@@ -59,7 +59,12 @@ public class DefisController {
 
     @PostMapping("/creer")
     public Boolean creerDefi(@RequestBody DefiEntityDto defi) {
-        return this.service.creerDefi(new DefiEntityDto(defi.getNomDefi(), defi.getDescDefi(), defi.getInfobulleDefi(), defi.getCategorieId()));
+        return this.service.creerDefi(new DefiEntityDto(
+                defi.getNomDefi(),
+                defi.getDescDefi(),
+                defi.getInfobulleDefi(),
+                defi.getNomCategorie()
+        ));
     }
     /* JSON
     {

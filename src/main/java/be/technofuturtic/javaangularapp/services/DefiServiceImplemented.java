@@ -46,7 +46,8 @@ public class DefiServiceImplemented implements DefiService {
     public Boolean creerDefi(DefiEntityDto nouveauDefi) {
         Boolean isDuplicate = isDuplicate(nouveauDefi);
         if(!isDuplicate) {
-            Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(nouveauDefi.getCategorieId());
+            //Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(nouveauDefi.getCategorieId());
+            CategorieEntity categorieEntityOptional = this.repoCat.findCategorieEntityByNomCategorie(nouveauDefi.getNomCategorie());
             DefiEntity defiEntity = new DefiEntity(
                     nouveauDefi.getNomDefi(),
                     nouveauDefi.getDescDefi(),

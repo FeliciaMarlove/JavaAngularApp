@@ -8,6 +8,7 @@ public class DefiEntityDto {
     private String descDefi;
     private String infobulleDefi;
     private Integer categorieId;
+    private String nomCategorie;
 
     public DefiEntityDto(String nomDefi, String descDefi, String infobulleDefi, Integer categorieId) {
         this.nomDefi = nomDefi;
@@ -16,7 +17,18 @@ public class DefiEntityDto {
         this.categorieId = categorieId;
     }
 
+    public DefiEntityDto(String nomDefi, String descDefi, String infobulleDefi, String nomCategorie) {
+        this.nomDefi = nomDefi;
+        this.descDefi = descDefi;
+        this.infobulleDefi = infobulleDefi;
+        this.nomCategorie = nomCategorie;
+    }
+
     public DefiEntityDto() {
+    }
+
+    public String getNomCategorie() {
+        return nomCategorie;
     }
 
     public String getNomDefi() {
