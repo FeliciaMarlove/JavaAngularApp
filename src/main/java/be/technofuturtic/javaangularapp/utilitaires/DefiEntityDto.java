@@ -24,6 +24,14 @@ public class DefiEntityDto {
         this.nomCategorie = nomCategorie;
     }
 
+    public DefiEntityDto(String nomDefi, String descDefi, String infobulleDefi, String nomCategorie, Integer categorieId) {
+        this.nomDefi = nomDefi;
+        this.descDefi = descDefi;
+        this.infobulleDefi = infobulleDefi;
+        this.nomCategorie = nomCategorie;
+        this.categorieId = categorieId;
+    }
+
     public DefiEntityDto() {
     }
 
@@ -45,5 +53,16 @@ public class DefiEntityDto {
 
     public Integer getCategorieId() {
         return categorieId;
+    }
+
+    @Override
+    public String toString() {
+        return "DefiEntityDto{" +
+                "nomDefi='" + nomDefi + '\'' +
+                ", descDefi='" + descDefi + '\'' +
+                ", infobulleDefi='" + infobulleDefi + '\'' +
+                ", categorieId=" + categorieId +
+                ", nomCategorie='" + nomCategorie + '\'' +
+                '}';
     }
 }

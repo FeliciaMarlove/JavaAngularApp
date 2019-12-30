@@ -43,16 +43,35 @@ public class DefiServiceImplemented implements DefiService {
     }
 
     @Override
+    public Boolean majDefi(Integer idDefi, DefiEntityDto updateDefi) {
+        //System.out.println(updateDefi);
+        Boolean isDuplicate = isDuplicate(updateDefi);
+        if (!isDuplicate) {
+            DefiEntity defiAModifier = repo.findByIdDefi(idDefi);
+            defiAModifier.setNomDefi(updateDefi.getNomDefi());
+            defiAModifier.setDescDefi(updateDefi.getDescDefi());
+            defiAModifier.setInfobulleDefi(updateDefi.getInfobulleDefi());
+            CategorieEntity c = this.repoCat.findCategorieEntityByNomCategorie(updateDefi.getNomCategorie());
+            //System.out.println(updateDefi.getNomCategorie());
+            //System.out.println(c);
+            defiAModifier.setCategorie(c);
+            //System.out.println(defiAModifier);
+            repo.save(defiAModifier);
+        }
+        return isDuplicate;
+    }
+
+    @Override
     public Boolean creerDefi(DefiEntityDto nouveauDefi) {
         Boolean isDuplicate = isDuplicate(nouveauDefi);
         if(!isDuplicate) {
             //Optional<CategorieEntity> categorieEntityOptional = this.repoCat.findById(nouveauDefi.getCategorieId());
-            CategorieEntity categorieEntityOptional = this.repoCat.findCategorieEntityByNomCategorie(nouveauDefi.getNomCategorie());
+            CategorieEntity c = this.repoCat.findCategorieEntityByNomCategorie(nouveauDefi.getNomCategorie());
             DefiEntity defiEntity = new DefiEntity(
                     nouveauDefi.getNomDefi(),
                     nouveauDefi.getDescDefi(),
                     nouveauDefi.getInfobulleDefi(),
-                    categorieEntityOptional
+                    c
             );
             defiEntity.setActiveDefi(true);
             this.repo.save(defiEntity);
@@ -81,22 +100,6 @@ public class DefiServiceImplemented implements DefiService {
             }
         }
         return a;
-    }
-
-    @Override
-    public Boolean majDefi(Integer idDefi, DefiEntityDto updateDefi) {
-        Boolean isDuplicate = isDuplicate(updateDefi);
-        if (!isDuplicate) {
-            DefiEntity defiAModifier = repo.findByIdDefi(idDefi);
-            defiAModifier.setNomDefi(updateDefi.getNomDefi());
-            defiAModifier.setDescDefi(updateDefi.getDescDefi());
-            defiAModifier.setInfobulleDefi(updateDefi.getInfobulleDefi());
-            //CategorieEntity c = repoCat.findById(updateDefi.getCategorieId()).get();
-            CategorieEntity c = repoCat.findCategorieEntityByNomCategorie(updateDefi.getNomCategorie());
-            defiAModifier.setCategorie(c);
-            repo.save(defiAModifier);
-        }
-       return isDuplicate;
     }
 
     @Override

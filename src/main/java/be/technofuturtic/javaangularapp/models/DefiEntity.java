@@ -27,13 +27,6 @@ public class DefiEntity implements Serializable {
     @Column(name = "is_active", nullable = false)
     private boolean isActiveDefi;
 
-    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, Optional<CategorieEntity> categorieEntityOptional) {
-        this.nomDefi = nomDefi;
-        this.descDefi = descDefi;
-        this.infobulleDefi = infobulleDefi;
-        this.categorie = categorieEntityOptional.get();
-    }
-
     public Integer getIdDefi() {
         return idDefi;
     }
@@ -111,6 +104,14 @@ public class DefiEntity implements Serializable {
         this.isActiveDefi = true;
     }
 
+    public DefiEntity(String nomDefi, String descDefi, String infobulleDefi, Optional<CategorieEntity> categorieEntityOptional) {
+        this();
+        this.nomDefi = nomDefi;
+        this.descDefi = descDefi;
+        this.infobulleDefi = infobulleDefi;
+        this.categorie = categorieEntityOptional.get();
+    }
+
     @Override
     public String toString() {
         return "DefiEntity{" +
@@ -119,6 +120,7 @@ public class DefiEntity implements Serializable {
                 ", descDefi='" + descDefi + '\'' +
                 ", infobulleDefi='" + infobulleDefi + '\'' +
                 ", isActiveDefi=" + isActiveDefi +
+                ", catégorie= " + categorie +
                 '}';
     }
 }
