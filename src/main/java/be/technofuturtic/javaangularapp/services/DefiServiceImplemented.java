@@ -91,7 +91,8 @@ public class DefiServiceImplemented implements DefiService {
             defiAModifier.setNomDefi(updateDefi.getNomDefi());
             defiAModifier.setDescDefi(updateDefi.getDescDefi());
             defiAModifier.setInfobulleDefi(updateDefi.getInfobulleDefi());
-            CategorieEntity c = repoCat.findById(updateDefi.getCategorieId()).get();
+            //CategorieEntity c = repoCat.findById(updateDefi.getCategorieId()).get();
+            CategorieEntity c = repoCat.findCategorieEntityByNomCategorie(updateDefi.getNomCategorie());
             defiAModifier.setCategorie(c);
             repo.save(defiAModifier);
         }
